@@ -1,17 +1,35 @@
 import Layout from '@/components/Layout';
-import ErrorPage from '@/pages/ErrorPage';
-import IntroPage from '@/pages/IntroPage';
-import LoginPage from '@/pages/LoginPage';
+
+import Intro from '@/pages/login';
+import Login from '@/pages/login/Login';
+import Error from '@/pages/error/Error';
 import { createBrowserRouter } from 'react-router-dom';
+import { ROUTE_PATH } from '@/constant/routes';
+import { Suspense } from 'react';
+import Spinner from '@/components/Spinner';
 
 export const router = [
   {
     element: <Layout />,
-    path: '/',
-    errorElement: <ErrorPage />,
+    path: ROUTE_PATH.HOME,
+    errorElement: <Error />,
     children: [
-      { path: 'intro', element: <IntroPage /> },
-      { path: 'login', element: <LoginPage /> },
+      {
+        path: ROUTE_PATH.INTRO,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Intro />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTE_PATH.LOGIN,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Login />
+          </Suspense>
+        ),
+      },
     ],
   },
 ];
