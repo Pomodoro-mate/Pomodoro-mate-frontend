@@ -8,7 +8,7 @@ import darkTheme from './styles/darkTheme.ts';
 import defaultTheme from './styles/defaultTheme.ts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
+import { Reset } from 'styled-reset';
 // type BuildProvidersTreeProps = {
 //   componentsWithProps :
 // }
@@ -25,7 +25,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 //   }, initialComponent);
 // };
 // const ProvidersTree = buildProvidersTree([[QueryClientProvider, { client: queryClinet }]]);
-const mode = 'dark';
+const mode = 'light';
 const theme = mode === 'dark' ? darkTheme : defaultTheme;
 const queryClinet = new QueryClient();
 
@@ -33,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClinet}>
       <ThemeProvider theme={theme}>
+        <Reset />
         <GlobalStyle />
         <App />
       </ThemeProvider>

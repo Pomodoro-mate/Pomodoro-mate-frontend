@@ -1,12 +1,15 @@
 import Layout from '@/components/Layout';
 
-import Intro from '@/pages/login';
-import Login from '@/pages/login/Login';
-import Error from '@/pages/error/Error';
+import Intro from '@/pages/Intro/intro';
+import Login from '@/pages/login/login';
+import Error from '@/pages/error/error';
+
 import { createBrowserRouter } from 'react-router-dom';
 import { ROUTE_PATH } from '@/constant/routes';
 import { Suspense } from 'react';
-import Spinner from '@/components/Spinner';
+
+import StudyRooms from '@/pages/StudyRooms/study-rooms';
+import Spinner from '@/components/common/spinner/spinner';
 
 export const router = [
   {
@@ -27,6 +30,14 @@ export const router = [
         element: (
           <Suspense fallback={<Spinner />}>
             <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTE_PATH.STUDY_ROOMS,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <StudyRooms />
           </Suspense>
         ),
       },

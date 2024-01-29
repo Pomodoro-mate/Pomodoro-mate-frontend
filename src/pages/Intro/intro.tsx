@@ -1,7 +1,7 @@
 import React from 'react';
 
-const IntroPage = () => {
+const Intro = () => {
   return <form>intro</form>;
 };
 
-export default IntroPage;
+export default Intro;
