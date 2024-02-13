@@ -1,7 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Chip } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, Chip } from '@mui/material';
 import ParticipantList from './components/participant-list';
 import Timer from './components/timer';
-import Input from '@/components/Input';
 
 const StudyRoom = () => {
   return (

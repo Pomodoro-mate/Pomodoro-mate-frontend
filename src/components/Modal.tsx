@@ -6,7 +6,6 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
-import React, { ReactNode } from 'react';
 
 interface ModalProps {
   open: boolean;

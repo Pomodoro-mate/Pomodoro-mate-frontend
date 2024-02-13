@@ -1,11 +1,3 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material';
 import Modal from '@/components/Modal';
 import { ReactNode, createContext, useState } from 'react';
 
