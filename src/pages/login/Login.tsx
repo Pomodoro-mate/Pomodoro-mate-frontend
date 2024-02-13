@@ -9,7 +9,7 @@ interface FormValue {
   name?: string;
   test?: string;
 }
-const LoginPage = () => {
+const Login = () => {
   const {
     handleSubmit,
     control,
@@ -59,4 +59,4 @@ const Form = styled.form`
   flex-direction: column;
   gap: 4px;
 `;
-export default LoginPage;
+export default Login;

@@ -14,7 +14,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
         <Toolbar>
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Pomodoro Mate
           </Typography>
           <div
@@ -25,7 +25,9 @@ const Header = () => {
               justifyContent: 'flex-end',
             }}
           >
-            <Typography>정진범님</Typography>
+            <Typography variant="h6" component="div">
+              정진범님
+            </Typography>
             <Button type="button" color="inherit" onClick={handleLogout}>
               Logout
             </Button>
