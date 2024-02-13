@@ -1,6 +1,7 @@
-import { Card, CardContent, CardHeader } from '@mui/material';
-import React from 'react';
+import { Button, Card, CardContent, CardHeader } from '@mui/material';
+import React, { useContext } from 'react';
 import StudyRoomsListItem from './study-rooms-list-item';
+import { DialogContext } from './dialog-provider';
 
 type ItemsType = {
   id: number;
@@ -21,11 +22,20 @@ const items: ItemsType[] = [
   { id: 10, title: '뽀모도로 할 사람', count: '10' },
 ];
 const StudyRoomsList = () => {
+  const { handleDialog } = useContext(DialogContext);
   return (
-    <div style={{ width: '75%' }}>
+    <div style={{ width: '100%' }}>
       <Card>
         <CardHeader title="스터디 룸 목록" />
         <CardContent>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              handleDialog();
+            }}
+          >
+            스터디룸 생성
+          </Button>
           <ul>
             {items.map((item) => (
               <StudyRoomsListItem item={item} />
