@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface StudyRoomsListItemProps {
+interface StudyRoomProps {
   item: { id: number; title: string; count: string };
 }
-const StudyRoomsListItem = ({ item }: StudyRoomsListItemProps) => {
+const StudyRoomListItem = ({ item }: StudyRoomProps) => {
   return (
     <li key={item.id} style={{ marginBottom: '5px', height: '40px', border: '1px solid blue' }}>
       <div
@@ -21,4 +21,4 @@ const StudyRoomsListItem = ({ item }: StudyRoomsListItemProps) => {
   );
 };
 
-export default StudyRoomsListItem;
+export default StudyRoomListItem;

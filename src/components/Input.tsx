@@ -29,10 +29,20 @@ const Input = <
         {...textFieldProps}
         onChange={field.onChange} // send value to hook form
         onBlur={field.onBlur} // notify when input is touched/blur
-        value={field.value} // input value
+        // value={field.value} // input value
         name={field.name} // send down the input name
         inputRef={field.ref} // send input re
       />
+      {/* <ErrorMessage
+        errors={errors}
+        name="multipleErrorInput"
+        render={({ messages }) =>
+          messages &&
+          Object.entries(messages).map(([type, message]) => (
+            <p key={type}>{message}</p>
+          ))
+        }
+      /> */}
       {/* <p>{invalid ? '유효' : '무효'}</p> */}
     </>
   );

@@ -1,5 +1,5 @@
 import DialogProvider from './components/dialog-provider';
-import StudyRoomsList from './components/study-rooms-list';
+import StudyRoomsList from './components/study-room-list';
 
 const StudyRooms = () => {
   return (
