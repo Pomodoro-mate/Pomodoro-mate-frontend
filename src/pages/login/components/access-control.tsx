@@ -1,4 +1,3 @@
-import Intro from '@/pages/Intro/intro';
 import { getLocalStorge } from '@/utils/util';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,36 +1,20 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
 import Input from '@/components/Input';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
-import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import styled from 'styled-components';
 
-import axios from 'axios';
-import { setLocalStorge } from '@/utils/util';
 import AccessControl from './components/access-control';
+import { useMutation } from '@tanstack/react-query';
+import { setLocalStorge } from '@/utils/util';
+import { login } from '@/apis/login/login';
 
 interface FormValue {
   nickname: string;
 }
 
-type LoginResponse = {
-  accessToken: string;
-};
-type LoginData = {
-  nickname: string;
-};
-const GUEST_LOGIN_URL = 'http://localhost:8000/auth/guest';
-const login = async ({ nickname }: LoginData): Promise<LoginResponse> => {
-  const response = await axios.post<LoginResponse>(GUEST_LOGIN_URL, {
-    nickname,
-  });
-  return response.data;
-};
-
 const Login = () => {
   const navigate = useNavigate();
-
   const {
     handleSubmit,
     control,
