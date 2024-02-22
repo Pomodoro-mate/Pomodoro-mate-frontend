@@ -12,6 +12,7 @@ const AccessControl = ({ children }: AccessControl) => {
     if (!token) {
       navigate('/login');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return children;
 };
