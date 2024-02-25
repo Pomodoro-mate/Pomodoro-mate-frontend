@@ -24,21 +24,13 @@ export const router = [
       },
       {
         path: ROUTE_PATH.LOGIN,
-        element: (
-          <Suspense fallback={<Spinner />}>
-            {/* <AccessControl> */}
-            <Login />
-            {/* </AccessControl> */}
-          </Suspense>
-        ),
+        element: <Login />,
       },
       {
         path: ROUTE_PATH.STUDY_ROOM,
         element: (
           <Suspense fallback={<Spinner />}>
-            {/* <AccessControl> */}
             <StudyRoom />
-            {/* </AccessControl> */}
           </Suspense>
         ),
       },
@@ -46,9 +38,7 @@ export const router = [
         path: ROUTE_PATH.STUDY_ROOMS,
         element: (
           <Suspense fallback={<Spinner />}>
-            {/* <AccessControl> */}
             <StudyRooms />
-            {/* </AccessControl> */}
           </Suspense>
         ),
       },

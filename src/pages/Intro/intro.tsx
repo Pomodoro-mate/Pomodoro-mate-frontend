@@ -3,9 +3,13 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightRounded';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_PATH } from '@/constant/routes';
 
 const Intro = () => {
   const navigate = useNavigate();
+  const onClickStart = () => {
+    navigate(ROUTE_PATH.LOGIN);
+  };
   return (
     <Box sx={{ overflow: 'hidden', height: 700 }}>
       <Container
@@ -31,9 +35,7 @@ const Intro = () => {
                 뽀모도로 방식으로 여러 사람이 모여서 각자 공부하고 함께 회고하는 방식의 서비스입니다
               </Typography>
               <Button
-                onClick={() => {
-                  navigate('/login');
-                }}
+                onClick={onClickStart}
                 variant="contained"
                 endIcon={<KeyboardArrowRightRounded />}
                 sx={{

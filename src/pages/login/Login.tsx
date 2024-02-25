@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
 import { setLocalStorge } from '@/utils/util';
 import { login } from '@/apis/login/login';
+import { ROUTE_PATH } from '@/constant/routes';
 
 interface FormValue {
   nickname: string;
@@ -30,7 +31,7 @@ const Login = () => {
     onSuccess: (res) => {
       const { accessToken } = res;
       setLocalStorge({ key: 'token', value: accessToken });
-      navigate('/study-rooms');
+      navigate(ROUTE_PATH.STUDY_ROOMS);
     },
   });
 

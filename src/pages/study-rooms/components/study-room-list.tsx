@@ -29,12 +29,7 @@ const StudyRoomList = () => {
       <Card>
         <CardHeader title="스터디 룸 목록" />
         <CardContent>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              handleDialog();
-            }}
-          >
+          <Button variant="outlined" onClick={handleDialog}>
             스터디룸 생성
           </Button>
           <ul>

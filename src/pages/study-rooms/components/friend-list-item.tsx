@@ -1,9 +1,10 @@
 import React from 'react';
 
 interface FriendProps {
-  item: { id: number; name: string };
+  id: number;
+  name: string;
 }
-const FriendListItem = ({ item }: FriendProps) => {
+const FriendListItem = (item: FriendProps) => {
   const { id, name } = item;
   return (
     <li key={id} style={{ marginBottom: '5px', height: '25px', border: '1px solid blue' }}>

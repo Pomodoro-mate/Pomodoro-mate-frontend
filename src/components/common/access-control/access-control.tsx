@@ -1,16 +1,14 @@
+import { ROUTE_PATH } from '@/constant/routes';
 import { getLocalStorge } from '@/utils/util';
-import React, { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface AccessControl {
-  children: React.ReactNode;
-}
-const AccessControl = ({ children }: AccessControl) => {
+const AccessControl = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = getLocalStorge('token');
     if (!token) {
-      navigate('/login');
+      navigate(ROUTE_PATH.LOGIN);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
