@@ -12,7 +12,6 @@ import StudyRooms from '@/pages/study-rooms/study-rooms';
 import Spinner from '@/components/common/spinner/spinner';
 import Login from '@/pages/login/login';
 import StudyRoom from '@/pages/study-room/study-room';
-import AccessControl from '@/components/common/access-control/access-control';
 
 export const router = [
   {
@@ -27,9 +26,9 @@ export const router = [
         path: ROUTE_PATH.LOGIN,
         element: (
           <Suspense fallback={<Spinner />}>
-            <AccessControl>
-              <Login />
-            </AccessControl>
+            {/* <AccessControl> */}
+            <Login />
+            {/* </AccessControl> */}
           </Suspense>
         ),
       },
@@ -37,9 +36,9 @@ export const router = [
         path: ROUTE_PATH.STUDY_ROOM,
         element: (
           <Suspense fallback={<Spinner />}>
-            <AccessControl>
-              <StudyRoom />
-            </AccessControl>
+            {/* <AccessControl> */}
+            <StudyRoom />
+            {/* </AccessControl> */}
           </Suspense>
         ),
       },
@@ -47,9 +46,9 @@ export const router = [
         path: ROUTE_PATH.STUDY_ROOMS,
         element: (
           <Suspense fallback={<Spinner />}>
-            <AccessControl>
-              <StudyRooms />
-            </AccessControl>
+            {/* <AccessControl> */}
+            <StudyRooms />
+            {/* </AccessControl> */}
           </Suspense>
         ),
       },
