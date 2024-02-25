@@ -1,7 +1,7 @@
 import { getLocalStorge } from '@/utils/util';
 import axios, { AxiosInstance } from 'axios';
 
-const TIME_OUT = 10000;
+const TIME_OUT = 5_000;
 const baseURL = import.meta.env.VITE_BASE_URL as string;
 
 const generateHeaders = () => {
