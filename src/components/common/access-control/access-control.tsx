@@ -6,9 +6,9 @@ interface AccessControl {
   children: React.ReactNode;
 }
 const AccessControl = ({ children }: AccessControl) => {
-  const token = getLocalStorge('token');
   const navigate = useNavigate();
   useEffect(() => {
+    const token = getLocalStorge('token');
     if (!token) {
       navigate('/login');
     }

@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout';
 
-import Intro from '@/pages/Intro/intro';
+import Intro from '@/pages/intro/intro';
 
 import Error from '@/pages/error/error';
 
@@ -10,29 +10,26 @@ import { Suspense } from 'react';
 
 import StudyRooms from '@/pages/study-rooms/study-rooms';
 import Spinner from '@/components/common/spinner/spinner';
-import Login from '@/pages/login/Login';
+import Login from '@/pages/login/login';
 import StudyRoom from '@/pages/study-room/study-room';
-import AccessControl from '@/pages/login/components/access-control';
+import AccessControl from '@/components/common/access-control/access-control';
 
 export const router = [
   {
     element: <Layout />,
-    path: ROUTE_PATH.HOME,
     errorElement: <Error />,
     children: [
       {
         path: ROUTE_PATH.INTRO,
-        element: (
-          <Suspense fallback={<Spinner />}>
-            <Intro />
-          </Suspense>
-        ),
+        element: <Intro />,
       },
       {
         path: ROUTE_PATH.LOGIN,
         element: (
           <Suspense fallback={<Spinner />}>
-            <Login />
+            <AccessControl>
+              <Login />
+            </AccessControl>
           </Suspense>
         ),
       },
@@ -40,7 +37,9 @@ export const router = [
         path: ROUTE_PATH.STUDY_ROOM,
         element: (
           <Suspense fallback={<Spinner />}>
-            <StudyRoom />
+            <AccessControl>
+              <StudyRoom />
+            </AccessControl>
           </Suspense>
         ),
       },
@@ -48,7 +47,9 @@ export const router = [
         path: ROUTE_PATH.STUDY_ROOMS,
         element: (
           <Suspense fallback={<Spinner />}>
-            <StudyRooms />
+            <AccessControl>
+              <StudyRooms />
+            </AccessControl>
           </Suspense>
         ),
       },

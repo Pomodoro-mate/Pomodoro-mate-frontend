@@ -21,6 +21,6 @@ type StudyRoomsData = {
 };
 
 export const getStudyRooms = async (data: StudyRoomsData): Promise<StudyRoomsResponse> => {
-  const response = await http.get<StudyRoomsResponse>('/studyrooms', data);
+  const response = await http.get<StudyRoomsResponse>(`/studyrooms`, { ...data });
   return response.data;
 };

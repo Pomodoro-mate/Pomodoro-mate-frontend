@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import AccessControl from './components/access-control';
 import { useMutation } from '@tanstack/react-query';
 import { setLocalStorge } from '@/utils/util';
 import { login } from '@/apis/login/login';
@@ -36,28 +35,26 @@ const Login = () => {
   });
 
   return (
-    <AccessControl>
-      <Container>
-        <Card sx={{ minWidth: 480 }}>
-          <CardHeader title="로그인" />
-          <CardContent>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <Input
-                textFieldProps={{
-                  label: '닉네임',
-                  //  defaultValue: '',
-                }}
-                control={control}
-                name="nickname"
-              />
-              <Button type="submit" variant="outlined">
-                Login
-              </Button>
-            </Form>
-          </CardContent>
-        </Card>
-      </Container>
-    </AccessControl>
+    <Container>
+      <Card sx={{ minWidth: 480 }}>
+        <CardHeader title="로그인" />
+        <CardContent>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              textFieldProps={{
+                label: '닉네임',
+                //  defaultValue: '',
+              }}
+              control={control}
+              name="nickname"
+            />
+            <Button type="submit" variant="outlined">
+              Login
+            </Button>
+          </Form>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
