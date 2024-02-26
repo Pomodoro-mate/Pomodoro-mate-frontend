@@ -1,4 +1,5 @@
-import Header from './Header';
+import ProtectedRoute from './common/protected-route/protected-route';
+import Header from './header/Header';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
@@ -6,7 +7,9 @@ const Layout = () => {
     <>
       <Header />
       <main>
-        <Outlet />
+        <ProtectedRoute>
+          <Outlet />
+        </ProtectedRoute>
       </main>
     </>
   );

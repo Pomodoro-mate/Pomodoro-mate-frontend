@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useMutation } from '@tanstack/react-query';
-import { setLocalStorge } from '@/utils/util';
 import { login } from '@/apis/login/login';
 import { ROUTE_PATH } from '@/constant/routes';
+import { setLocalStorge } from '@/utils/util';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 interface FormValue {
   nickname: string;
@@ -21,20 +22,17 @@ const Login = () => {
     //formState: { errors },
   } = useForm<FormValue>();
 
-  const onSubmit = (data: FormValue) => {
-    const { nickname } = data;
-    mutation.mutate({ nickname });
-  };
-
-  const mutation = useMutation({
+  const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: (res) => {
-      const { accessToken } = res;
+    onSuccess: ({ accessToken }) => {
       setLocalStorge({ key: 'token', value: accessToken });
       navigate(ROUTE_PATH.STUDY_ROOMS);
     },
   });
 
+  const onSubmit = ({ nickname }: FormValue) => loginMutation.mutate({ nickname });
+
+  useEffect(() => {}, []);
   return (
     <Container>
       <Card sx={{ minWidth: 480 }}>
@@ -66,9 +64,11 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
 `;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 4px;
 `;
+
 export default Login;

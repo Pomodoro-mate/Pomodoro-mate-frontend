@@ -34,7 +34,7 @@ const StudyRoomList = () => {
           </Button>
           <ul>
             {items.map((item) => (
-              <StudyRoom item={item} />
+              <StudyRoom {...item} />
             ))}
           </ul>
         </CardContent>

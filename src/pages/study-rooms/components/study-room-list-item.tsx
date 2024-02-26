@@ -1,11 +1,11 @@
-import React from 'react';
-
 interface StudyRoomProps {
-  item: { id: number; title: string; count: string };
+  id: number;
+  title: string;
+  count: string;
 }
-const StudyRoomListItem = ({ item }: StudyRoomProps) => {
+const StudyRoomListItem = ({ id, title, count }: StudyRoomProps) => {
   return (
-    <li key={item.id} style={{ marginBottom: '5px', height: '40px', border: '1px solid blue' }}>
+    <li key={id} style={{ marginBottom: '5px', height: '40px', border: '1px solid blue' }}>
       <div
         style={{
           display: 'flex',
@@ -14,8 +14,8 @@ const StudyRoomListItem = ({ item }: StudyRoomProps) => {
           justifyContent: 'space-between',
         }}
       >
-        <span>{item.title}</span>
-        <span>{`${item.count}/10`}</span>
+        <span>{title}</span>
+        <span>{`${count}/10`}</span>
       </div>
     </li>
   );

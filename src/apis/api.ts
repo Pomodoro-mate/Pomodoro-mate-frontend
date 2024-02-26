@@ -5,9 +5,10 @@ const TIME_OUT = 5_000;
 const baseURL = import.meta.env.VITE_BASE_URL as string;
 
 const generateHeaders = () => {
-  const headers: Record<string, string> = {
+  const headers: Partial<Record<'Content-Type' | 'Authorization', string>> = {
     'Content-Type': 'application/json',
   };
+
   const authToken = getLocalStorge('token');
   if (authToken) {
     headers['Authorization'] = `Bearer ${authToken}`;
