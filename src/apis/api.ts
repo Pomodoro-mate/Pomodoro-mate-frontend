@@ -1,4 +1,4 @@
-import { getLocalStorge } from '@/utils/storage';
+import { getLocalStorage } from '@/utils/storage';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const TIME_OUT = 5_000;
@@ -9,7 +9,7 @@ const generateHeaders = () => {
     'Content-Type': 'application/json',
   };
 
-  const authToken = getLocalStorge('token');
+  const authToken = getLocalStorage('token');
   if (authToken) {
     headers['Authorization'] = `Bearer ${authToken}`;
   }

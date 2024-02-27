@@ -1,10 +1,10 @@
-import { getLocalStorge } from '@/utils/storage';
+import { getLocalStorage } from '@/utils/storage';
 
 import { type PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }: PropsWithChildren) => {
-  const token = getLocalStorge('token');
+  const token = getLocalStorage('token');
   return token ? children : <Navigate to="/login" replace />;
 };
 
