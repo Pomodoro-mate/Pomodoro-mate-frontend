@@ -1,5 +1,6 @@
-import ProtectedRoute from './common/protected-route/protected-route';
-import Header from './header/Header';
+import Header from './header/header';
+import ProtectedRoute from '../common/protected-route/protected-route';
+
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {

@@ -5,7 +5,7 @@ import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightRou
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/constant/routes';
 
-const Intro = () => {
+const Home = () => {
   const navigate = useNavigate();
   const onClickStart = () => {
     navigate(ROUTE_PATH.LOGIN);
@@ -64,7 +64,7 @@ const Intro = () => {
   );
 };
 
-export default Intro;
+export default Home;
 
 const GradientText = styled('span')<{
   color?: 'primary' | 'error' | 'success' | 'warning';

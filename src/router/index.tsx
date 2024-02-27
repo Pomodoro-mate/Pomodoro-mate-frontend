@@ -1,6 +1,6 @@
-import Layout from '@/components/Layout';
+import Layout from '@/components/layout/layout';
 
-import Intro from '@/pages/intro/intro';
+import Home from '@/pages/home/home';
 
 import Error from '@/pages/error/error';
 
@@ -38,8 +38,8 @@ export const router = [
     ],
   },
   {
-    path: ROUTE_PATH.INTRO,
-    element: <Intro />,
+    path: ROUTE_PATH.HOME,
+    element: <Home />,
   },
   {
     path: ROUTE_PATH.LOGIN,

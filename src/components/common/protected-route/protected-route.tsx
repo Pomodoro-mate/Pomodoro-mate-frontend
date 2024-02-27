@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
-import { Navigate } from 'react-router-dom';
+import { getLocalStorge } from '@/utils/storage';
 
-import { getLocalStorge } from '@/utils/util';
+import { type PropsWithChildren } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }: PropsWithChildren) => {
   const token = getLocalStorge('token');
