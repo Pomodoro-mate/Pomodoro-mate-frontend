@@ -1,15 +1,15 @@
-import { getLocalStorge } from '@/utils/util';
-import axios, { AxiosInstance } from 'axios';
+import { getLocalStorage } from '@/utils/storage';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const TIME_OUT = 5_000;
 const baseURL = import.meta.env.VITE_BASE_URL as string;
 
 const generateHeaders = () => {
-  const headers: Partial<Record<'Content-Type' | 'Authorization', string>> = {
+  const headers: AxiosRequestConfig['headers'] = {
     'Content-Type': 'application/json',
   };
 
-  const authToken = getLocalStorge('token');
+  const authToken = getLocalStorage('token');
   if (authToken) {
     headers['Authorization'] = `Bearer ${authToken}`;
   }

@@ -1,4 +1,4 @@
-import Input from '@/components/Input';
+import Input from '@/components/common/input/input';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -6,9 +6,8 @@ import styled from 'styled-components';
 
 import { login } from '@/apis/login/login';
 import { ROUTE_PATH } from '@/constant/routes';
-import { setLocalStorge } from '@/utils/util';
+import { setLocalStorage } from '@/utils/storage';
 import { useMutation } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 interface FormValue {
   nickname: string;
@@ -25,14 +24,13 @@ const Login = () => {
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: ({ accessToken }) => {
-      setLocalStorge({ key: 'token', value: accessToken });
+      setLocalStorage({ key: 'token', value: accessToken });
       navigate(ROUTE_PATH.STUDY_ROOMS);
     },
   });
 
   const onSubmit = ({ nickname }: FormValue) => loginMutation.mutate({ nickname });
 
-  useEffect(() => {}, []);
   return (
     <Container>
       <Card sx={{ minWidth: 480 }}>
