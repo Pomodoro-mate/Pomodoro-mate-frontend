@@ -10,7 +10,6 @@ import {
 interface ModalProps {
   open: boolean;
   handleDialog: () => void;
-  //children: ReactNode;
 }
 
 const Modal = ({ open, handleDialog }: ModalProps) => {

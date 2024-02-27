@@ -1,37 +1,48 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
 import Input from '@/components/Input';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
-import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { login } from '@/apis/login/login';
+import { ROUTE_PATH } from '@/constant/routes';
+import { setLocalStorge } from '@/utils/util';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 interface FormValue {
-  name?: string;
-  test?: string;
+  nickname: string;
 }
+
 const Login = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
-    // formState: { errors },
-  } = useForm();
-  const navigate = useNavigate();
-  const onSubmit = (data: FormValue) => {
-    const { name, test } = data;
-    console.log(name, test);
-    navigate('/study-rooms');
-  };
+    //formState: { errors },
+  } = useForm<FormValue>();
 
+  const loginMutation = useMutation({
+    mutationFn: login,
+    onSuccess: ({ accessToken }) => {
+      setLocalStorge({ key: 'token', value: accessToken });
+      navigate(ROUTE_PATH.STUDY_ROOMS);
+    },
+  });
+
+  const onSubmit = ({ nickname }: FormValue) => loginMutation.mutate({ nickname });
+
+  useEffect(() => {}, []);
   return (
     <Container>
       <Card sx={{ minWidth: 480 }}>
-        <CardHeader title={'로그인'} />
+        <CardHeader title="로그인" />
         <CardContent>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Input
               textFieldProps={{
                 label: '닉네임',
-                defaultValue: '',
+                //  defaultValue: '',
               }}
               control={control}
               name="nickname"
@@ -52,11 +63,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* 상하좌우 정중앙 정렬하기 */
 `;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 4px;
 `;
+
 export default Login;

@@ -29,11 +29,9 @@ const Input = <
         {...textFieldProps}
         onChange={field.onChange} // send value to hook form
         onBlur={field.onBlur} // notify when input is touched/blur
-        value={field.value} // input value
         name={field.name} // send down the input name
         inputRef={field.ref} // send input re
       />
-      {/* <p>{invalid ? '유효' : '무효'}</p> */}
     </>
   );
 };

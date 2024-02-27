@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader } from '@mui/material';
-import React from 'react';
 import FriendListItem from './friend-list-item';
 
 type ItemType = {
@@ -27,7 +26,7 @@ const FriendList = () => {
         <CardContent>
           <ul>
             {items.map((item) => (
-              <FriendListItem item={item} />
+              <FriendListItem {...item} />
             ))}
           </ul>
         </CardContent>

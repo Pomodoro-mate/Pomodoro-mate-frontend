@@ -1,4 +1,4 @@
-import Modal from '@/components/Modal';
+import Modal from '@/components/modal';
 import { ReactNode, createContext, useState } from 'react';
 
 export const DialogContext = createContext({ handleDialog() {} });

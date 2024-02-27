@@ -1,14 +1,7 @@
 import { Box, Button, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 
-// interface HeaderProps {
-//   pathname: string;
-// }
-
 const Header = () => {
-  // if (pathname.match(ROUTE_PATH.LOGIN)) {
-  //   return null;
-  // }
   const handleLogout = () => {};
   return (
     <Box sx={{ flexGrow: 1 }}>

@@ -9,6 +9,6 @@ const item: ItemType = { id: 0, name: '홍길동' };
 
 describe('FriendListItem', () => {
   it('renders FriendListItem', () => {
-    render(<FriendListItem item={item} />);
+    render(<FriendListItem {...item} />);
   });
 });

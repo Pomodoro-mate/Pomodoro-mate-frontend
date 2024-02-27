@@ -8,9 +8,7 @@ const ParticipantList = () => {
       <CardHeader title="참여자 목록" />
       <CardContent>
         <ul>
-          {[].map((item) => (
-            <ParticipantListItem item={item} />
-          ))}
+          <ParticipantListItem />
         </ul>
       </CardContent>
     </Card>
