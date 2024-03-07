@@ -1,15 +1,23 @@
 import { Button, Card, CardActions, CardContent, CardHeader } from '@mui/material';
+import useTimer from '../hook/useTimer';
+
 const Timer = () => {
+  const { startTimer, stopTimer, resetTimer, isActive, status, currentTime } = useTimer();
+
   return (
     <Card sx={{ minWidth: '50%' }}>
       <CardHeader title="타이머" />
       <CardContent sx={{ height: '130px', textAlign: 'center' }}>
-        <h2>00 : 00</h2>
+        <h2>남은시간</h2>
+        <h1>{currentTime}</h1>
       </CardContent>
       <CardActions>
-        <Button size="small">시작</Button>
-        <Button size="small">리셋</Button>
-        <Button size="small">시간설정</Button>
+        {isActive ? (
+          <Button onClick={stopTimer}>일시정지</Button>
+        ) : (
+          <Button onClick={startTimer}>{`${status} 시작`}</Button>
+        )}
+        <Button onClick={resetTimer}>초기화</Button>
       </CardActions>
     </Card>
   );
