@@ -1,58 +1,50 @@
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import useStepStatus from './useStepStatus';
+import { studyStep } from '../util/studyStep';
+import useAudio from './useAudio';
 
-import { STEP } from '@/constant/step';
+interface UseTimeProps {
+  updateAt: string;
+  step: string;
+}
 
 const DELAY = 1000;
-// const REST_TIME = 300;
-// const RETROSPECT_TIME = 300;
-// const STUDY_TIME = 1500;
-// const PLANNING = 300;
+const STUDY_TIME = 1500;
 
-const useTimer = () => {
-  const [min, setMin] = useState(0);
-  const [sec, setSec] = useState(3);
-
-  const [isActive, setIsActive] = useState(false);
-  const [status, setStatus] = useState(STEP.PLANNING);
-
-  const timeRef = useRef(3);
+const useTimer = ({ updateAt, step }: UseTimeProps) => {
+  const { status, changeStepStatus } = useStepStatus(step);
+  const { playSound } = useAudio();
+  const [seconds, setSeconds] = useState(STUDY_TIME);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // const { studyStepMutation } = useStudyStep();
+  const startRef = useRef(new Date(updateAt).getTime());
+  const timeRef = useRef(STUDY_TIME); //25 분
 
   const startTimer = () => {
-    // studyStepMutation.mutate({ studyId: 1, step: STEP.STUDYING });
-    setIsActive(true);
     intervalRef.current = setInterval(() => {
-      if (timeRef.current === 0) {
-        setIsActive(false);
+      const difference = Math.floor((Date.now() - startRef.current) / 1000);
+      const remainingSeconds = timeRef.current - difference;
+      if (remainingSeconds <= 0) {
+        playSound();
+        const step = studyStep(status);
+
+        /** 스터디 정보 업데이트 API
+         *
+         * const data = studyStepMutation.mutate({ studyId: 1, step });
+         *
+         */
+        changeStepStatus(step);
         clearInterval(intervalRef.current as NodeJS.Timeout);
-        setStatus(STEP.RESTING);
+        timeRef.current = STUDY_TIME;
+        setSeconds(STUDY_TIME);
+        return;
       }
-      if (timeRef.current > 0) {
-        timeRef.current -= 1;
-        setMin(Math.floor(timeRef.current / 60));
-        setSec(timeRef.current % 60);
+      if (remainingSeconds > 0) {
+        setSeconds(remainingSeconds);
       }
     }, DELAY);
   };
 
-  const stopTimer = () => {
-    clearInterval(intervalRef.current as NodeJS.Timeout);
-    setIsActive(false);
-  };
-
-  const resetTimer = () => {
-    clearInterval(intervalRef.current as NodeJS.Timeout);
-    setIsActive(false);
-  };
-
-  const currentTime = useMemo(() => {
-    const currentMinutes = min < 10 ? `0${min}` : min;
-    const currentSeconds = sec < 10 ? `0${sec}` : sec;
-    return `${currentMinutes} : ${currentSeconds}`;
-  }, [min, sec]);
-
-  return { startTimer, stopTimer, resetTimer, isActive, status, currentTime };
+  return { seconds, startTimer, status };
 };
+
 export default useTimer;

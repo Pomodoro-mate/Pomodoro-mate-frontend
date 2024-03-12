@@ -1,7 +1,7 @@
 export const STEP = {
-  PLANNING: '계획',
-  STUDYING: '스터디 진행',
-  RETROSPECT: '회고',
-  RESTING: '휴식',
-  COMPLETED: '완료',
+  PLANNING: 'PLANNING',
+  STUDYING: 'STUDYING',
+  RETROSPECT: 'RETROSPECT',
+  RESTING: 'RESTING',
+  COMPLETED: 'COMPLETED',
 };
