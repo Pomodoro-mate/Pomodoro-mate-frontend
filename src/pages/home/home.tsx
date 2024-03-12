@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightRounded';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/constant/routes';
-import Timer from '../study-room/components/timer';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ const Home = () => {
   };
   return (
     <Box sx={{ overflow: 'hidden', height: 700 }}>
-      <Timer />
       <Container
         sx={{
           pt: { xs: 8, sm: 0 },
