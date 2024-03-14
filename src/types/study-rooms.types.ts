@@ -1,16 +1,16 @@
 export type PageKey = 'current' | 'total';
 
-export type Page = Record<PageKey, number>;
+export type PageDto = Record<PageKey, number>;
 
-export type StudyRoomsInfo = {
+export type StudyRoom = {
   id: number;
   name: string;
   intro: string;
-  step: string;
+  step: 'PLANNING' | 'STUDYING' | 'RETROSPECT' | 'RESTING' | 'COMPLETED';
   participantCount: number;
 };
 
 export type StudyRooms = {
-  studyRooms: StudyRoomsInfo[];
-  pageDto: Page;
+  studyRooms: StudyRoom[];
+  pageDto: PageDto;
 };

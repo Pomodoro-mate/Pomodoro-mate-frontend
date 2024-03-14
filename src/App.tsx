@@ -1,8 +1,11 @@
-import { ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
 import { useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import { routes } from './router';
+
+const queryClient = new QueryClient();
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -19,8 +22,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RouterProvider router={routes} />
+      <QueryClientProvider client={queryClient}>
+        <CssBaseline />
+        <RouterProvider router={routes} />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
