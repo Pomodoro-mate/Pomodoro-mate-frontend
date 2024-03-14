@@ -1,25 +1,24 @@
-import DialogProvider from './components/dialog-provider';
-import StudyRoomsList from './components/study-room-list';
+import { useContext } from 'react';
+import { Container, Card, CardContent, CardHeader, Button } from '@mui/material';
+import DialogProvider, { DialogContext } from './components/dialog-provider';
+import StudyRoomList from './components/study-room-list';
 
 const StudyRooms = () => {
-  // const { data } = useQuery({
-  //   queryKey: ['studyRoomsList'],
-  //   queryFn: () => getStudyRooms({ data: { page: 1 } }),
-  // });
+  const { handleDialog } = useContext(DialogContext);
 
   return (
     <DialogProvider>
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          gap: '4px',
-          justifyContent: 'center',
-        }}
-      >
-        <StudyRoomsList />
-        {/* <FriendList /> */}
-      </div>
+      <Container sx={{ maxWidth: '60rem' }}>
+        <Card sx={{ width: '100%' }}>
+          <CardHeader title="스터디 룸 목록" />
+          <CardContent>
+            <Button variant="outlined" onClick={handleDialog}>
+              스터디룸 생성
+            </Button>
+            <StudyRoomList />
+          </CardContent>
+        </Card>
+      </Container>
     </DialogProvider>
   );
 };
