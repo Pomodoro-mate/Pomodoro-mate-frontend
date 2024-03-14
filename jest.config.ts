@@ -1,24 +1,27 @@
 export default {
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/src/jest.setup.ts"],
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/jest.setup.ts'],
   transform: {
-    "^.+\\.(t|j)sx?$": [
-      "@swc/jest",
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
       {
         jsc: {
           parser: {
-            syntax: "typescript",
+            syntax: 'typescript',
             jsx: true,
             decorators: true,
           },
           transform: {
             react: {
-              runtime: "automatic",
+              runtime: 'automatic',
             },
           },
         },
       },
     ],
   },
-  testPathIgnorePatterns: ["<rootDir>/node_modules/"],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 };
