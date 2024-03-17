@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getStudyRooms } from '@/apis/study-rooms/get-study-rooms';
+import { getStudyRooms } from '@/apis/study-room/get-study-rooms';
 
 const useStudyRoomsQuery = () => {
   const [page, setPage] = useState(1);
