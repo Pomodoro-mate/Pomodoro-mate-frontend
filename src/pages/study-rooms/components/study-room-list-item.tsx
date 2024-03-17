@@ -1,6 +1,6 @@
 import { Chip, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { StudyRoom } from '@/types/study-rooms.types';
-import { studyRoomStep } from '@/constant/study-room';
+import { STUDY_ROOM_STEP } from '@/constant/study-room';
 
 type StudyRoomProps = StudyRoom;
 
@@ -19,7 +19,7 @@ const StudyRoomListItem = ({ name, step, participantCount }: StudyRoomProps) => 
           <ListItemText>{name}</ListItemText>
         </div>
         <div style={{ display: 'flex' }}>
-          <Chip sx={{ marginRight: '8px' }} label={studyRoomStep[step]}></Chip>
+          <Chip sx={{ marginRight: '8px' }} label={STUDY_ROOM_STEP[step]}></Chip>
           <ListItemText>{`${participantCount}/${MAX_PARTICIPANT_COUNT}`}</ListItemText>
         </div>
       </ListItemButton>

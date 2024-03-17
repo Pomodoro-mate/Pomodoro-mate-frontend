@@ -1,11 +1,6 @@
 import { List, Pagination } from '@mui/material';
-import { StudyRoom } from '@/types/study-rooms.types';
 import useStudyRoomsQuery from '@/hooks/useStudyRoomsQuery';
 import StudyRoomListItem from './study-room-list-item';
-
-const studyRoomKey = (id: number) => {
-  return `study-room-${id}`;
-};
 
 const StudyRoomList = () => {
   const { isLoading, studyRooms, pageDto, isError, page, setPage } = useStudyRoomsQuery();
@@ -43,8 +38,8 @@ const StudyRoomList = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <List sx={{ width: '100%' }}>
-        {studyRooms.map((studyRoom: StudyRoom) => (
-          <StudyRoomListItem key={studyRoomKey(studyRoom.id)} {...studyRoom} />
+        {studyRooms.map((studyRoom) => (
+          <StudyRoomListItem key={`study-room-${studyRoom.id}`} {...studyRoom} />
         ))}
       </List>
       <Pagination count={pageDto.total} page={pageDto.current} onChange={handleChangePage} />
