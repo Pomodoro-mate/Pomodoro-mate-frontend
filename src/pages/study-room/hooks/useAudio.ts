@@ -1,10 +1,10 @@
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import sound from '../../../assets/audio/flipdish-ringer.mp3';
 const useAudio = () => {
   const audio = useRef(new Audio(sound));
-  const playSound = () => audio.current.play();
+  const play = useCallback(() => audio.current.play(), []);
 
-  return { playSound };
+  return { play };
 };
 
 export default useAudio;

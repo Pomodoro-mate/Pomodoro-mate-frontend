@@ -1,4 +1,4 @@
-export const STEP = {
+export const STEP_STATUS = {
   PLANNING: 'PLANNING',
   STUDYING: 'STUDYING',
   RETROSPECT: 'RETROSPECT',

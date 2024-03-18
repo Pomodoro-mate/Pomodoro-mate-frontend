@@ -1,11 +1,10 @@
-import { studyStep } from '@/apis/study-room/study-step';
+import { studyStep } from '@/apis/study-room/update-study-step';
 import { useMutation } from '@tanstack/react-query';
 
 const useStudyStepMutation = () => {
-  const studyStepMutation = useMutation({
+  return useMutation({
     mutationFn: studyStep,
   });
-  return { studyStepMutation };
 };
 
 export default useStudyStepMutation;
