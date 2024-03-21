@@ -1,37 +1,36 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { PropsWithChildren } from 'react';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
-interface ModalProps {
-  open: boolean;
-  handleDialog: () => void;
+interface ModalProps extends PropsWithChildren {
+  isOpen: boolean;
+  onClose: (modalKey: any) => void;
+  title: string;
+  actionBtn?: string;
+  closeBtn?: string;
+  onClickActionBtn?: (...args: any) => any;
 }
 
-const Modal = ({ open, handleDialog }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  title,
+  actionBtn,
+  closeBtn,
+  onClickActionBtn,
+  children,
+}: ModalProps) => {
   return (
-    <Dialog
-      open={open}
-      onClose={handleDialog}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
-      <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          Let Google help apps determine location. This means sending anonymous location data to
-          Google, even when no apps are running.
-        </DialogContentText>
-      </DialogContent>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>{children}</DialogContent>
       <DialogActions>
-        <Button onClick={handleDialog}>Disagree</Button>
-        <Button onClick={handleDialog} autoFocus>
-          Agree
-        </Button>
+        <Button onClick={onClose}>{closeBtn ?? '닫기'}</Button>
+        {actionBtn && (
+          <Button variant="contained" onClick={onClickActionBtn}>
+            {actionBtn}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );
