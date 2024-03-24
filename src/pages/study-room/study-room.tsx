@@ -1,14 +1,22 @@
 import { Box, Button, Card, CardContent, CardHeader, Chip, Container, Grid } from '@mui/material';
 import ParticipantList from './components/participant-list';
 import Timer from './components/timer';
+import { useParams } from 'react-router-dom';
+import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 
 const StudyRoom = () => {
+  const { id: studyId } = useParams();
+
+  const { data, isLoading, refetch } = useStudyRoomQuery({ studyId: studyId });
+  if (isLoading) {
+    return <></>;
+  }
   return (
     <Container maxWidth="lg">
       <Box component="section" sx={{ p: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Timer />
+            <Timer data={data} refetch={refetch} />
           </Grid>
           <Grid item xs={6}>
             <ParticipantList />

@@ -13,19 +13,14 @@ const STEP_LABEL_MAP: Record<StepTextKey, string> = {
   COMPLETED: '완료',
 };
 
-const Timer = () => {
-  /** api호출
-   *
-   * const { isLoading, isError, data, error, refetch } = useQuery({
-   * queryKey: ['get-study-room-info'],
-   * queryFn: () => studyRoomInfo({ studyId: 1 }),
-   * });
-   *
-   */
-
+const Timer = ({ data, refetch }: { data: any; refetch: any }) => {
+  console.log({ data });
+  const { updateAt, step, id } = data;
   const { seconds, startTimer, stepStatus } = useTimer({
-    updateAt: '2024-03-11T14:55:32.513Z',
-    step: 'PLANNING',
+    updateAt: `${updateAt}Z`,
+    step: step,
+    id: id,
+    refetch,
   });
 
   const currentTime = useMemo(() => {
@@ -35,12 +30,16 @@ const Timer = () => {
   }, [seconds]);
 
   useEffect(() => {
-    document.title = currentTime;
+    document.title = `${currentTime} - ${stepStatus}`;
   }, [currentTime]);
+
+  const title = useMemo(() => {
+    return STEP_LABEL_MAP[stepStatus];
+  }, [stepStatus]);
 
   return (
     <Card sx={{ minWidth: '50%' }}>
-      <CardHeader title={STEP_LABEL_MAP[stepStatus]} />
+      <CardHeader title={title} />
       <CardContent sx={{ textAlign: 'center' }}>
         <h2>남은시간</h2>
         <h1>{currentTime}</h1>

@@ -1,11 +1,13 @@
 import { Step } from '@/types/study-room.types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useStepStatus = (initialStepStatus: Step) => {
   const [stepStatus, setStepStatus] = useState(initialStepStatus);
-  const changeStepStatus = (step: Step) => setStepStatus(step);
+  useEffect(() => {
+    setStepStatus(initialStepStatus);
+  }, [initialStepStatus]);
 
-  return { stepStatus, changeStepStatus };
+  return { stepStatus };
 };
 
 export default useStepStatus;
