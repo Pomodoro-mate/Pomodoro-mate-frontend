@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, CardHeader } from '@mui/materia
 import { useEffect, useMemo } from 'react';
 import useTimer from '../hooks/useTimer';
 import { STEP_STATUS } from '@/constant/step';
+import { Step } from '@/types/study-room.types';
 
 type StepTextKey = keyof typeof STEP_STATUS;
 
@@ -13,8 +14,13 @@ const STEP_LABEL_MAP: Record<StepTextKey, string> = {
   COMPLETED: '완료',
 };
 
-const Timer = ({ data, refetch }: { data: any; refetch: any }) => {
-  console.log({ data });
+const Timer = ({
+  data,
+  refetch,
+}: {
+  data: { updateAt: string; step: Step; id: number };
+  refetch: () => void;
+}) => {
   const { updateAt, step, id } = data;
   const { seconds, startTimer, stepStatus } = useTimer({
     updateAt: `${updateAt}Z`,
@@ -31,7 +37,7 @@ const Timer = ({ data, refetch }: { data: any; refetch: any }) => {
 
   useEffect(() => {
     document.title = `${currentTime} - ${stepStatus}`;
-  }, [currentTime]);
+  }, [currentTime, stepStatus]);
 
   const title = useMemo(() => {
     return STEP_LABEL_MAP[stepStatus];
