@@ -16,11 +16,15 @@ const CreateStudyRoomModal = () => {
   const [intro, setIntro] = useState('');
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
+    const { value } = event.target;
+
+    setName(value);
   };
 
   const handleChangeIntro = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIntro(event.target.value);
+    const { value } = event.target;
+
+    setIntro(value);
   };
 
   const handleClickActionBtn = async () => {

@@ -14,7 +14,7 @@ const Modal = ({
   onClose,
   title,
   actionBtn,
-  closeBtn,
+  closeBtn = '닫기',
   onClickActionBtn,
   children,
 }: ModalProps) => {
@@ -23,7 +23,7 @@ const Modal = ({
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>{closeBtn ?? '닫기'}</Button>
+        <Button onClick={onClose}>{closeBtn}</Button>
         {actionBtn && (
           <Button variant="contained" onClick={onClickActionBtn}>
             {actionBtn}
