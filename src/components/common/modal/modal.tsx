@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { PropsWithChildren } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
-interface ModalProps extends PropsWithChildren {
+export interface ModalProps extends React.PropsWithChildren {
   isOpen: boolean;
-  onClose: (modalKey: any) => void;
+  onClose: () => void;
   title: string;
   actionBtn?: string;
   closeBtn?: string;
-  onClickActionBtn?: (...args: any) => any;
+  onClickActionBtn?: () => void;
 }
 
 const Modal = ({
