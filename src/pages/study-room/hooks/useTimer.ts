@@ -14,8 +14,7 @@ interface UseTimer {
 }
 
 const DELAY = 1000;
-const STUDY_TIME = 100;
-//const STUDY_TIME = 600;
+const STUDY_TIME = 2100;
 
 const useTimer = ({ id, updateAt, step, refetch }: UseTimer) => {
   const { stepStatus } = useStepStatus(step);
