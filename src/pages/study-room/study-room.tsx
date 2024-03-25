@@ -3,6 +3,7 @@ import ParticipantList from './components/participant-list';
 import Timer from './components/timer';
 import { useParams } from 'react-router-dom';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
+import Spinner from '@/components/common/spinner/spinner';
 
 const StudyRoom = () => {
   const { id: studyId } = useParams();
@@ -10,7 +11,7 @@ const StudyRoom = () => {
   // 추후 수정 예정
   const { data, isLoading, refetch } = useStudyRoomQuery({ studyId: Number(studyId) });
   if (isLoading) {
-    return <></>;
+    return <Spinner />;
   }
   return (
     <Container maxWidth="lg">
