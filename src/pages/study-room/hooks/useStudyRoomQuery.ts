@@ -1,7 +1,10 @@
 import { getStudyRoomInfo } from '@/apis/study-room/get-study-room-info';
 import { useQuery } from '@tanstack/react-query';
 
-const useStudyRoomQuery = ({ studyId }: { studyId: string }) => {
+interface UseStudyRoomQuery {
+  studyId: number;
+}
+const useStudyRoomQuery = ({ studyId }: UseStudyRoomQuery) => {
   return useQuery({
     queryKey: ['get-study-room-info'],
     queryFn: () => getStudyRoomInfo({ studyId }),

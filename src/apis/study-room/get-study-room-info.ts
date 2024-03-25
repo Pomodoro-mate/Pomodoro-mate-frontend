@@ -1,7 +1,7 @@
 import { Step } from '@/types/study-room.types';
 import { http } from '../api';
 
-type Params = { studyId: string };
+type Params = { studyId: number };
 
 type Response = {
   id: number;

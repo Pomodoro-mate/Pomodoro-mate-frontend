@@ -7,7 +7,8 @@ import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 const StudyRoom = () => {
   const { id: studyId } = useParams();
 
-  const { data, isLoading, refetch } = useStudyRoomQuery({ studyId: studyId });
+  // 추후 수정 예정
+  const { data, isLoading, refetch } = useStudyRoomQuery({ studyId: Number(studyId) });
   if (isLoading) {
     return <></>;
   }

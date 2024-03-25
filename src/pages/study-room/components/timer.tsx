@@ -14,13 +14,13 @@ const STEP_LABEL_MAP: Record<StepTextKey, string> = {
   COMPLETED: '완료',
 };
 
-const Timer = ({
-  data,
-  refetch,
-}: {
-  data: { updateAt: string; step: Step; id: number };
+type StudyRoomType = { updateAt: string; step: Step; id: number };
+interface TimerProps {
+  data: StudyRoomType;
   refetch: () => void;
-}) => {
+}
+
+const Timer = ({ data, refetch }: TimerProps) => {
   const { updateAt, step, id } = data;
   const { seconds, startTimer, stepStatus } = useTimer({
     updateAt: `${updateAt}Z`,
@@ -28,6 +28,8 @@ const Timer = ({
     id: id,
     refetch,
   });
+
+  const stepLabel = useMemo(() => STEP_LABEL_MAP[stepStatus], [stepStatus]);
 
   const currentTime = useMemo(() => {
     const 분 = Math.floor(seconds / 60);
@@ -39,19 +41,15 @@ const Timer = ({
     document.title = `${currentTime} - ${stepStatus}`;
   }, [currentTime, stepStatus]);
 
-  const title = useMemo(() => {
-    return STEP_LABEL_MAP[stepStatus];
-  }, [stepStatus]);
-
   return (
     <Card sx={{ minWidth: '50%' }}>
-      <CardHeader title={title} />
+      <CardHeader title={stepLabel} />
       <CardContent sx={{ textAlign: 'center' }}>
         <h2>남은시간</h2>
         <h1>{currentTime}</h1>
       </CardContent>
       <CardActions>
-        <Button type="button" onClick={startTimer}>{`${STEP_LABEL_MAP[stepStatus]} 시작`}</Button>
+        <Button type="button" onClick={startTimer}>{`${stepLabel} 시작`}</Button>
       </CardActions>
     </Card>
   );
