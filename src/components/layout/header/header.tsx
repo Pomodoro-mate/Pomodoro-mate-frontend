@@ -1,8 +1,19 @@
+import { ROUTE_PATH } from '@/constant/routes';
+import useLogoutMutate from '@/hooks/useLogoutMutate';
+import { removeLocalStorage } from '@/utils/storage';
 import { Box, Button, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const handleLogout = () => {};
+  const navigate = useNavigate();
+  const logoutMutation = useLogoutMutate();
+  const logout = () => {
+    removeLocalStorage('token');
+    logoutMutation.mutate();
+    navigate(ROUTE_PATH.LOGIN);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
@@ -21,7 +32,15 @@ const Header = () => {
             <Typography variant="h6" component="div">
               정진범님
             </Typography>
-            <Button type="button" color="inherit" onClick={handleLogout}>
+            <Button
+              type="button"
+              color="inherit"
+              onClick={logout}
+              sx={{
+                flexShrink: 0,
+                textTransform: 'none',
+              }}
+            >
               Logout
             </Button>
           </div>
