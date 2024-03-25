@@ -11,7 +11,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import ModalProvider from '@/provider/modal-provider';
 import AppRoute from '@/components/common/app-route/app-route';
 import Spinner from '@/components/common/spinner/spinner';
-import Login from '@/pages/login/login';
+import Login from '@/pages/login/Login';
 import StudyRoom from '@/pages/study-room/study-room';
 import StudyRooms from '@/pages/study-rooms/study-rooms';
 
@@ -25,7 +25,7 @@ export const router = [
     errorElement: <Error />,
     children: [
       {
-        path: ROUTE_PATH.STUDY_ROOM,
+        path: `${ROUTE_PATH.STUDY_ROOM}/:id`,
         element: (
           <Suspense fallback={<Spinner />}>
             <StudyRoom />
