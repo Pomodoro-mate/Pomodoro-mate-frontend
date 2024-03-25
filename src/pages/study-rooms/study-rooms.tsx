@@ -1,25 +1,18 @@
-import { useContext } from 'react';
-import { Container, Card, CardContent, CardHeader, Button } from '@mui/material';
-import DialogProvider, { DialogContext } from './components/dialog-provider';
-import StudyRoomList from './components/study-room-list';
+import { Container, Card, CardContent, CardHeader } from '@mui/material';
+import StudyRoomListButtons from '@/pages/study-rooms/components/study-room-list-buttons';
+import StudyRoomList from '@/pages/study-rooms/components/study-room-list';
 
 const StudyRooms = () => {
-  const { handleDialog } = useContext(DialogContext);
-
   return (
-    <DialogProvider>
-      <Container sx={{ maxWidth: '60rem' }}>
-        <Card sx={{ width: '100%' }}>
-          <CardHeader title="스터디 룸 목록" />
-          <CardContent>
-            <Button variant="outlined" onClick={handleDialog}>
-              스터디룸 생성
-            </Button>
-            <StudyRoomList />
-          </CardContent>
-        </Card>
-      </Container>
-    </DialogProvider>
+    <Container sx={{ maxWidth: '60rem' }}>
+      <Card sx={{ width: '100%' }}>
+        <CardHeader title="스터디룸 목록" />
+        <CardContent>
+          <StudyRoomListButtons />
+          <StudyRoomList />
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 

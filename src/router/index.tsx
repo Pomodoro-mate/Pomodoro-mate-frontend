@@ -8,6 +8,7 @@ import { ROUTE_PATH } from '@/constant/routes';
 import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
+import ModalProvider from '@/provider/modal-provider';
 import AppRoute from '@/components/common/app-route/app-route';
 import Spinner from '@/components/common/spinner/spinner';
 import Login from '@/pages/login/login';
@@ -16,7 +17,11 @@ import StudyRooms from '@/pages/study-rooms/study-rooms';
 
 export const router = [
   {
-    element: <Layout />,
+    element: (
+      <ModalProvider>
+        <Layout />
+      </ModalProvider>
+    ),
     errorElement: <Error />,
     children: [
       {
