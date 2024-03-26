@@ -14,6 +14,16 @@ const mockQueryData = {
   setPage: jest.fn(),
 };
 
+const navigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => navigate,
+}));
+
+jest.mock('@/apis/study-room/participate-study', () => ({
+  participateStudy: jest.fn(),
+}));
+
 jest.mock('@/hooks/useStudyRoomsQuery', () => () => mockQueryData);
 
 describe('StudyRoomList', () => {
