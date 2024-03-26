@@ -1,7 +1,7 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
-import useLogoutMutate from '@/hooks/useLogoutMutate';
+import useLogoutMutation from '@/hooks/useLogoutMutation';
 
 import { removeLocalStorage } from '@/utils/storage';
 
@@ -9,11 +9,11 @@ import { ROUTE_PATH } from '@/constant/routes';
 
 const Header = () => {
   const navigate = useNavigate();
-  const logoutMutation = useLogoutMutate();
+  const { mutate: logoutMutate } = useLogoutMutation();
 
   const logout = () => {
+    logoutMutate();
     removeLocalStorage('token');
-    logoutMutation.mutate();
     navigate(ROUTE_PATH.LOGIN);
   };
 
