@@ -1,30 +1,25 @@
 import { useRef, useState } from 'react';
-import useStepStatus from './useStepStatus';
-// import { getNextStudyStep } from '../util/studyStep';
-import { Step } from '@/types/study-room.types';
-import { getNextStudyStep } from '../util/studyStep';
 import useAudio from './useAudio';
-import useStudyStepMutation from './useStudyStepMutation';
+import useStepStatus from './useStepStatus';
+
+import { Step } from '@/types/study-room.types';
 
 interface UseTimer {
-  id: number;
   updateAt: string;
   step: Step;
-  refetch: () => void;
 }
 
 const DELAY = 1000;
-const STUDY_TIME = 2100;
+const STUDY_TIME = 2100; //35분
 
-const useTimer = ({ id, updateAt, step, refetch }: UseTimer) => {
-  const { stepStatus } = useStepStatus(step);
+const useTimer = ({ updateAt, step }: UseTimer) => {
   const { play } = useAudio();
+  const { stepStatus } = useStepStatus(step);
   const [seconds, setSeconds] = useState(STUDY_TIME);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const startRef = useRef(new Date(updateAt).getTime());
 
-  const timeRef = useRef(STUDY_TIME); //25 분
-  const studyStepMutation = useStudyStepMutation({ refetch });
+  const timeRef = useRef(STUDY_TIME);
+  const startRef = useRef(new Date(updateAt).getTime());
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const startTimer = () => {
     intervalRef.current = setInterval(() => {
@@ -38,21 +33,11 @@ const useTimer = ({ id, updateAt, step, refetch }: UseTimer) => {
 
       play();
       reset();
-
-      //
-
-      /** 스터디 정보 업데이트 API
-       *
-       * const data = studyStepMutation.mutate({ studyId: 1, step });
-       *
-       */
     }, DELAY);
   };
 
-  const reset = async () => {
+  const reset = () => {
     setSeconds(STUDY_TIME);
-    const step = getNextStudyStep(stepStatus);
-    studyStepMutation.mutate({ studyId: id, step });
     clearInterval(intervalRef.current as NodeJS.Timeout);
     timeRef.current = STUDY_TIME;
   };

@@ -1,35 +1,22 @@
 import { Button, Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import { useEffect, useMemo } from 'react';
 import useTimer from '../hooks/useTimer';
-import { STEP_STATUS } from '@/constant/step';
 import { Step } from '@/types/study-room.types';
-
-type StepTextKey = keyof typeof STEP_STATUS;
-
-const STEP_LABEL_MAP: Record<StepTextKey, string> = {
-  PLANNING: '계획',
-  STUDYING: '스터디',
-  RETROSPECT: '회고',
-  RESTING: '휴식',
-  COMPLETED: '완료',
-};
+import { STUDY_ROOM_STEP } from '@/constant/study-room';
 
 type StudyRoomType = { updateAt: string; step: Step; id: number };
 interface TimerProps {
   data: StudyRoomType;
-  refetch: () => void;
 }
 
-const Timer = ({ data, refetch }: TimerProps) => {
-  const { updateAt, step, id } = data;
+const Timer = ({ data }: TimerProps) => {
+  const { updateAt, step } = data;
   const { seconds, startTimer, stepStatus } = useTimer({
     updateAt: `${updateAt}Z`,
     step: step,
-    id: id,
-    refetch,
   });
 
-  const stepLabel = useMemo(() => STEP_LABEL_MAP[stepStatus], [stepStatus]);
+  const stepLabel = useMemo(() => STUDY_ROOM_STEP[stepStatus], [stepStatus]);
 
   const currentTime = useMemo(() => {
     const 분 = Math.floor(seconds / 60);

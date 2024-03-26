@@ -10,14 +10,14 @@ const StudyRoom = () => {
   const { id: studyId } = useParams();
 
   // 추후 수정 예정
-  const { data, isLoading, refetch } = useStudyRoomQuery({ studyId: Number(studyId) });
+  const { data, isLoading } = useStudyRoomQuery({ studyId: Number(studyId) });
   if (isLoading) {
     return <Spinner />;
   }
   return (
     <Layout>
       <Grid item xs={6}>
-        <Timer data={data} refetch={refetch} />
+        <Timer data={data} />
       </Grid>
       <Grid item xs={6}>
         <ParticipantList />
