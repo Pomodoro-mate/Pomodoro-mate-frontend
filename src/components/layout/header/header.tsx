@@ -10,6 +10,7 @@ import { ROUTE_PATH } from '@/constant/routes';
 const Header = () => {
   const navigate = useNavigate();
   const logoutMutation = useLogoutMutate();
+
   const logout = () => {
     removeLocalStorage('token');
     logoutMutation.mutate();
