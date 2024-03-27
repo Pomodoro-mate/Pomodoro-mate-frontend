@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { List, Pagination } from '@mui/material';
 import { ROUTE_PATH } from '@/constant/routes';
-import { participateStudy } from '@/apis/study-room/participate-study';
+import { joinStudyRoom } from '@/apis/study-room/join-study-room';
 import useStudyRoomsQuery from '@/hooks/useStudyRoomsQuery';
 import StudyRoomListItem from './study-room-list-item';
 
@@ -10,15 +10,15 @@ const StudyRoomList = () => {
 
   const { isLoading, studyRooms, pageDto, isError, page, setPage } = useStudyRoomsQuery();
 
-  const handleChangePage = (_: React.ChangeEvent<unknown>, targetPage: number) => {
+  const handlePageChange = (_: React.ChangeEvent<unknown>, targetPage: number) => {
     if (page === targetPage) return;
 
     setPage(targetPage);
   };
 
-  const handleClickStudyRoom = async (studyRoomId: number) => {
+  const handleJoinStudyRoom = async (studyRoomId: number) => {
     try {
-      await participateStudy({ studyRoomId });
+      await joinStudyRoom({ studyRoomId });
 
       navigate(`${ROUTE_PATH.STUDY_ROOM}/${studyRoomId}`);
     } catch (e) {
@@ -54,14 +54,10 @@ const StudyRoomList = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <List sx={{ width: '100%' }}>
         {studyRooms.map((studyRoom) => (
-          <StudyRoomListItem
-            key={`study-room-${studyRoom.id}`}
-            {...studyRoom}
-            onClick={handleClickStudyRoom}
-          />
+          <StudyRoomListItem key={studyRoom.id} {...studyRoom} onClick={handleJoinStudyRoom} />
         ))}
       </List>
-      <Pagination count={pageDto.total} page={pageDto.current} onChange={handleChangePage} />
+      <Pagination count={pageDto.total} page={pageDto.current} onChange={handlePageChange} />
     </div>
   );
 };

@@ -20,8 +20,8 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => navigate,
 }));
 
-jest.mock('@/apis/study-room/participate-study', () => ({
-  participateStudy: jest.fn(),
+jest.mock('@/apis/study-room/join-study-room', () => ({
+  joinStudyRoom: jest.fn(),
 }));
 
 jest.mock('@/hooks/useStudyRoomsQuery', () => () => mockQueryData);
