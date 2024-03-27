@@ -20,7 +20,7 @@ const StudyRoomList = () => {
     try {
       await joinStudyRoom({ studyRoomId });
 
-      navigate(`${ROUTE_PATH.STUDY_ROOM}/${studyRoomId}`);
+      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${studyRoomId}`);
     } catch (e) {
       console.error(e);
     }

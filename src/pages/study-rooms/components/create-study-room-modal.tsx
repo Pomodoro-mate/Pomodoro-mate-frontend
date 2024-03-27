@@ -33,7 +33,7 @@ const CreateStudyRoomModal = () => {
 
       onClose();
 
-      navigate(`${ROUTE_PATH.STUDY_ROOM}/${id}`);
+      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${id}`);
     } catch (e) {
       console.error(e);
     }
