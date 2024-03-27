@@ -2,13 +2,21 @@ import { Chip, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { StudyRoom } from '@/types/study-rooms.types';
 import { STUDY_ROOM_STEP } from '@/constant/study-room';
 
-type StudyRoomProps = StudyRoom;
+type StudyRoomListItemProps = StudyRoom & {
+  onClick: (studyRoomId: number) => void;
+};
 
 const MAX_PARTICIPANT_COUNT = 8;
 
-const StudyRoomListItem = ({ name, step, participantCount }: StudyRoomProps) => {
+const StudyRoomListItem = ({
+  id,
+  name,
+  step,
+  participantCount,
+  onClick,
+}: StudyRoomListItemProps) => {
   return (
-    <ListItem>
+    <ListItem onClick={() => onClick(id)}>
       <ListItemButton
         sx={{
           border: '1px solid lightgray' /* 테마 추가 후 색상 변경 예정 */,
