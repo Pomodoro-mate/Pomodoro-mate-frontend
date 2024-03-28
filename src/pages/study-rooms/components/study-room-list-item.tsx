@@ -1,8 +1,8 @@
 import { Chip, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { StudyRoom } from '@/types/study-rooms.types';
+import { StudyRoomSummary } from '@/types/study-room.types';
 import { STUDY_ROOM_STEP } from '@/constant/study-room';
 
-type StudyRoomListItemProps = StudyRoom & {
+type StudyRoomListItemProps = StudyRoomSummary & {
   onClick: (studyRoomId: number) => void;
 };
 
