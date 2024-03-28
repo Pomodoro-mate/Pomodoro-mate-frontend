@@ -1,12 +1,12 @@
 import { http } from '../api';
-import { PageDto, StudyRoom } from '@/types/study-rooms.types';
+import { PageDto, StudyRoomSummary } from '@/types/study-room.types';
 
 interface GetStudyRoomsParams {
   page: number;
 }
 
 interface GetStudyRoomsResponse {
-  studyRooms: StudyRoom[];
+  studyRooms: StudyRoomSummary[];
   pageDto: PageDto;
 }
 

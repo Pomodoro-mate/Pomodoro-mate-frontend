@@ -1,4 +1,4 @@
-import { PageDto } from '@/types/study-rooms.types';
+import { PageDto } from '@/types/study-room.types';
 
 const pageDto: PageDto = {
   current: 1,

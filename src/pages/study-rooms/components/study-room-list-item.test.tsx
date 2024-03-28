@@ -5,13 +5,15 @@ import StudyRoomListItem from './study-room-list-item';
 
 const context = describe;
 
-const { studyRoom } = fixtures;
+const { studyRooms } = fixtures;
+
+const studyRoom = studyRooms[0];
 
 const onClick = jest.fn();
 
 describe('StudyRoomListItem', () => {
   it('renders study room list item', () => {
-    render(<StudyRoomListItem {...fixtures.studyRoom} onClick={onClick} />);
+    render(<StudyRoomListItem {...studyRoom} onClick={onClick} />);
 
     screen.getByText(studyRoom.name);
     screen.getByText(`${studyRoom.participantCount}/8`);
@@ -20,7 +22,7 @@ describe('StudyRoomListItem', () => {
 
   context('when click study room list item', () => {
     it('execute onClick function', () => {
-      render(<StudyRoomListItem {...fixtures.studyRoom} onClick={onClick} />);
+      render(<StudyRoomListItem {...studyRoom} onClick={onClick} />);
 
       const studyRoomListItem = screen.getByText(studyRoom.name);
 
