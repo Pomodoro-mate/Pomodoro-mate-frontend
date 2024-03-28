@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { List, Pagination } from '@mui/material';
 import { ROUTE_PATH } from '@/constant/routes';
 import { joinStudyRoom } from '@/apis/study-room/join-study-room';
-import useStudyRoomsQuery from '@/hooks/useStudyRoomsQuery';
+import useStudyRoomsQuery from '@/pages/study-rooms/hooks/useStudyRoomsQuery';
 import StudyRoomListItem from './study-room-list-item';
 
 const StudyRoomList = () => {
