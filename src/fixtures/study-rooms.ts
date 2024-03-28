@@ -1,6 +1,6 @@
-import { StudyRoom } from '@/types/study-rooms.types';
+import { StudyRoomSummary } from '@/types/study-room.types';
 
-const studyRooms: StudyRoom[] = [
+const studyRooms: StudyRoomSummary[] = [
   {
     id: 1,
     name: '스터디룸1',
