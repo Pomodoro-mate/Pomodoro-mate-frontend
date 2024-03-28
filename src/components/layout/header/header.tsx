@@ -11,10 +11,14 @@ const Header = () => {
   const navigate = useNavigate();
   const { mutate: logoutMutate } = useLogoutMutation();
 
-  const logout = () => {
-    logoutMutate();
-    removeLocalStorage('token');
-    navigate(ROUTE_PATH.LOGIN);
+  const logout = async () => {
+    try {
+      await logoutMutate();
+      await removeLocalStorage('token');
+      await navigate(ROUTE_PATH.LOGIN);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
