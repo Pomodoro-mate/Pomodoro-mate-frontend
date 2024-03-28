@@ -25,7 +25,7 @@ export const router = [
     errorElement: <Error />,
     children: [
       {
-        path: ROUTE_PATH.STUDY_ROOM,
+        path: `${ROUTE_PATH.STUDY_ROOMS}/:id`,
         element: (
           <Suspense fallback={<Spinner />}>
             <StudyRoom />

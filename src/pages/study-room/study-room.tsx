@@ -1,13 +1,23 @@
+import Spinner from '@/components/common/spinner/spinner';
 import { Button, Card, CardContent, CardHeader, Chip, Grid } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import Layout from './components/layout';
 import ParticipantList from './components/participant-list';
 import Timer from './components/timer';
+import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 
 const StudyRoom = () => {
+  const { id: studyId } = useParams();
+
+  // 추후 수정 예정
+  const { data, isLoading } = useStudyRoomQuery({ studyId: Number(studyId) });
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <Layout>
       <Grid item xs={6}>
-        <Timer />
+        <Timer data={data} />
       </Grid>
       <Grid item xs={6}>
         <ParticipantList />

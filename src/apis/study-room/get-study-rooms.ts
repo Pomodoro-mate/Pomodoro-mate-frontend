@@ -1,12 +1,18 @@
 import { http } from '../api';
-import { PageDto, StudyRoom } from '@/types/study-rooms.types';
+import { PageDto, StudyRoomSummary } from '@/types/study-room.types';
 
-interface DataType {
-  studyRooms: StudyRoom[];
+interface GetStudyRoomsParams {
+  page: number;
+}
+
+interface GetStudyRoomsResponse {
+  studyRooms: StudyRoomSummary[];
   pageDto: PageDto;
 }
 
-export const getStudyRooms = async ({ page }: { page: number }): Promise<DataType> => {
+export const getStudyRooms = async ({
+  page,
+}: GetStudyRoomsParams): Promise<GetStudyRoomsResponse> => {
   const { data } = await http.get('/studyrooms', { params: { page } });
 
   return data;

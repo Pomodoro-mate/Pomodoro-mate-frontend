@@ -1,16 +1,18 @@
 import { http } from '../api';
 
-interface DataType {
+interface CreateStudyRoomParams {
+  name: string;
+  intro: string;
+}
+
+interface CreateStudyRoomResponse {
   id: number;
 }
 
 export const createStudyRoom = async ({
   name,
   intro,
-}: {
-  name: string;
-  intro: string;
-}): Promise<DataType> => {
+}: CreateStudyRoomParams): Promise<CreateStudyRoomResponse> => {
   const { data } = await http.post('/studyrooms', { name, intro });
 
   return data;
