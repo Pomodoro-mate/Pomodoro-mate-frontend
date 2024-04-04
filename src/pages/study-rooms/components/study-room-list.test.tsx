@@ -24,7 +24,7 @@ jest.mock('@/apis/study-room/join-study-room', () => ({
   joinStudyRoom: jest.fn(),
 }));
 
-jest.mock('@/hooks/useStudyRoomsQuery', () => () => mockQueryData);
+jest.mock('../hooks/useStudyRoomsQuery', () => () => mockQueryData);
 
 describe('StudyRoomList', () => {
   it('renders study room list', () => {
