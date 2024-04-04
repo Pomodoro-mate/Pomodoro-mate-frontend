@@ -1,12 +1,18 @@
-import Header from './header/header';
+import { Outlet, useLocation } from 'react-router-dom';
+import { ROUTE_PATH } from '@/constant/routes';
 import ProtectedRoute from '../common/protected-route/protected-route';
-
-import { Outlet } from 'react-router-dom';
+import Header from './header/header';
 
 const Layout = () => {
+  const { pathname } = useLocation();
+
+  // 현재 경로가 스터디룸 내부인지 확인하는 정규식
+  const regExp = new RegExp(`^${ROUTE_PATH.STUDY_ROOMS}/\\d+$`);
+  const isStudyRoomPage = regExp.test(pathname);
+
   return (
     <>
-      <Header />
+      {!isStudyRoomPage && <Header />}
       <main>
         <ProtectedRoute>
           <Outlet />

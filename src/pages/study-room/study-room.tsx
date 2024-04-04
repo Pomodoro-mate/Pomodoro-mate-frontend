@@ -1,44 +1,41 @@
-import Spinner from '@/components/common/spinner/spinner';
-import { Button, Card, CardContent, CardHeader, Chip, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import Layout from './components/layout';
-import ParticipantList from './components/participant-list';
-import Timer from './components/timer';
+import { Box, Container, Grid } from '@mui/material';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
+import Spinner from '@/components/common/spinner/spinner';
+import Header from './components/header';
+import Timer from './components/timer';
+import ParticipantPopover from './components/participant-list';
 
 const StudyRoom = () => {
   const { id: studyId } = useParams();
 
   // 추후 수정 예정
-  const { data, isLoading } = useStudyRoomQuery({ studyId: Number(studyId) });
+  const { isLoading, data, isError } = useStudyRoomQuery({ studyId: Number(studyId) });
+
+  const { name, participantSummaries } = data;
+
   if (isLoading) {
     return <Spinner />;
   }
+
+  if (isError) {
+    return <div>Error!</div>;
+  }
+
   return (
-    <Layout>
-      <Grid item xs={6}>
-        <Timer data={data} />
-      </Grid>
-      <Grid item xs={6}>
-        <ParticipantList />
-      </Grid>
-      <Grid item xs={6}>
-        <Card sx={{ minWidth: '50%' }}>
-          <CardHeader title="학습 키워드" />
-          <CardContent sx={{ height: '130px', textAlign: 'center' }}>
-            <input type="text" />
-            <Button size="small">등록</Button>
-            <Chip label="Chip Outlined" variant="outlined" />
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={6}>
-        <Card sx={{ minWidth: '50%' }}>
-          <CardHeader title="채팅창" />
-          <CardContent sx={{ height: '130px', textAlign: 'center' }}></CardContent>
-        </Card>
-      </Grid>
-    </Layout>
+    <>
+      <Header name={name} />
+      <Container maxWidth="xl">
+        <Box component="section" sx={{ position: 'relative', paddingBlock: 2 }}>
+          <ParticipantPopover participants={participantSummaries} />
+          <Grid container sx={{ justifyContent: 'center' }}>
+            <Grid item xs={6}>
+              <Timer data={data} />
+            </Grid>
+          </Grid>
+        </Box>
+      </Container>
+    </>
   );
 };
 

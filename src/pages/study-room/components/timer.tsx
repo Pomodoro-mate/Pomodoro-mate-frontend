@@ -1,8 +1,9 @@
-import { Button, Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import { useEffect, useMemo } from 'react';
-import useTimer from '../hooks/useTimer';
-import { Step } from '@/types/study-room.types';
+import { Button, Container } from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { STUDY_ROOM_STEP } from '@/constant/study-room';
+import { Step } from '@/types/study-room.types';
+import useTimer from '../hooks/useTimer';
 
 type StudyRoomType = { updateAt: string; step: Step; id: number };
 interface TimerProps {
@@ -29,16 +30,13 @@ const Timer = ({ data }: TimerProps) => {
   }, [currentTime, stepStatus]);
 
   return (
-    <Card sx={{ minWidth: '50%' }}>
-      <CardHeader title={stepLabel} />
-      <CardContent sx={{ textAlign: 'center' }}>
-        <h2>남은시간</h2>
-        <h1>{currentTime}</h1>
-      </CardContent>
-      <CardActions>
-        <Button type="button" onClick={startTimer}>{`${stepLabel} 시작`}</Button>
-      </CardActions>
-    </Card>
+    <Container sx={{ minWidth: '50%', textAlign: 'center', paddingBlock: 4 }}>
+      <h2>{stepLabel} 단계</h2>
+      <h1>{currentTime}</h1>
+      <Button size="large" type="button" variant="contained" onClick={startTimer}>
+        &nbsp; NEXT STEP <KeyboardArrowRightIcon />
+      </Button>
+    </Container>
   );
 };
 
