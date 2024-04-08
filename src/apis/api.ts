@@ -1,12 +1,12 @@
 import { ROUTE_PATH } from '@/constant/routes';
 import { API_PATH } from '@/constant/api-path';
-import { HTTP_ERRORS } from '@/constant/error-status-code';
+import { HTTP_ERROR } from '@/constant/error-status-code';
 import { ERROR_MESSAGE } from '@/constant/error-message';
 
-import { getLocalStorage } from '@/utils/storage';
+import { getLocalStorage, setLocalStorage } from '@/utils/storage';
 
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import refreshToken from './refresh-token/refresh-token';
+import getAccessToken from './auth/get-access-token';
 
 const TIME_OUT = 5_000;
 const baseURL = import.meta.env.VITE_BASE_URL as string;
@@ -26,7 +26,7 @@ export const http: AxiosInstance = axios.create({
 
 http.interceptors.request.use((config) => {
   const { url } = config;
-  if (url === API_PATH.REFERSH_TOKEN) {
+  if (url === API_PATH.REFRESH_TOKEN) {
     config.withCredentials = true;
     return config;
   }
@@ -49,13 +49,14 @@ http.interceptors.response.use(
       response: { status },
     } = error;
 
-    if (status === HTTP_ERRORS.UNAUTHORIZED) {
+    if (status === HTTP_ERROR.UNAUTHORIZED) {
       if (error.response.data === ERROR_MESSAGE.UNAUTHORIZED) {
-        const response = await refreshToken();
+        const response = await getAccessToken();
 
         if (response.status === 201) {
           const newAccessToken = response.data.accessToken;
-          localStorage.setItem('token', newAccessToken);
+
+          setLocalStorage({ key: 'token', value: newAccessToken });
           axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
           config.headers.Authorization = `Bearer ${newAccessToken}`;
           return axios(config);

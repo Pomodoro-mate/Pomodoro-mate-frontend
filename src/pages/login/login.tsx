@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { login } from '@/apis/login/login';
+import { login } from '@/apis/auth/login';
 import { ROUTE_PATH } from '@/constant/routes';
 import { setLocalStorage } from '@/utils/storage';
 import { useMutation } from '@tanstack/react-query';
