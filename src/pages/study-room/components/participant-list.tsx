@@ -44,7 +44,7 @@ const ParticipantList = ({ participants }: ParticipantListProps) => {
       >
         <List sx={{ minWidth: 240 }}>
           {participants.map((participant) => (
-            <ParticipantListItem key={participant.id} participant={participant} />
+            <ParticipantListItem key={participant.id} {...participant} />
           ))}
         </List>
       </Popover>
