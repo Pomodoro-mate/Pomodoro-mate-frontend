@@ -9,7 +9,7 @@ const participant = participants[0];
 
 describe('ParticipantListItem', () => {
   it('renders participant list item', () => {
-    render(<ParticipantListItem participant={participant} />);
+    render(<ParticipantListItem {...participant} />);
 
     screen.getByText(participant.nickname);
   });

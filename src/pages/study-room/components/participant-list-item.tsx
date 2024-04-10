@@ -1,13 +1,7 @@
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import { ParticipantSummary } from '@/types/study-room.types';
 
-interface ParticipantListItemProps {
-  participant: ParticipantSummary;
-}
-
-const ParticipantListItem = ({ participant }: ParticipantListItemProps) => {
-  const { nickname, imageUrl } = participant;
-
+const ParticipantListItem = ({ nickname, imageUrl }: ParticipantSummary) => {
   return (
     <ListItem>
       <ListItemAvatar>
