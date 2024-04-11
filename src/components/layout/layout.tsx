@@ -6,9 +6,8 @@ import Header from './header/header';
 const Layout = () => {
   const { pathname } = useLocation();
 
-  // 현재 경로가 스터디룸 내부인지 확인하는 정규식
-  const regExp = new RegExp(`^${ROUTE_PATH.STUDY_ROOMS}/\\d+$`);
-  const isStudyRoomPage = regExp.test(pathname);
+  const IN_STUDY_ROOM_REGEX = new RegExp(`^${ROUTE_PATH.STUDY_ROOMS}/\\d+$`);
+  const isStudyRoomPage = IN_STUDY_ROOM_REGEX.test(pathname);
 
   return (
     <>

@@ -8,10 +8,12 @@ const context = describe;
 
 const { participants } = fixtures;
 
+const [participant1, participant2] = participants;
+
 const mockUsePopover: UsePopover = {
   anchorEl: null,
-  onOpen: jest.fn(),
-  onClose: jest.fn(),
+  openPopover: jest.fn(),
+  closePopover: jest.fn(),
 };
 
 jest.mock('../hooks/usePopover', () => () => mockUsePopover);
@@ -25,20 +27,20 @@ describe('ParticipantList', () => {
 
       screen.getByText(participants.length);
 
-      expect(screen.queryByText(participants[0].nickname)).not.toBeInTheDocument();
+      expect(screen.queryByText(participant1.nickname)).not.toBeInTheDocument();
     });
 
     context('when click participant list button', () => {
       it('renders participant list', () => {
         renderParticipantList();
 
-        const buttonNameRegExp = new RegExp(`${participants.length}`);
+        const buttonNameRegExp = new RegExp(String(participants.length));
 
         const button = screen.getByRole('button', { name: buttonNameRegExp });
 
         fireEvent.click(button);
 
-        expect(mockUsePopover.onOpen).toHaveBeenCalled();
+        expect(mockUsePopover.openPopover).toHaveBeenCalled();
       });
     });
   });
@@ -51,8 +53,8 @@ describe('ParticipantList', () => {
     it('renders participant list', () => {
       renderParticipantList();
 
-      screen.getByText(participants[0].nickname);
-      screen.getByText(participants[1].nickname);
+      screen.getByText(participant1.nickname);
+      screen.getByText(participant2.nickname);
     });
   });
 });

@@ -6,7 +6,7 @@ interface UseStudyRoomQuery {
   studyId: number;
 }
 
-const initStudyRoom: StudyRoomInfo = {
+const initialStudyRoom: StudyRoomInfo = {
   id: 0,
   name: '',
   intro: '',
@@ -19,7 +19,7 @@ const useStudyRoomQuery = ({ studyId }: UseStudyRoomQuery) => {
   return useQuery({
     queryKey: ['get-study-room-info'],
     queryFn: () => getStudyRoomInfo({ studyId }),
-    initialData: initStudyRoom,
+    initialData: initialStudyRoom,
   });
 };
 
