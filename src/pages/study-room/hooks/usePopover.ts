@@ -2,25 +2,25 @@ import { useCallback, useState } from 'react';
 
 export interface UsePopover {
   anchorEl: HTMLButtonElement | null;
-  onOpen: () => void;
-  onClose: () => void;
+  openPopover: () => void;
+  closePopover: () => void;
 }
 
 const usePopover = () => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<UsePopover['anchorEl']>(null);
 
-  const onOpen = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+  const openPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   }, []);
 
-  const onClose = useCallback(() => {
+  const closePopover = useCallback(() => {
     setAnchorEl(null);
   }, []);
 
   return {
     anchorEl,
-    onOpen,
-    onClose,
+    openPopover,
+    closePopover,
   };
 };
 

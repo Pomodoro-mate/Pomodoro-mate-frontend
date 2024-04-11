@@ -9,7 +9,7 @@ interface ParticipantListProps {
 }
 
 const ParticipantList = ({ participants }: ParticipantListProps) => {
-  const { anchorEl, onOpen, onClose } = usePopover();
+  const { anchorEl, openPopover, closePopover } = usePopover();
 
   const isOpen = Boolean(anchorEl);
 
@@ -22,7 +22,7 @@ const ParticipantList = ({ participants }: ParticipantListProps) => {
       <Button
         aria-describedby={buttonId}
         variant="contained"
-        onClick={onOpen}
+        onClick={openPopover}
         sx={{ borderRadius: 5 }}
       >
         <PeopleAltIcon sx={{ marginRight: 1 }} />
@@ -32,7 +32,7 @@ const ParticipantList = ({ participants }: ParticipantListProps) => {
         id={buttonId}
         open={isOpen}
         anchorEl={anchorEl}
-        onClose={onClose}
+        onClose={closePopover}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',

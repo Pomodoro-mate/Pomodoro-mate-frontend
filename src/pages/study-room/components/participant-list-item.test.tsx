@@ -5,7 +5,7 @@ import ParticipantListItem from './participant-list-item';
 
 const { participants } = fixtures;
 
-const participant = participants[0];
+const [participant] = participants;
 
 describe('ParticipantListItem', () => {
   it('renders participant list item', () => {
