@@ -1,4 +1,5 @@
 export const STUDY_ROOM_STEP = {
+  WAITING: '대기',
   PLANNING: '계획',
   STUDYING: '스터디',
   RETROSPECT: '회고',

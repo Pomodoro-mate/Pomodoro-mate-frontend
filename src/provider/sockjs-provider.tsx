@@ -16,7 +16,7 @@ export const SockJSContext = createContext<SockJSContextType | null>(null);
 
 const SockJSProvider = ({ children }: PropsWithChildren) => {
   const [curParticipants, setCurParticipants] = useState<ParticipantSummary[]>([]);
-  const [curStep, setCurStep] = useState<Step>('PLANNING');
+  const [curStep, setCurStep] = useState<Step>('WAITING');
   const [curUpdateAt, setCurUpdateAt] = useState('');
 
   const { id } = useParams();
