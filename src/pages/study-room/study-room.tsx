@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Box, Container, Grid } from '@mui/material';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
+import useSockJSContext from './hooks/useSockJSContext';
 import Spinner from '@/components/common/spinner/spinner';
 import Header from './components/header';
 import Timer from './components/timer';
@@ -13,6 +14,10 @@ const StudyRoom = () => {
   const { isLoading, data, isError } = useStudyRoomQuery({ studyId: Number(studyId) });
 
   const { name, participantSummaries } = data;
+
+  const { curParticipants } = useSockJSContext();
+
+  const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
 
   if (isLoading) {
     return <Spinner />;
@@ -27,7 +32,7 @@ const StudyRoom = () => {
       <Header name={name} />
       <Container maxWidth="xl">
         <Box component="section" sx={{ position: 'relative', paddingBlock: 2 }}>
-          <ParticipantPopover participants={participantSummaries} />
+          <ParticipantPopover participants={participants} />
           <Grid container sx={{ justifyContent: 'center' }}>
             <Grid item xs={6}>
               <Timer data={data} />
