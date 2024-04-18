@@ -6,3 +6,10 @@ export const STUDY_ROOM_STEP = {
   RESTING: '휴식',
   COMPLETED: '완료',
 };
+
+export const STUDY_ROOM_STEP_TO_TIMESET = {
+  PLANNING: 'planningTime',
+  STUDYING: 'studyingTime',
+  RETROSPECT: 'retrospectTime',
+  RESTING: 'restingTime',
+} as const;

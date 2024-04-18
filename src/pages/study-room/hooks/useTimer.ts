@@ -1,48 +1,52 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useAudio from './useAudio';
-import useStepStatus from './useStepStatus';
 
-import { Step } from '@/types/study-room.types';
-
-interface UseTimer {
-  updateAt: string;
-  step: Step;
-}
+import { StepInfo } from '@/types/study-room.types';
 
 const DELAY = 1000;
-const STUDY_TIME = 2100; //35분
 
-const useTimer = ({ updateAt, step }: UseTimer) => {
+const useTimer = ({ step, progressTime, updateAt }: StepInfo) => {
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
+
   const { play } = useAudio();
-  const { stepStatus } = useStepStatus(step);
-  const [seconds, setSeconds] = useState(STUDY_TIME);
 
-  const timeRef = useRef(STUDY_TIME);
-  const startRef = useRef(new Date(updateAt).getTime());
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startTimer = () => {
-    intervalRef.current = setInterval(() => {
-      const difference = Math.floor((Date.now() - startRef.current) / 1000);
-      const remainingSeconds = timeRef.current - difference;
+  const calcRemainingSeconds = useCallback(
+    (endTime: number) => Math.ceil((endTime - Date.now()) / 1000),
+    [],
+  );
 
-      if (remainingSeconds > 0) {
-        setSeconds(remainingSeconds);
-        return;
-      }
+  useEffect(() => {
+    const startTime = new Date(updateAt).getTime();
+    const endTime = startTime + progressTime * 1000 * 60;
 
-      play();
-      reset();
-    }, DELAY);
-  };
+    const remainingTime = calcRemainingSeconds(endTime);
 
-  const reset = () => {
-    setSeconds(STUDY_TIME);
-    clearInterval(intervalRef.current as NodeJS.Timeout);
-    timeRef.current = STUDY_TIME;
-  };
+    if (remainingTime > 0) {
+      setRemainingSeconds(remainingTime);
 
-  return { seconds, startTimer, stepStatus };
+      intervalRef.current = setInterval(() => {
+        const updatedRemainingTime = calcRemainingSeconds(endTime);
+
+        if (updatedRemainingTime >= 0) {
+          setRemainingSeconds(updatedRemainingTime);
+
+          return;
+        }
+
+        play();
+
+        clearTimer();
+      }, DELAY);
+    }
+
+    return () => clearTimer();
+  }, [step, progressTime, updateAt]);
+
+  const clearTimer = () => clearInterval(intervalRef.current as NodeJS.Timeout);
+
+  return { remainingSeconds };
 };
 
 export default useTimer;

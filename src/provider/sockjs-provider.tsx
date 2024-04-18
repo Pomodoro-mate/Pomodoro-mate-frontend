@@ -3,12 +3,11 @@ import { useParams } from 'react-router-dom';
 import SockJS from 'sockjs-client';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { getLocalStorage } from '@/utils/storage';
-import { ParticipantSummary, Step } from '@/types/study-room.types';
+import { ParticipantSummary, Step, StepInfo } from '@/types/study-room.types';
 
 interface SockJSContextType {
   curParticipants: ParticipantSummary[];
-  curStep: Step;
-  curUpdateAt: string;
+  curStepInfo: StepInfo | null;
   goToNextStep: (step: Step) => void;
 }
 
@@ -16,8 +15,7 @@ export const SockJSContext = createContext<SockJSContextType | null>(null);
 
 const SockJSProvider = ({ children }: PropsWithChildren) => {
   const [curParticipants, setCurParticipants] = useState<ParticipantSummary[]>([]);
-  const [curStep, setCurStep] = useState<Step>('WAITING');
-  const [curUpdateAt, setCurUpdateAt] = useState('');
+  const [curStepInfo, setCurStepInfo] = useState<StepInfo | null>(null);
 
   const { id } = useParams();
 
@@ -34,10 +32,9 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
       copyClient.subscribe(
         `/sub/studyrooms/${id}/next-step`,
         (response) => {
-          const { step, updateAt } = JSON.parse(response.body);
+          const stepInfo = JSON.parse(response.body);
 
-          setCurStep(step);
-          setCurUpdateAt(updateAt);
+          setCurStepInfo(stepInfo);
         },
         {
           Authorization: `Bearer ${authToken}`,
@@ -76,7 +73,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <SockJSContext.Provider value={{ curParticipants, curStep, curUpdateAt, goToNextStep }}>
+    <SockJSContext.Provider value={{ curParticipants, curStepInfo, goToNextStep }}>
       {children}
     </SockJSContext.Provider>
   );
