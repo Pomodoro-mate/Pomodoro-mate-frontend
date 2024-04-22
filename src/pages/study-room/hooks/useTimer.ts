@@ -42,7 +42,7 @@ const useTimer = ({ step, progressTime, updateAt }: StepInfo) => {
     }
 
     return () => clearTimer();
-  }, [step, progressTime, updateAt]);
+  }, [step, progressTime, updateAt, calcRemainingSeconds, play]);
 
   const clearTimer = () => clearInterval(intervalRef.current as NodeJS.Timeout);
 
