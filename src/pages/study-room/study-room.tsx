@@ -1,11 +1,15 @@
-import { useParams } from 'react-router-dom';
-import { Box, Container, Grid } from '@mui/material';
-import useStudyRoomQuery from './hooks/useStudyRoomQuery';
-import useSockJSContext from './hooks/useSockJSContext';
 import Spinner from '@/components/common/spinner/spinner';
 import Header from './components/header';
-import Timer from './components/timer';
 import ParticipantPopover from './components/participant-list';
+import Timer from './components/timer';
+
+import { Box, Container, Grid } from '@mui/material';
+
+import { useParams } from 'react-router-dom';
+
+import useStudyRoomQuery from './hooks/useStudyRoomQuery';
+
+import useSockJSContext from './hooks/useSockJSContext';
 
 const StudyRoom = () => {
   const { id: studyId } = useParams();
