@@ -6,10 +6,10 @@ import Timer from './components/timer';
 
 import { Box, Container, Grid } from '@mui/material';
 
-import useSockJSContext from './hooks/useSockJSContext';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import useSockJSContext from './hooks/useSockJSContext';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 import useExitRoomModalContext from './hooks/useExitRoomModalContext';
 
