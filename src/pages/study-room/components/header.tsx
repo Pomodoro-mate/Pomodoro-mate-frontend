@@ -1,12 +1,16 @@
-import { AppBar, Container, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
+import { AppBar, Container, IconButton } from '@mui/material';
+
+import useExitRoomModalContext from '../hooks/useExitRoomModalContext';
 
 interface HeaderProps {
   name: string;
 }
 
 const Header = ({ name }: HeaderProps) => {
+  const { openDialog } = useExitRoomModalContext();
   return (
     <AppBar color="default" position="sticky">
       <Container
@@ -18,7 +22,7 @@ const Header = ({ name }: HeaderProps) => {
           <IconButton>
             <SettingsIcon />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={openDialog}>
             <ExitToAppIcon />
           </IconButton>
         </div>
