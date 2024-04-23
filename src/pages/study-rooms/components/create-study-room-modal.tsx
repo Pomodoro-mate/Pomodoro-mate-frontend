@@ -4,6 +4,7 @@ import { Container, TextField } from '@mui/material';
 import { createStudyRoom } from '@/apis/study-room/create-study-room';
 import { ROUTE_PATH } from '@/constant/routes';
 import { MODAL_KEYS } from '@/constant/modal';
+import { setLocalStorage } from '@/utils/storage';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/common/modal/modal';
 
@@ -29,8 +30,8 @@ const CreateStudyRoomModal = () => {
 
   const handleClickActionBtn = async () => {
     try {
-      const { id } = await createStudyRoom({ name, intro });
-
+      const { id, participantId } = await createStudyRoom({ name, intro });
+      setLocalStorage({ key: 'participantId', value: String(participantId) });
       onClose();
 
       navigate(`${ROUTE_PATH.STUDY_ROOMS}/${id}`);
