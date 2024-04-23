@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import Spinner from '@/components/common/spinner/spinner';
 import Header from './components/header';
 import ParticipantPopover from './components/participant-list';
@@ -27,6 +26,7 @@ const StudyRoom = () => {
 
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
 
+
   useEffect(() => {
     const handlePopState = () => openDialog();
     window.addEventListener('popstate', handlePopState);
@@ -36,6 +36,7 @@ const StudyRoom = () => {
       window.addEventListener('popstate', handlePopState);
     };
   }, []);
+
 
   if (isLoading) {
     return <Spinner />;
