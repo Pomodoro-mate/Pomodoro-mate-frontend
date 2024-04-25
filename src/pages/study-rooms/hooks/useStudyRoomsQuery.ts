@@ -10,6 +10,8 @@ const useStudyRoomsQuery = () => {
     queryFn: () => getStudyRooms({ page }),
   });
 
+  // 캐싱을 없애는 방법이 더 좋을듯, (실시간으로 스터디룸 목록을 체크해야 할 것 같기 때문) 얘기하고 바꾸자
+
   return {
     isLoading,
     studyRooms: data?.studyRooms ?? [],
