@@ -23,7 +23,7 @@ const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
 
   const navigate = useNavigate();
   const { id: studyId } = useParams() as { id: string };
-  const { exitStudyRoom } = useExitStudyRoom(studyId);
+  const { exitStudyRoom } = useExitStudyRoom(Number(studyId));
 
   const clickExit = () => {
     exitStudyRoom();
