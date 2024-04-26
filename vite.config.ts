@@ -8,7 +8,4 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],
   },
   define: { global: 'window' },
-  server: {
-    port: 8080,
-  },
 });
