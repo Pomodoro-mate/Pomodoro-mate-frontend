@@ -1,10 +1,10 @@
 import { http } from '../api';
 
-type Param = {
+type ExitStudyRoomParam = {
   studyRoomId: number;
   participantId: number;
 };
 
-export const exitStudyRoom = async ({ studyRoomId, participantId }: Param) => {
-  return await http.delete(`/studyrooms/${studyRoomId}/participants/${participantId}`);
+export const exitStudyRoom = async ({ studyRoomId, participantId }: ExitStudyRoomParam) => {
+  await http.delete(`/studyrooms/${studyRoomId}/participants/${participantId}`);
 };
