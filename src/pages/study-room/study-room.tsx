@@ -28,10 +28,11 @@ const StudyRoom = () => {
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
 
   useEffect(() => {
-    window.addEventListener('popstate', openDialog);
+    const handlePopState = () => openDialog();
+    window.addEventListener('popstate', handlePopState);
 
     return () => {
-      window.removeEventListener('popstate', openDialog);
+      window.addEventListener('popstate', handlePopState);
     };
   }, []);
 
