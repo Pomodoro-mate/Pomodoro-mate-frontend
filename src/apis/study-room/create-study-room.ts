@@ -17,12 +17,6 @@ export const createStudyRoom = async ({
   const { data } = await http.post('/studyrooms', {
     name,
     intro,
-    timeSet: {
-      planningTime: 20,
-      studyingTime: 20,
-      retrospectTime: 20,
-      restingTime: 20,
-    },
   });
 
   return data;
