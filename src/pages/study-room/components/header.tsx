@@ -11,6 +11,7 @@ interface HeaderProps {
 
 const Header = ({ name }: HeaderProps) => {
   const { openDialog } = useExitRoomModalContext();
+
   return (
     <AppBar color="default" position="sticky">
       <Container
