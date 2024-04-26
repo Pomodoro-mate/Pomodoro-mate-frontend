@@ -15,6 +15,7 @@ import Spinner from '@/components/common/spinner/spinner';
 import Login from '@/pages/login/login';
 import StudyRoom from '@/pages/study-room/study-room';
 import StudyRooms from '@/pages/study-rooms/study-rooms';
+import ExitRoomModalProvdier from '@/pages/study-room/provider/exit-room-modal-provider';
 
 export const router = [
   {
@@ -29,9 +30,11 @@ export const router = [
         path: `${ROUTE_PATH.STUDY_ROOMS}/:id`,
         element: (
           <Suspense fallback={<Spinner />}>
-            <SockJSProvider>
-              <StudyRoom />
-            </SockJSProvider>
+            <ExitRoomModalProvdier>
+              <SockJSProvider>
+                <StudyRoom />
+              </SockJSProvider>
+            </ExitRoomModalProvdier>
           </Suspense>
         ),
       },
