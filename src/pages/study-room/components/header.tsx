@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 const Header = ({ name }: HeaderProps) => {
-  const { openDialog } = useExitRoomModalContext();
+  const { open } = useExitRoomModalContext();
 
   return (
     <AppBar color="default" position="sticky">
@@ -23,7 +23,7 @@ const Header = ({ name }: HeaderProps) => {
           <IconButton>
             <SettingsIcon />
           </IconButton>
-          <IconButton onClick={openDialog}>
+          <IconButton onClick={open}>
             <ExitToAppIcon />
           </IconButton>
         </div>

@@ -15,7 +15,7 @@ import useExitRoomModalContext from './hooks/useExitRoomModalContext';
 const StudyRoom = () => {
   const { id: studyId } = useParams();
 
-  const { openDialog } = useExitRoomModalContext();
+  const { open } = useExitRoomModalContext();
 
   // 추후 수정 예정
   const { isLoading, data, isError } = useStudyRoomQuery({ studyId: Number(studyId) });
@@ -26,16 +26,14 @@ const StudyRoom = () => {
 
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
 
-
   useEffect(() => {
-    const handlePopState = () => openDialog();
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', open);
 
     return () => {
-      window.addEventListener('popstate', handlePopState);
+      window.removeEventListener('popstate', open);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   if (isLoading) {
     return <Spinner />;

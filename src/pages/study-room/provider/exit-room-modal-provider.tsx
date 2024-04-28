@@ -12,14 +12,14 @@ import useBooleanState from '@/hooks/useBooleanState';
 
 const initialContext = {
   isOpen: false,
-  openDialog: () => {},
-  closeDialog: () => {},
+  open: () => {},
+  close: () => {},
 };
 
 export const ExitRoomModalContext = createContext(initialContext);
 
 const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
-  const [isOpen, openDialog, closeDialog] = useBooleanState();
+  const [isOpen, open, close] = useBooleanState();
 
   const navigate = useNavigate();
   const { id: studyId } = useParams() as { id: string };
@@ -27,12 +27,12 @@ const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
 
   const clickExit = () => {
     exitStudyRoom();
-    closeDialog();
+    close();
     navigate(ROUTE_PATH.STUDY_ROOMS);
   };
 
   return (
-    <ExitRoomModalContext.Provider value={{ isOpen, openDialog, closeDialog }}>
+    <ExitRoomModalContext.Provider value={{ isOpen, open, close }}>
       {children}
       {isOpen && (
         <Modal
@@ -41,7 +41,7 @@ const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
           closeBtn="취소"
           actionBtn="나가기"
           onClickActionBtn={clickExit}
-          onClose={closeDialog}
+          onClose={close}
         >
           <Typography>스터디 방을 나가시겠습니까?</Typography>
         </Modal>

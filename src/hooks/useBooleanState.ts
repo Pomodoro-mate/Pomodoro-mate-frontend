@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const useBooleanState = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openDialog = () => setIsOpen(true);
+  const open = useCallback(() => setIsOpen(true), []);
 
-  const closeDialog = () => setIsOpen(false);
+  const close = useCallback(() => setIsOpen(false), []);
 
-  return [isOpen, openDialog, closeDialog] as const;
+  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
+
+  return [isOpen, open, close, toggle] as const;
 };
 
 export default useBooleanState;
