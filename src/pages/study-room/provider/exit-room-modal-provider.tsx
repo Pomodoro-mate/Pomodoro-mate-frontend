@@ -3,9 +3,7 @@ import Modal from '@/components/common/modal/modal';
 import { Typography } from '@mui/material';
 
 import { PropsWithChildren, createContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-
-import { ROUTE_PATH } from '@/constant/routes';
+import { useParams } from 'react-router-dom';
 
 import useExitStudyRoom from '../hooks/useExitStudyRoom';
 import useBooleanState from '@/hooks/useBooleanState';
@@ -21,15 +19,10 @@ export const ExitRoomModalContext = createContext(initialContext);
 const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
   const [isOpen, open, close] = useBooleanState();
 
-  const navigate = useNavigate();
   const { id: studyId } = useParams() as { id: string };
-  const { exitStudyRoom } = useExitStudyRoom(Number(studyId));
+  const { exitStudyRoom } = useExitStudyRoom({ studyId: Number(studyId), close });
 
-  const clickExit = () => {
-    exitStudyRoom();
-    close();
-    navigate(ROUTE_PATH.STUDY_ROOMS);
-  };
+  const clickExit = () => exitStudyRoom();
 
   return (
     <ExitRoomModalContext.Provider value={{ isOpen, open, close }}>
