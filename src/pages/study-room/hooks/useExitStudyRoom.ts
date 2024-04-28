@@ -5,16 +5,16 @@ import { getLocalStorage } from '@/utils/storage';
 import useExitStudyRoomMutation from './useExitStudyRoomMutation';
 
 const useExitStudyRoom = (studyId: number) => {
-  const { mutate } = useExitStudyRoomMutation();
-  const { state, proceed } = useBlocker(
+  const { mutate: exitStudyRoomMutate } = useExitStudyRoomMutation();
+  const { state: blockState, proceed } = useBlocker(
     ({ currentLocation, nextLocation }) => currentLocation.pathname !== nextLocation.pathname,
   );
 
   const exitStudyRoom = () => {
-    if (state !== 'blocked') return;
+    if (blockState !== 'blocked') return;
 
     const participantId = getLocalStorage('participantId');
-    mutate(
+    exitStudyRoomMutate(
       { studyRoomId: studyId, participantId: Number(participantId) },
       { onSuccess: () => proceed() },
     );
