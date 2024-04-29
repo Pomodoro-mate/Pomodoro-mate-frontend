@@ -1,5 +1,3 @@
-import React from 'react';
-import ParticipantListItem from './participant-list-item';
 import { Card, CardContent, CardHeader } from '@mui/material';
 
 const ParticipantList = () => {
@@ -7,9 +5,7 @@ const ParticipantList = () => {
     <Card sx={{ minWidth: '50%' }}>
       <CardHeader title="참여자 목록" />
       <CardContent>
-        <ul>
-          <ParticipantListItem />
-        </ul>
+        <ul>{/* <ParticipantListItem /> */}</ul>
       </CardContent>
     </Card>
   );

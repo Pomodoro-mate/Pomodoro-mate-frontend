@@ -9,8 +9,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import getAccessToken from './auth/get-access-token';
 
 const TIME_OUT = 5_000;
-const baseURL = 'https://pomodoro-mate.site/api';
-//import.meta.env.VITE_BASE_URL as string;
+const baseURL = import.meta.env.VITE_BASE_URL as string;
 
 const generateHeaders = () => {
   const headers: AxiosRequestConfig['headers'] = {
