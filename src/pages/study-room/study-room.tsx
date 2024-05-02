@@ -18,6 +18,7 @@ const StudyRoom = () => {
   const { open } = useExitRoomModalContext();
 
   // 추후 수정 예정
+
   const { isLoading, data, isError } = useStudyRoomQuery({ studyId: Number(studyId) });
 
   const { name, participantSummaries } = data;
@@ -25,6 +26,7 @@ const StudyRoom = () => {
   const { curParticipants } = useSockJSContext();
 
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
+
 
   useEffect(() => {
     window.addEventListener('popstate', open);
@@ -34,6 +36,7 @@ const StudyRoom = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   if (isLoading) {
     return <Spinner />;
