@@ -1,10 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { fireEvent, screen } from '@testing-library/react';
+import { render } from '@/test-helper';
 import Modal from './modal';
 
 const context = describe;
-
-const theme = createTheme();
 
 const modalProps = {
   isOpen: true,
@@ -14,12 +12,9 @@ const modalProps = {
 
 const content = 'content';
 
-const renderModal = (children: React.ReactNode) =>
-  render(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
-
 describe('Modal', () => {
   it('render modal', () => {
-    renderModal(
+    render(
       <Modal {...modalProps}>
         <div>{content}</div>
       </Modal>,
@@ -31,7 +26,7 @@ describe('Modal', () => {
 
   context('isOpen is false', () => {
     it('not rendering modal', () => {
-      renderModal(
+      render(
         <Modal {...modalProps} isOpen={false}>
           <div>{content}</div>
         </Modal>,
@@ -44,7 +39,7 @@ describe('Modal', () => {
   describe('about close button', () => {
     context('not input closeBtn', () => {
       it('render "닫기" button', () => {
-        renderModal(
+        render(
           <Modal {...modalProps} closeBtn={undefined}>
             <div>{content}</div>
           </Modal>,
@@ -58,7 +53,7 @@ describe('Modal', () => {
       const closeBtn = '취소';
 
       it('render closeBtn you typed', () => {
-        renderModal(
+        render(
           <Modal {...modalProps} closeBtn={closeBtn}>
             <div>{content}</div>
           </Modal>,
@@ -70,7 +65,7 @@ describe('Modal', () => {
 
     context('when click closeBtn', () => {
       it('execute onClose function', () => {
-        renderModal(
+        render(
           <Modal {...modalProps}>
             <div>{content}</div>
           </Modal>,
@@ -88,7 +83,7 @@ describe('Modal', () => {
   describe('about action button', () => {
     context('not input actionBtn', () => {
       it('not render action button', () => {
-        renderModal(
+        render(
           <Modal {...modalProps} actionBtn={undefined}>
             <div>{content}</div>
           </Modal>,
@@ -105,7 +100,7 @@ describe('Modal', () => {
       const onClickActionBtn = jest.fn();
 
       it('render actionBtn you typed', () => {
-        renderModal(
+        render(
           <Modal {...modalProps} actionBtn={actionBtn} onClickActionBtn={onClickActionBtn}>
             <div>{content}</div>
           </Modal>,
@@ -116,7 +111,7 @@ describe('Modal', () => {
 
       context('when click actionBtn', () => {
         it('execute onClickActionBtn function', () => {
-          renderModal(
+          render(
             <Modal {...modalProps} actionBtn={actionBtn} onClickActionBtn={onClickActionBtn}>
               <div>{content}</div>
             </Modal>,

@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import ModalProvider from '@/provider/modal-provider';
+import SockJSProvider from '@/provider/sockjs-provider';
 import AppRoute from '@/components/common/app-route/app-route';
 import Spinner from '@/components/common/spinner/spinner';
 import Login from '@/pages/login/login';
@@ -40,7 +41,9 @@ export const router = [
         path: `${ROUTE_PATH.STUDY_ROOMS}/:id`,
         element: (
           <Suspense fallback={<Spinner />}>
-            <StudyRoom />
+            <SockJSProvider>
+              <StudyRoom />
+            </SockJSProvider>
           </Suspense>
         ),
       },
