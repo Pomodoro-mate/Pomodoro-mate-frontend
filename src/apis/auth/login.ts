@@ -9,6 +9,10 @@ type Params = {
 };
 
 export const login = async ({ nickname }: Params): Promise<LoginResponse> => {
-  const response = await http.post<LoginResponse>('/auth/guest', { nickname });
+  const response = await http.post<LoginResponse>(
+    '/auth/guest',
+    { nickname },
+    { withCredentials: true },
+  );
   return response.data;
 };
