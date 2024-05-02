@@ -11,6 +11,7 @@ const StudyRoom = () => {
   const { id: studyId } = useParams();
 
   // 추후 수정 예정
+
   const { isLoading, data, isError } = useStudyRoomQuery({ studyId: Number(studyId) });
 
   const { name, participantSummaries } = data;
@@ -18,6 +19,7 @@ const StudyRoom = () => {
   const { curParticipants } = useSockJSContext();
 
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
+
 
   if (isLoading) {
     return <Spinner />;

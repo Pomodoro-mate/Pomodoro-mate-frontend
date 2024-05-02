@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import KeyboardArrowRightRounded from '@mui/icons-material/KeyboardArrowRightRounded';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/constant/routes';
@@ -27,9 +26,8 @@ const Home = () => {
               <Typography variant="h2" sx={{ my: 2, maxWidth: 500 }}>
                 Getting started with
                 <br />
-                <GradientText color="error">Pomodoro Mate</GradientText>
-                {/* <br />
-                components */}
+                Pomodoro Mate
+                {/* <GradientText color="error">Pomodoro Mate</GradientText> */}
               </Typography>
               <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 500 }}>
                 뽀모도로 방식으로 여러 사람이 모여서 각자 공부하고 함께 회고하는 방식의 서비스입니다
@@ -66,11 +64,11 @@ const Home = () => {
 
 export default Home;
 
-const GradientText = styled('span')<{
-  color?: 'primary' | 'error' | 'success' | 'warning';
-}>(({ theme, color = 'primary' }) => ({
-  background: `linear-gradient(90deg, ${(theme.vars || theme).palette[color][400]} 5%, ${
-    (theme.vars || theme).palette[color].main
-  } 90%)`,
-  WebkitBackgroundClip: 'text',
-}));
+// const GradientText = styled('span')<{
+//   color?: 'primary' | 'error' | 'success' | 'warning';
+// }>(({ theme, color = 'primary' }) => ({
+//   background: `linear-gradient(90deg, ${(theme?.vars || theme).palette[color][400]} 5%, ${
+//     (theme?.vars || theme).palette[color].main
+//   } 90%)`,
+//   WebkitBackgroundClip: 'text',
+// }));

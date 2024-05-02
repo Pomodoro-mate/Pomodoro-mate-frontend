@@ -26,6 +26,18 @@ export const router = [
     errorElement: <Error />,
     children: [
       {
+        path: ROUTE_PATH.HOME,
+        element: <Home />,
+      },
+      {
+        path: ROUTE_PATH.LOGIN,
+        element: (
+          <AppRoute>
+            <Login />
+          </AppRoute>
+        ),
+      },
+      {
         path: `${ROUTE_PATH.STUDY_ROOMS}/:id`,
         element: (
           <Suspense fallback={<Spinner />}>
@@ -44,18 +56,6 @@ export const router = [
         ),
       },
     ],
-  },
-  {
-    path: ROUTE_PATH.HOME,
-    element: <Home />,
-  },
-  {
-    path: ROUTE_PATH.LOGIN,
-    element: (
-      <AppRoute>
-        <Login />
-      </AppRoute>
-    ),
   },
 ];
 
