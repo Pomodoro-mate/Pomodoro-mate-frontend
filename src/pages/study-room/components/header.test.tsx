@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { render } from '@/test-helper';
-import Header from './Header';
+import Header from './header';
 
 describe('Header in Study Room', () => {
   const name = '방 제목';

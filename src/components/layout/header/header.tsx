@@ -36,9 +36,9 @@ const Header = () => {
               justifyContent: 'flex-end',
             }}
           >
-            <Typography variant="h6" component="div">
+            {/* <Typography variant="h6" component="div">
               정진범님
-            </Typography>
+            </Typography> */}
             <Button
               type="button"
               color="inherit"
