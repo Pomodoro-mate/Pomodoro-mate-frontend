@@ -1,40 +1,42 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { render } from '@/test-helper';
 import { STUDY_ROOM_STEP } from '@/constant/study-room';
-import { StepInfo } from '@/types/study-room.types';
+import fixtures from '@/fixtures';
 import Timer from './timer';
 
 const context = describe;
 
-const mockStepInfo: StepInfo = {
-  step: 'PLANNING',
-  progressTime: 10,
-  updateAt: '2024-03-27T05:47:11.638Z',
-};
+const {
+  studyRoom: { step, timeSet, updateAt },
+} = fixtures;
 
-const mockUseTimer = {
-  remainingSeconds: 10 * 60,
+const mockUseStepInfo = {
+  stepLabel: '계획',
+  currentTime: '10:00',
 };
 
 const mockUseSockJSContext = {
   goToNextStep: jest.fn(),
 };
 
-jest.mock('../hooks/useTimer', () => () => mockUseTimer);
+jest.mock('../hooks/useStepInfo', () => () => mockUseStepInfo);
 
 jest.mock('../hooks/useSockJSContext', () => () => mockUseSockJSContext);
 
+const renderTimer = () =>
+  render(<Timer step={step} progressTime={timeSet.studyingTime} updateAt={updateAt} />);
+
 describe('Timer', () => {
   it('renders timer', () => {
-    render(<Timer {...mockStepInfo} />);
+    renderTimer();
 
-    screen.getByText(`${STUDY_ROOM_STEP[mockStepInfo.step]} 단계`);
-    screen.getByText('10:00');
+    screen.getByText(`${STUDY_ROOM_STEP[step]} 단계`);
+    screen.getByText(mockUseStepInfo.currentTime);
   });
 
   context('when click next step button', () => {
     it('execute goToNextStep function', () => {
-      render(<Timer {...mockStepInfo} />);
+      renderTimer();
 
       const button = screen.getByRole('button', { name: /NEXT STEP/ });
 
