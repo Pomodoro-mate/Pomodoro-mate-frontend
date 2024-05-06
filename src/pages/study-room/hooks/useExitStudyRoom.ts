@@ -11,15 +11,19 @@ interface UseExitStudyRoom {
 
 const useExitStudyRoom = ({ studyId, close }: UseExitStudyRoom) => {
   const navigate = useNavigate();
-  const { state: blockState, proceed } = useBlocker(
-    ({ currentLocation, nextLocation }) => currentLocation.pathname !== nextLocation.pathname,
-  );
+  useBlocker(({ currentLocation, nextLocation, historyAction }) => {
+    if (historyAction === 'POP') {
+      return currentLocation.pathname !== nextLocation.pathname;
+    }
+    return currentLocation.pathname === nextLocation.pathname;
+  });
 
-  const { mutate: exitStudyRoomMutate } = useExitStudyRoomMutation({ proceed, close, navigate });
+  const { mutate: exitStudyRoomMutate } = useExitStudyRoomMutation({
+    close,
+    navigate,
+  });
 
   const exitStudyRoom = () => {
-    if (blockState !== 'blocked') return;
-
     const participantId = getLocalStorage('participantId');
     exitStudyRoomMutate({ studyRoomId: studyId, participantId: Number(participantId) });
   };
