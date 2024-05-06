@@ -1,43 +1,23 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Container, TextField } from '@mui/material';
-import { createStudyRoom } from '@/apis/study-room/create-study-room';
-import { ROUTE_PATH } from '@/constant/routes';
+import { TextField } from '@mui/material';
 import { MODAL_KEYS } from '@/constant/modal';
-import { setLocalStorage } from '@/utils/storage';
 import useModal from '@/hooks/useModal';
+import useCreateStudyRoomForm from '../hooks/useCreateStudyRoomForm';
 import Modal from '@/components/common/modal/modal';
+import CreateStudyRoomSelects from './create-study-room-selects';
 
 const CreateStudyRoomModal = () => {
-  const navigate = useNavigate();
-
   const { isOpen, onClose } = useModal(MODAL_KEYS.CREATE_STUDY_ROOM);
 
-  const [name, setName] = useState('');
-  const [intro, setIntro] = useState('');
+  const {
+    textFields: { name, intro },
+    timeSet,
+    handleChangeTextField,
+    handleChangeSelect,
+    createStudyRoom,
+  } = useCreateStudyRoomForm();
 
-  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    setName(value);
-  };
-
-  const handleChangeIntro = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    setIntro(value);
-  };
-
-  const handleClickActionBtn = async () => {
-    try {
-      const { id, participantId } = await createStudyRoom({ name, intro });
-      setLocalStorage({ key: 'participantId', value: String(participantId) });
-      onClose();
-
-      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${id}`);
-    } catch (e) {
-      console.error(e);
-    }
+  const handleClickCreateStudyRoom = async () => {
+    createStudyRoom({ name, intro, timeSet });
   };
 
   return (
@@ -46,26 +26,27 @@ const CreateStudyRoomModal = () => {
       title="스터디룸 생성"
       closeBtn="취소"
       actionBtn="방 만들기"
-      onClickActionBtn={handleClickActionBtn}
+      onClickActionBtn={handleClickCreateStudyRoom}
       onClose={onClose}
     >
-      <Container sx={{ paddingBlock: '10px' }}>
-        <TextField
-          fullWidth
-          label="방 제목"
-          variant="outlined"
-          margin="normal"
-          onChange={handleChangeName}
-        />
-        <TextField
-          fullWidth
-          label="설명"
-          variant="outlined"
-          multiline
-          rows={3}
-          onChange={handleChangeIntro}
-        />
-      </Container>
+      <TextField
+        fullWidth
+        label="방 제목"
+        name="name"
+        variant="outlined"
+        margin="normal"
+        onChange={handleChangeTextField}
+      />
+      <TextField
+        fullWidth
+        label="설명"
+        name="intro"
+        variant="outlined"
+        multiline
+        rows={3}
+        onChange={handleChangeTextField}
+      />
+      <CreateStudyRoomSelects timeSet={timeSet} onChangeSelect={handleChangeSelect} />
     </Modal>
   );
 };
