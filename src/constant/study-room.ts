@@ -7,7 +7,7 @@ export const STUDY_ROOM_STEP = {
   COMPLETED: '완료',
 };
 
-export const STUDY_ROOM_STEP_TO_TIMESET = {
+export const STUDY_ROOM_STEP_TO_TIME_SET = {
   PLANNING: 'planningTime',
   STUDYING: 'studyingTime',
   RETROSPECT: 'retrospectTime',

@@ -22,9 +22,12 @@ const Timer = (stepInfo: StepInfo) => {
     return `${String(분).padStart(2, '0')}:${String(초).padStart(2, '0')}`;
   }, [remainingSeconds]);
 
-  useEffect(() => {
-    document.title = `${currentTime} - ${stepLabel} 단계`;
-  }, [currentTime, stepLabel]);
+  useEffect(
+    function setDocumentTitle() {
+      document.title = `${currentTime} - ${stepLabel} 단계`;
+    },
+    [currentTime, stepLabel],
+  );
 
   return (
     <Container sx={{ minWidth: '50%', textAlign: 'center', paddingBlock: 4 }}>

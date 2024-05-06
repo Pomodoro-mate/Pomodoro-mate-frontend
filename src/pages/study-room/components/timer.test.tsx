@@ -13,7 +13,7 @@ const mockStepInfo: StepInfo = {
 };
 
 const mockUseTimer = {
-  remainingSeconds: 600, // 10분
+  remainingSeconds: 10 * 60,
 };
 
 const mockUseSockJSContext = {

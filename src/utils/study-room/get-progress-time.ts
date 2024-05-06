@@ -1,4 +1,4 @@
-import { STUDY_ROOM_STEP_TO_TIMESET } from '@/constant/study-room';
+import { STUDY_ROOM_STEP_TO_TIME_SET } from '@/constant/study-room';
 import { Step, TimeSet } from '@/types/study-room.types';
 
 const getProgressTime = ({ step, timeSet }: { step: Step; timeSet: TimeSet }) => {
@@ -6,7 +6,7 @@ const getProgressTime = ({ step, timeSet }: { step: Step; timeSet: TimeSet }) =>
     return 0;
   }
 
-  return timeSet[STUDY_ROOM_STEP_TO_TIMESET[step]];
+  return timeSet[STUDY_ROOM_STEP_TO_TIME_SET[step]];
 };
 
 export default getProgressTime;
