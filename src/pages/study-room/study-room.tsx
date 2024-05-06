@@ -1,15 +1,23 @@
-import { useParams } from 'react-router-dom';
-import { Box, Container, Grid } from '@mui/material';
-import useStudyRoomQuery from './hooks/useStudyRoomQuery';
-import useSockJSContext from './hooks/useSockJSContext';
-import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 import Spinner from '@/components/common/spinner/spinner';
 import Header from './components/header';
-import Timer from './components/timer';
 import ParticipantPopover from './components/participant-list';
+import Timer from './components/timer';
+
+import { Box, Container, Grid } from '@mui/material';
+
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import useSockJSContext from './hooks/useSockJSContext';
+import useStudyRoomQuery from './hooks/useStudyRoomQuery';
+import useExitRoomModalContext from './hooks/useExitRoomModalContext';
+  
+import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 
 const StudyRoom = () => {
   const { id: studyId } = useParams();
+
+  const { open } = useExitRoomModalContext();
 
   // 추후 수정 예정
   const {
@@ -27,6 +35,15 @@ const StudyRoom = () => {
     progressTime: getProgressTime({ step, timeSet }),
     updateAt,
   };
+
+  useEffect(() => {
+    window.addEventListener('popstate', open);
+
+    return () => {
+      window.removeEventListener('popstate', open);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (isLoading) {
     return <Spinner />;

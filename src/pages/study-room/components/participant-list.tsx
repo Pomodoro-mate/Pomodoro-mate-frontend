@@ -16,6 +16,7 @@ const ParticipantList = ({ participants }: ParticipantListProps) => {
   const buttonId = isOpen ? 'participant-list' : undefined;
 
   return (
+
     <div
       style={{ width: '100%', position: 'absolute', display: 'flex', justifyContent: 'flex-end' }}
     >

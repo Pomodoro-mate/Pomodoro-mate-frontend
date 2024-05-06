@@ -7,13 +7,17 @@ interface CreateStudyRoomParams {
 
 interface CreateStudyRoomResponse {
   id: number;
+  participantId: number;
 }
 
 export const createStudyRoom = async ({
   name,
   intro,
 }: CreateStudyRoomParams): Promise<CreateStudyRoomResponse> => {
-  const { data } = await http.post('/studyrooms', { name, intro });
+  const { data } = await http.post('/studyrooms', {
+    name,
+    intro,
+  });
 
   return data;
 };
