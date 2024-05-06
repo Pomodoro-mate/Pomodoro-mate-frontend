@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom';
 import useSockJSContext from './hooks/useSockJSContext';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 import useExitRoomModalContext from './hooks/useExitRoomModalContext';
+  
+import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 
 const StudyRoom = () => {
   const { id: studyId } = useParams();
@@ -18,15 +20,21 @@ const StudyRoom = () => {
   const { open } = useExitRoomModalContext();
 
   // 추후 수정 예정
+  const {
+    isLoading,
+    data: { name, participantSummaries, step, updateAt, timeSet },
+    isError,
+  } = useStudyRoomQuery({ studyId: Number(studyId) });
 
-  const { isLoading, data, isError } = useStudyRoomQuery({ studyId: Number(studyId) });
-
-  const { name, participantSummaries } = data;
-
-  const { curParticipants } = useSockJSContext();
+  const { curStepInfo, curParticipants } = useSockJSContext();
 
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
 
+  const stepInfo = curStepInfo ?? {
+    step,
+    progressTime: getProgressTime({ step, timeSet }),
+    updateAt,
+  };
 
   useEffect(() => {
     window.addEventListener('popstate', open);
@@ -36,7 +44,6 @@ const StudyRoom = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   if (isLoading) {
     return <Spinner />;
@@ -54,7 +61,7 @@ const StudyRoom = () => {
           <ParticipantPopover participants={participants} />
           <Grid container sx={{ justifyContent: 'center' }}>
             <Grid item xs={6}>
-              <Timer data={data} />
+              <Timer {...stepInfo} />
             </Grid>
           </Grid>
         </Box>

@@ -11,6 +11,12 @@ const initialStudyRoom: StudyRoomInfo = {
   name: '',
   intro: '',
   step: 'PLANNING',
+  timeSet: {
+    planningTime: 0,
+    studyingTime: 0,
+    retrospectTime: 0,
+    restingTime: 0,
+  },
   participantSummaries: [],
   updateAt: '',
 };

@@ -22,8 +22,23 @@ export type ParticipantSummary = {
   imageUrl: string;
 };
 
+export type TimeSet = {
+  planningTime: number;
+  studyingTime: number;
+  retrospectTime: number;
+  restingTime: number;
+};
+
 export type StudyRoomInfo = StudyRoom & {
   participantSummaries: ParticipantSummary[];
+  timeSet: TimeSet;
+  updateAt: string;
+};
+
+//스터디 룸 스텝 관련 정보
+export type StepInfo = {
+  step: Step;
+  progressTime: number;
   updateAt: string;
 };
 
