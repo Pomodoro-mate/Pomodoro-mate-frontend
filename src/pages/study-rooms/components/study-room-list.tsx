@@ -19,8 +19,8 @@ const StudyRoomList = () => {
 
   const handleJoinStudyRoom = async (studyRoomId: number) => {
     try {
-      const { participantId } = await joinStudyRoom({ studyRoomId });
-
+      const data = await joinStudyRoom({ studyRoomId });
+      const { id: participantId } = data;
       setLocalStorage({ key: 'participantId', value: String(participantId) });
       navigate(`${ROUTE_PATH.STUDY_ROOMS}/${studyRoomId}`);
     } catch (e) {
