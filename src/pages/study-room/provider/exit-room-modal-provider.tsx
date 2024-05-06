@@ -20,6 +20,7 @@ const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
   const [isOpen, open, close] = useBooleanState();
 
   const { id: studyId } = useParams() as { id: string };
+
   const { exitStudyRoom } = useExitStudyRoom({ studyId: Number(studyId), close });
 
   const clickExit = () => exitStudyRoom();
@@ -30,7 +31,7 @@ const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          title="스터디룸 생성"
+          title="스터디룸 나가기"
           closeBtn="취소"
           actionBtn="나가기"
           onClickActionBtn={clickExit}

@@ -4,6 +4,7 @@ import { ROUTE_PATH } from '@/constant/routes';
 import { joinStudyRoom } from '@/apis/study-room/join-study-room';
 import useStudyRoomsQuery from '@/pages/study-rooms/hooks/useStudyRoomsQuery';
 import StudyRoomListItem from './study-room-list-item';
+import { setLocalStorage } from '@/utils/storage';
 
 const StudyRoomList = () => {
   const navigate = useNavigate();
@@ -18,8 +19,9 @@ const StudyRoomList = () => {
 
   const handleJoinStudyRoom = async (studyRoomId: number) => {
     try {
-      await joinStudyRoom({ studyRoomId });
-
+      const data = await joinStudyRoom({ studyRoomId });
+      const { id: participantId } = data;
+      setLocalStorage({ key: 'participantId', value: String(participantId) });
       navigate(`${ROUTE_PATH.STUDY_ROOMS}/${studyRoomId}`);
     } catch (e) {
       console.error(e);

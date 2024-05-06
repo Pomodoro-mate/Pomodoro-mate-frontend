@@ -5,7 +5,7 @@ interface JoinStudyRoomParams {
 }
 
 interface JoinStudyRoomResponse {
-  userId: number;
+  id: number;
 }
 
 export const joinStudyRoom = async ({
@@ -13,5 +13,5 @@ export const joinStudyRoom = async ({
 }: JoinStudyRoomParams): Promise<JoinStudyRoomResponse> => {
   const { data } = await http.post(`/studyrooms/${studyRoomId}/participants`);
 
-  return { userId: data.id };
+  return data;
 };

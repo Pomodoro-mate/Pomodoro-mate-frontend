@@ -1,8 +1,9 @@
 import { useBlocker, useNavigate } from 'react-router-dom';
 
-import { getLocalStorage } from '@/utils/storage';
+import { getLocalStorage, removeLocalStorage } from '@/utils/storage';
 
 import useExitStudyRoomMutation from './useExitStudyRoomMutation';
+import { ROUTE_PATH } from '@/constant/routes';
 
 interface UseExitStudyRoom {
   studyId: number;
@@ -11,15 +12,23 @@ interface UseExitStudyRoom {
 
 const useExitStudyRoom = ({ studyId, close }: UseExitStudyRoom) => {
   const navigate = useNavigate();
-  const { state: blockState, proceed } = useBlocker(
-    ({ currentLocation, nextLocation }) => currentLocation.pathname !== nextLocation.pathname,
-  );
 
-  const { mutate: exitStudyRoomMutate } = useExitStudyRoomMutation({ proceed, close, navigate });
+  useBlocker(({ currentLocation, nextLocation, historyAction }) => {
+    if (historyAction === 'POP') {
+      return currentLocation.pathname !== nextLocation.pathname;
+    }
+    return currentLocation.pathname === nextLocation.pathname;
+  });
+
+  const exitStudyRoomAction = () => {
+    close();
+    removeLocalStorage('participantId');
+    navigate(ROUTE_PATH.STUDY_ROOMS);
+  };
+
+  const { mutate: exitStudyRoomMutate } = useExitStudyRoomMutation({ exitStudyRoomAction });
 
   const exitStudyRoom = () => {
-    if (blockState !== 'blocked') return;
-
     const participantId = getLocalStorage('participantId');
     exitStudyRoomMutate({ studyRoomId: studyId, participantId: Number(participantId) });
   };
