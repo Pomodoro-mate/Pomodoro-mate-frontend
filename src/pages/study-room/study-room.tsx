@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Box, Container, Grid } from '@mui/material';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 import useSockJSContext from './hooks/useSockJSContext';
-import getProgressTime from '@/utils/study-room/get-progress-time';
+import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 import Spinner from '@/components/common/spinner/spinner';
 import Header from './components/header';
 import Timer from './components/timer';
