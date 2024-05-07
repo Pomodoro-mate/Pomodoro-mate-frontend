@@ -1,9 +1,9 @@
 import { useBlocker, useNavigate } from 'react-router-dom';
 
-import { getLocalStorage, removeLocalStorage } from '@/utils/storage';
+import { participantIdStorage } from '@/utils/storage';
 
-import useExitStudyRoomMutation from './useExitStudyRoomMutation';
 import { ROUTE_PATH } from '@/constant/routes';
+import useExitStudyRoomMutation from './useExitStudyRoomMutation';
 
 interface UseExitStudyRoom {
   studyId: number;
@@ -22,14 +22,15 @@ const useExitStudyRoom = ({ studyId, close }: UseExitStudyRoom) => {
 
   const exitStudyRoomAction = () => {
     close();
-    removeLocalStorage('participantId');
+    participantIdStorage.clear();
+
     navigate(ROUTE_PATH.STUDY_ROOMS);
   };
 
   const { mutate: exitStudyRoomMutate } = useExitStudyRoomMutation({ exitStudyRoomAction });
 
   const exitStudyRoom = () => {
-    const participantId = getLocalStorage('participantId');
+    const participantId = participantIdStorage.getItem();
     exitStudyRoomMutate({ studyRoomId: studyId, participantId: Number(participantId) });
   };
 
