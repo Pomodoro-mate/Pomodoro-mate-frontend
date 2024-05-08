@@ -3,7 +3,7 @@ import { MODAL_KEYS } from '@/constant/modal';
 import useModal from '@/hooks/useModal';
 import useCreateStudyRoomForm from '../hooks/useCreateStudyRoomForm';
 import Modal from '@/components/common/modal/modal';
-import CreateStudyRoomSelects from './create-study-room-selects';
+import CreateStudyRoomSelects from './create-study-room-select-fields';
 
 const CreateStudyRoomModal = () => {
   const { isOpen, onClose } = useModal(MODAL_KEYS.CREATE_STUDY_ROOM);
@@ -16,7 +16,7 @@ const CreateStudyRoomModal = () => {
     createStudyRoom,
   } = useCreateStudyRoomForm();
 
-  const handleClickCreateStudyRoom = async () => {
+  const handleClickCreateStudyRoom = () => {
     createStudyRoom({ name, intro, timeSet });
   };
 

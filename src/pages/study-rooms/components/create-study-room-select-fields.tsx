@@ -1,46 +1,49 @@
-import { useMemo } from 'react';
 import styled from 'styled-components';
 import { SelectChangeEvent } from '@mui/material';
-import { STUDY_ROOM_STEP_PROGRESS_TIME } from '@/constant/study-room';
+import { STUDY_ROOM_STEP_PROGRESS_TIME, STUDY_ROOM_STEP_TIME_UNIT } from '@/constant/study-room';
 import { TimeSet } from '@/types/study-room.types';
-import generateTimeValues from '../utils/generate-time-values';
 import StepTimeSelect from '@/pages/study-rooms/components/step-time-select';
 
-interface CreateStudyRoomSelectsProps {
+interface CreateStudyRoomSelectFieldsProps {
   timeSet: TimeSet;
   onChangeSelect: (event: SelectChangeEvent<unknown>) => void;
 }
 
-const CreateStudyRoomSelects = ({ timeSet, onChangeSelect }: CreateStudyRoomSelectsProps) => {
-  // step별 시간 선택 select 요소로 들어갈 value 값을 배열로 저장한 변수
-  const stepTimeValues = useMemo(
-    () =>
-      (() => {
-        const planning = generateTimeValues(
-          STUDY_ROOM_STEP_PROGRESS_TIME.PLANNING.MIN,
-          STUDY_ROOM_STEP_PROGRESS_TIME.PLANNING.MAX,
-        );
+// step별 시간 선택 select 요소로 들어갈 value 값을 배열로 저장한 변수
+const stepTimeValues = (() => {
+  const generateTimeValues = (min: number, max: number) => {
+    const length = Math.floor((max - min) / STUDY_ROOM_STEP_TIME_UNIT) + 1;
 
-        const studying = generateTimeValues(
-          STUDY_ROOM_STEP_PROGRESS_TIME.STUDYING.MIN,
-          STUDY_ROOM_STEP_PROGRESS_TIME.STUDYING.MAX,
-        );
+    return Array.from({ length }, (_, index) => min + index * STUDY_ROOM_STEP_TIME_UNIT);
+  };
 
-        const retrospect = generateTimeValues(
-          STUDY_ROOM_STEP_PROGRESS_TIME.RETROSPECT.MIN,
-          STUDY_ROOM_STEP_PROGRESS_TIME.RETROSPECT.MAX,
-        );
-
-        const resting = generateTimeValues(
-          STUDY_ROOM_STEP_PROGRESS_TIME.RESTING.MIN,
-          STUDY_ROOM_STEP_PROGRESS_TIME.RESTING.MAX,
-        );
-
-        return { planning, studying, retrospect, resting };
-      })(),
-    [],
+  const planning = generateTimeValues(
+    STUDY_ROOM_STEP_PROGRESS_TIME.PLANNING.MIN,
+    STUDY_ROOM_STEP_PROGRESS_TIME.PLANNING.MAX,
   );
 
+  const studying = generateTimeValues(
+    STUDY_ROOM_STEP_PROGRESS_TIME.STUDYING.MIN,
+    STUDY_ROOM_STEP_PROGRESS_TIME.STUDYING.MAX,
+  );
+
+  const retrospect = generateTimeValues(
+    STUDY_ROOM_STEP_PROGRESS_TIME.RETROSPECT.MIN,
+    STUDY_ROOM_STEP_PROGRESS_TIME.RETROSPECT.MAX,
+  );
+
+  const resting = generateTimeValues(
+    STUDY_ROOM_STEP_PROGRESS_TIME.RESTING.MIN,
+    STUDY_ROOM_STEP_PROGRESS_TIME.RESTING.MAX,
+  );
+
+  return { planning, studying, retrospect, resting };
+})();
+
+const CreateStudyRoomSelectFields = ({
+  timeSet,
+  onChangeSelect,
+}: CreateStudyRoomSelectFieldsProps) => {
   return (
     <SelectsWrapper>
       <StepTimeSelect
@@ -93,4 +96,4 @@ const SelectsWrapper = styled.div`
   }
 `;
 
-export default CreateStudyRoomSelects;
+export default CreateStudyRoomSelectFields;
