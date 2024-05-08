@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
-import { MenuItem, SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
 import { STUDY_ROOM_STEP_PROGRESS_TIME } from '@/constant/study-room';
 import { TimeSet } from '@/types/study-room.types';
 import generateTimeValues from '../utils/generate-time-values';
-import SelectBox from '@/components/common/input/select-box';
+import StepTimeSelect from '@/pages/study-rooms/components/step-time-select';
 
 interface CreateStudyRoomSelectsProps {
   timeSet: TimeSet;
@@ -43,61 +43,41 @@ const CreateStudyRoomSelects = ({ timeSet, onChangeSelect }: CreateStudyRoomSele
 
   return (
     <SelectsWrapper>
-      <SelectBox
+      <StepTimeSelect
         labelId="planning-time-select"
         value={String(timeSet.planningTime)}
         label="계획 시간"
         name="planningTime"
         onChange={onChangeSelect}
-      >
-        {stepTimeValues.planning.map((timeValue) => (
-          <MenuItem key={timeValue} value={timeValue}>
-            {timeValue}분
-          </MenuItem>
-        ))}
-      </SelectBox>
+        optionValues={stepTimeValues.planning}
+      />
 
-      <SelectBox
+      <StepTimeSelect
         labelId="studying-time-select"
         value={String(timeSet.studyingTime)}
         label="스터디 시간"
         name="studyingTime"
         onChange={onChangeSelect}
-      >
-        {stepTimeValues.studying.map((timeValue) => (
-          <MenuItem key={timeValue} value={timeValue}>
-            {timeValue}분
-          </MenuItem>
-        ))}
-      </SelectBox>
+        optionValues={stepTimeValues.studying}
+      />
 
-      <SelectBox
+      <StepTimeSelect
         labelId="retrospect-time-select"
         value={String(timeSet.retrospectTime)}
         label="회고 시간"
         name="retrospectTime"
         onChange={onChangeSelect}
-      >
-        {stepTimeValues.retrospect.map((timeValue) => (
-          <MenuItem key={timeValue} value={timeValue}>
-            {timeValue}분
-          </MenuItem>
-        ))}
-      </SelectBox>
+        optionValues={stepTimeValues.retrospect}
+      />
 
-      <SelectBox
+      <StepTimeSelect
         labelId="resting-time-select"
         value={String(timeSet.restingTime)}
         label="휴식 시간"
         name="restingTime"
         onChange={onChangeSelect}
-      >
-        {stepTimeValues.resting.map((timeValue) => (
-          <MenuItem key={timeValue} value={timeValue}>
-            {timeValue}분
-          </MenuItem>
-        ))}
-      </SelectBox>
+        optionValues={stepTimeValues.resting}
+      />
     </SelectsWrapper>
   );
 };
