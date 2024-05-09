@@ -13,3 +13,24 @@ export const STUDY_ROOM_STEP_TO_TIME_SET = {
   RETROSPECT: 'retrospectTime',
   RESTING: 'restingTime',
 } as const;
+
+export const STUDY_ROOM_STEP_PROGRESS_TIME = {
+  PLANNING: {
+    MIN: 0,
+    MAX: 20,
+  },
+  STUDYING: {
+    MIN: 10,
+    MAX: 60,
+  },
+  RETROSPECT: {
+    MIN: 0,
+    MAX: 20,
+  },
+  RESTING: {
+    MIN: 0,
+    MAX: 20,
+  },
+};
+
+export const STUDY_ROOM_STEP_TIME_UNIT = 5;
