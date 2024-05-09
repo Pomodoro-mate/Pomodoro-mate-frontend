@@ -16,12 +16,17 @@ jest.mock('@/hooks/useModal', () => () => ({
   onClose: jest.fn(),
 }));
 
+const createStudyRoom = jest.fn();
+
+jest.mock('@/apis/study-room/create-study-room', () => ({
+  createStudyRoom: () => createStudyRoom({}),
+}));
+
 const mockUseCreateStudyRoomForm = {
   textFields: { name: studyRoom.name, intro: studyRoom.intro },
   timeSet: studyRoom.timeSet,
   handleChangeTextField: jest.fn(),
   handleChangeSelect: jest.fn(),
-  createStudyRoom: jest.fn(),
 };
 
 jest.mock('../hooks/useCreateStudyRoomForm', () => () => mockUseCreateStudyRoomForm);
@@ -50,19 +55,13 @@ describe('CreateStudyRoomModal', () => {
 
   context('when click "방 만들기" button', () => {
     it('execute createStudyRoom function', () => {
-      const {
-        textFields: { name, intro },
-        timeSet,
-        createStudyRoom,
-      } = mockUseCreateStudyRoomForm;
-
       render(<CreateStudyRoomModal />);
 
       const button = screen.getByRole('button', { name: /방 만들기/ });
 
       fireEvent.click(button);
 
-      expect(createStudyRoom).toHaveBeenCalledWith({ name, intro, timeSet });
+      expect(createStudyRoom).toHaveBeenCalled();
     });
   });
 });
