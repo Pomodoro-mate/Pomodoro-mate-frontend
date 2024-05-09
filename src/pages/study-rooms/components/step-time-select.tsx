@@ -1,22 +1,16 @@
-import { PropsWithChildren } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
 
 interface StepTimeSelectProps extends Omit<SelectProps, 'labelId'> {
   labelId: string;
-  optionValues: number[];
+  stepTimeValues: number[];
 }
 
-const StepTimeSelect = ({
-  optionValues,
-  label,
-  labelId,
-  ...restProps
-}: PropsWithChildren<StepTimeSelectProps>) => {
+const StepTimeSelect = ({ stepTimeValues, label, labelId, ...restProps }: StepTimeSelectProps) => {
   return (
     <FormControl fullWidth>
       <InputLabel htmlFor={labelId}>{label}</InputLabel>
       <Select label={label} inputProps={{ id: labelId }} {...restProps}>
-        {optionValues.map((value) => (
+        {stepTimeValues.map((value) => (
           <MenuItem key={value} value={value}>
             {value}분
           </MenuItem>

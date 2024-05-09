@@ -3,11 +3,11 @@ import { TextField } from '@mui/material';
 import { MODAL_KEYS } from '@/constant/modal';
 import { ROUTE_PATH } from '@/constant/routes';
 import { createStudyRoom as createStudyRoomApi } from '@/apis/study-room/create-study-room';
+import { setLocalStorage } from '@/utils/storage';
 import useModal from '@/hooks/useModal';
 import useCreateStudyRoomForm from '../hooks/useCreateStudyRoomForm';
 import Modal from '@/components/common/modal/modal';
-import CreateStudyRoomSelects from './create-study-room-select-fields';
-import { setLocalStorage } from '@/utils/storage';
+import StepTimeSelectFields from './step-time-select-fields';
 
 const CreateStudyRoomModal = () => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const CreateStudyRoomModal = () => {
         rows={3}
         onChange={handleChangeTextField}
       />
-      <CreateStudyRoomSelects timeSet={timeSet} onChangeSelect={handleChangeSelect} />
+      <StepTimeSelectFields timeSet={timeSet} onChangeSelect={handleChangeSelect} />
     </Modal>
   );
 };
