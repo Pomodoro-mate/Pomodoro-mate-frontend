@@ -1,22 +1,22 @@
 export class LocalStorage<T> {
   private key: string;
-  private value: Storage;
+  private storage: Storage;
 
-  constructor(key: string, value = localStorage) {
+  constructor(key: string, storage = localStorage) {
     this.key = key;
-    this.value = value;
+    this.storage = storage;
   }
 
   getItem() {
-    return JSON.parse(this.value.getItem(this.key) || 'null') as T;
+    return JSON.parse(this.storage.getItem(this.key) || 'null') as T;
   }
 
   setItem(data: T) {
-    this.value.setItem(this.key, JSON.stringify(data));
+    this.storage.setItem(this.key, JSON.stringify(data));
   }
 
   clear() {
-    this.value.removeItem(this.key);
+    this.storage.removeItem(this.key);
   }
 }
 
