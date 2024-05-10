@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom';
-import { List, Pagination } from '@mui/material';
-import { ROUTE_PATH } from '@/constant/routes';
 import { joinStudyRoom } from '@/apis/study-room/join-study-room';
+import { ROUTE_PATH } from '@/constant/routes';
 import useStudyRoomsQuery from '@/pages/study-rooms/hooks/useStudyRoomsQuery';
+
+import { List, Pagination } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import StudyRoomListItem from './study-room-list-item';
-import { setLocalStorage } from '@/utils/storage';
+import { participantIdStorage } from '@/utils/storage';
 
 const StudyRoomList = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const StudyRoomList = () => {
     try {
       const data = await joinStudyRoom({ studyRoomId });
       const { id: participantId } = data;
-      setLocalStorage({ key: 'participantId', value: String(participantId) });
+      participantIdStorage.setItem(participantId);
       navigate(`${ROUTE_PATH.STUDY_ROOMS}/${studyRoomId}`);
     } catch (e) {
       console.error(e);

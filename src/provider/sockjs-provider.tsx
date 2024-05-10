@@ -1,9 +1,10 @@
+import { ParticipantSummary, Step, StepInfo } from '@/types/study-room.types';
+import { tokenStorage } from '@/utils/storage';
+
+import { CompatClient, Stomp } from '@stomp/stompjs';
 import { PropsWithChildren, createContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SockJS from 'sockjs-client';
-import { CompatClient, Stomp } from '@stomp/stompjs';
-import { getLocalStorage } from '@/utils/storage';
-import { ParticipantSummary, Step, StepInfo } from '@/types/study-room.types';
 
 interface SockJSContextType {
   curParticipants: ParticipantSummary[];
@@ -23,7 +24,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
 
   const client = useRef<CompatClient>(Stomp.over(sock));
 
-  const authToken = getLocalStorage('token');
+  const token = tokenStorage.getItem();
 
   useEffect(() => {
     const copyClient = client.current;
@@ -37,7 +38,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
           setCurStepInfo(stepInfo);
         },
         {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
           StudyRoomId: String(id),
         },
       );
@@ -50,7 +51,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
           setCurParticipants(participantSummaries);
         },
         {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
           StudyRoomId: String(id),
         },
       );
@@ -60,7 +61,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
     return () => {
       copyClient.disconnect();
     };
-  }, [authToken, id]);
+  }, [token, id]);
 
   const goToNextStep = (step: Step) => {
     client.current.send(

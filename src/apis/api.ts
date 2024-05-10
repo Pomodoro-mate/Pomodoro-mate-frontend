@@ -1,10 +1,9 @@
-import { ROUTE_PATH } from '@/constant/routes';
 import { API_PATH } from '@/constant/api-path';
-import { HTTP_ERROR } from '@/constant/error-status-code';
 import { ERROR_MESSAGE } from '@/constant/error-message';
+import { HTTP_ERROR } from '@/constant/error-status-code';
+import { ROUTE_PATH } from '@/constant/routes';
 
-import { getLocalStorage, setLocalStorage } from '@/utils/storage';
-
+import { tokenStorage } from '@/utils/storage';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import getAccessToken from './auth/get-access-token';
 
@@ -31,7 +30,7 @@ http.interceptors.request.use((config) => {
     return config;
   }
 
-  const accessToken = getLocalStorage('token');
+  const accessToken = tokenStorage.getItem();
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -56,7 +55,8 @@ http.interceptors.response.use(
         if (response.status === 201) {
           const newAccessToken = response.data.accessToken;
 
-          setLocalStorage({ key: 'token', value: newAccessToken });
+          tokenStorage.setItem(newAccessToken);
+
           axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
           config.headers.Authorization = `Bearer ${newAccessToken}`;
           return axios(config);

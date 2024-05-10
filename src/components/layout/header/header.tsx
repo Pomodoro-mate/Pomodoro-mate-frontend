@@ -1,20 +1,21 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 
-import { useNavigate } from 'react-router-dom';
 import useLogoutMutation from '@/hooks/useLogoutMutation';
-
-import { removeLocalStorage } from '@/utils/storage';
+import { useNavigate } from 'react-router-dom';
 
 import { ROUTE_PATH } from '@/constant/routes';
+import { tokenStorage } from '@/utils/storage';
 
 const Header = () => {
   const navigate = useNavigate();
+
   const { mutate: logoutMutate } = useLogoutMutation();
 
   const logout = async () => {
     try {
       await logoutMutate();
-      removeLocalStorage('token');
+      tokenStorage.clear();
+
       navigate(ROUTE_PATH.LOGIN);
     } catch (err) {
       console.error(err);

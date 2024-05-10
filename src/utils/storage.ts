@@ -1,13 +1,24 @@
-type SetLocalStorage = Record<'key' | 'value', string>;
+export class LocalStorage<T> {
+  private key: string;
+  private storage: Storage;
 
-export const setLocalStorage = ({ key, value }: SetLocalStorage) => {
-  localStorage.setItem(key, value);
-};
+  constructor(key: string, storage = localStorage) {
+    this.key = key;
+    this.storage = storage;
+  }
 
-export const getLocalStorage = (key: string) => {
-  return localStorage.getItem(key);
-};
+  getItem() {
+    return JSON.parse(this.storage.getItem(this.key) || 'null') as T;
+  }
 
-export const removeLocalStorage = (key: string) => {
-  localStorage.removeItem(key);
-};
+  setItem(data: T) {
+    this.storage.setItem(this.key, JSON.stringify(data));
+  }
+
+  clear() {
+    this.storage.removeItem(this.key);
+  }
+}
+
+export const tokenStorage = new LocalStorage('token');
+export const participantIdStorage = new LocalStorage('participantId');
