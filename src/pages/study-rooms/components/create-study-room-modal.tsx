@@ -1,38 +1,33 @@
-import { createStudyRoom } from '@/apis/study-room/create-study-room';
-import Modal from '@/components/common/modal/modal';
+
+import { useNavigate } from 'react-router-dom';
+import { TextField } from '@mui/material';
 import { MODAL_KEYS } from '@/constant/modal';
 import { ROUTE_PATH } from '@/constant/routes';
+import { createStudyRoom as createStudyRoomApi } from '@/apis/study-room/create-study-room';
+import { setLocalStorage } from '@/utils/storage';
 import useModal from '@/hooks/useModal';
-import { participantIdStorage } from '@/utils/storage';
+import useCreateStudyRoomForm from '../hooks/useCreateStudyRoomForm';
+import Modal from '@/components/common/modal/modal';
+import StepTimeSelectFields from './step-time-select-fields';
 
-import { Container, TextField } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const CreateStudyRoomModal = () => {
   const navigate = useNavigate();
 
   const { isOpen, onClose } = useModal(MODAL_KEYS.CREATE_STUDY_ROOM);
 
-  const [name, setName] = useState('');
-  const [intro, setIntro] = useState('');
+  const {
+    textFields: { name, intro },
+    timeSet,
+    handleChangeTextField,
+    handleChangeSelect,
+  } = useCreateStudyRoomForm();
 
-  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    setName(value);
-  };
-
-  const handleChangeIntro = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    setIntro(value);
-  };
-
-  const handleClickActionBtn = async () => {
+  const createStudyRoom = async () => {
     try {
-      const { id, participantId } = await createStudyRoom({ name, intro });
-      participantIdStorage.setItem(participantId);
+      const { id, participantId } = await createStudyRoomApi({ name, intro, timeSet });
+
+      setLocalStorage({ key: 'participantId', value: String(participantId) });
 
       onClose();
 
@@ -48,26 +43,27 @@ const CreateStudyRoomModal = () => {
       title="스터디룸 생성"
       closeBtn="취소"
       actionBtn="방 만들기"
-      onClickActionBtn={handleClickActionBtn}
+      onClickActionBtn={createStudyRoom}
       onClose={onClose}
     >
-      <Container sx={{ paddingBlock: '10px' }}>
-        <TextField
-          fullWidth
-          label="방 제목"
-          variant="outlined"
-          margin="normal"
-          onChange={handleChangeName}
-        />
-        <TextField
-          fullWidth
-          label="설명"
-          variant="outlined"
-          multiline
-          rows={3}
-          onChange={handleChangeIntro}
-        />
-      </Container>
+      <TextField
+        fullWidth
+        label="방 제목"
+        name="name"
+        variant="outlined"
+        margin="normal"
+        onChange={handleChangeTextField}
+      />
+      <TextField
+        fullWidth
+        label="설명"
+        name="intro"
+        variant="outlined"
+        multiline
+        rows={3}
+        onChange={handleChangeTextField}
+      />
+      <StepTimeSelectFields timeSet={timeSet} onChangeSelect={handleChangeSelect} />
     </Modal>
   );
 };
