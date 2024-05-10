@@ -24,7 +24,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
 
   const client = useRef<CompatClient>(Stomp.over(sock));
 
-  const authToken = tokenStorage.getItem();
+  const token = tokenStorage.getItem();
 
   useEffect(() => {
     const copyClient = client.current;
@@ -38,7 +38,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
           setCurStepInfo(stepInfo);
         },
         {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
           StudyRoomId: String(id),
         },
       );
@@ -51,7 +51,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
           setCurParticipants(participantSummaries);
         },
         {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
           StudyRoomId: String(id),
         },
       );
@@ -61,7 +61,7 @@ const SockJSProvider = ({ children }: PropsWithChildren) => {
     return () => {
       copyClient.disconnect();
     };
-  }, [authToken, id]);
+  }, [token, id]);
 
   const goToNextStep = (step: Step) => {
     client.current.send(
