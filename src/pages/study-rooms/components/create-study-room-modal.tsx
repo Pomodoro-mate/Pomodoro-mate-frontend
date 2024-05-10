@@ -1,15 +1,13 @@
-
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import { MODAL_KEYS } from '@/constant/modal';
 import { ROUTE_PATH } from '@/constant/routes';
 import { createStudyRoom as createStudyRoomApi } from '@/apis/study-room/create-study-room';
-import { setLocalStorage } from '@/utils/storage';
+import { participantIdStorage } from '@/utils/storage';
 import useModal from '@/hooks/useModal';
 import useCreateStudyRoomForm from '../hooks/useCreateStudyRoomForm';
 import Modal from '@/components/common/modal/modal';
 import StepTimeSelectFields from './step-time-select-fields';
-
 
 const CreateStudyRoomModal = () => {
   const navigate = useNavigate();
@@ -26,8 +24,7 @@ const CreateStudyRoomModal = () => {
   const createStudyRoom = async () => {
     try {
       const { id, participantId } = await createStudyRoomApi({ name, intro, timeSet });
-
-      setLocalStorage({ key: 'participantId', value: String(participantId) });
+      participantIdStorage.setItem(participantId);
 
       onClose();
 
