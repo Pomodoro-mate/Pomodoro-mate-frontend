@@ -11,7 +11,8 @@ interface JoinStudyRoomResponse {
 export const joinStudyRoom = async ({
   studyRoomId,
 }: JoinStudyRoomParams): Promise<JoinStudyRoomResponse> => {
-  const { data } = await http.post(`/studyrooms/${studyRoomId}/participants`);
+  // TODO : 사용자에게 isForce 값을 받도록 변경
+  const { data } = await http.post(`/studyrooms/${studyRoomId}/participants`, { isForce: false });
 
   return data;
 };
