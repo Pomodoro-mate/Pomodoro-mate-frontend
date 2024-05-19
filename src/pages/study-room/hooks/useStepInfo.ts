@@ -3,12 +3,19 @@ import { STUDY_ROOM_STEP } from '@/constant/study-room';
 import { StepInfo } from '@/types/study-room.types';
 import useAudio from './useAudio';
 
+import startSound from '../../../assets/audio/start.mp3';
+
 const DELAY = 1000;
 
 const useStepInfo = ({ step, progressTime, updateAt }: StepInfo) => {
   const [remainingSeconds, setRemainingSeconds] = useState(0);
 
-  const { play } = useAudio();
+  const { play, setSound } = useAudio();
+
+  const playSound = () => {
+    setSound(startSound);
+    play();
+  };
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -40,18 +47,17 @@ const useStepInfo = ({ step, progressTime, updateAt }: StepInfo) => {
 
         if (updatedRemainingTime >= 0) {
           setRemainingSeconds(updatedRemainingTime);
-
           return;
         }
-
-        play();
+        playSound();
 
         clearTimer();
       }, DELAY);
     }
 
     return () => clearTimer();
-  }, [step, progressTime, updateAt, calcRemainingSeconds, play]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, progressTime, updateAt, calcRemainingSeconds]);
 
   const clearTimer = () => clearInterval(intervalRef.current as NodeJS.Timeout);
 

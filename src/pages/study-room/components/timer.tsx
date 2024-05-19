@@ -1,14 +1,26 @@
 import { useEffect } from 'react';
+
 import { Button, Container } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
 import { StepInfo } from '@/types/study-room.types';
+
+import useAudio from '../hooks/useAudio';
 import useStepInfo from '../hooks/useStepInfo';
 import useSockJSContext from '../hooks/useSockJSContext';
+
+import finishSound from '../../../assets/audio/finish.mp3';
 
 const Timer = (stepInfo: StepInfo) => {
   const { goToNextStep } = useSockJSContext();
 
   const { stepLabel, currentTime } = useStepInfo(stepInfo);
+
+  const { play, setSound } = useAudio();
+  const playSound = () => {
+    setSound(finishSound);
+    play();
+  };
 
   useEffect(
     function setDocumentTitle() {
@@ -25,7 +37,10 @@ const Timer = (stepInfo: StepInfo) => {
         size="large"
         type="button"
         variant="contained"
-        onClick={() => goToNextStep(stepInfo.step)}
+        onClick={() => {
+          goToNextStep(stepInfo.step);
+          playSound();
+        }}
       >
         &nbsp; NEXT STEP <KeyboardArrowRightIcon />
       </Button>
