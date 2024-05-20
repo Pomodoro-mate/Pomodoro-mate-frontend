@@ -1,13 +1,15 @@
 import { useCallback, useRef } from 'react';
 
-const useAudio = () => {
-  const audio = useRef(new Audio());
+interface UseAudioProps {
+  initialSound: string;
+}
+
+const useAudio = ({ initialSound }: UseAudioProps) => {
+  const audio = useRef(new Audio(initialSound));
 
   const play = useCallback(() => audio.current.play(), []);
 
-  const setSound = (sound: string) => (audio.current.src = sound);
-
-  return { play, setSound };
+  return { play };
 };
 
 export default useAudio;
