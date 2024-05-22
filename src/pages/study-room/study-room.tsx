@@ -6,15 +6,20 @@ import Timer from './components/timer';
 import { Box, Container, Grid } from '@mui/material';
 
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { ROUTE_PATH } from '@/constant/routes';
+import { participantIdStorage } from '@/utils/storage';
 
 import useSockJSContext from './hooks/useSockJSContext';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 import useExitRoomModalContext from './hooks/useExitRoomModalContext';
-  
+
 import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 
 const StudyRoom = () => {
+  const navigate = useNavigate();
+
   const { id: studyId } = useParams();
 
   const { open } = useExitRoomModalContext();
@@ -36,6 +41,8 @@ const StudyRoom = () => {
     updateAt,
   };
 
+  const participantId = participantIdStorage.getItem();
+
   useEffect(() => {
     window.addEventListener('popstate', open);
 
@@ -44,6 +51,18 @@ const StudyRoom = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const hasOwnId = participantSummaries?.some((participant) => participant.id === participantId);
+
+    if (participantSummaries && !hasOwnId) {
+      // TODO : 스터디룸 접속 시간이 길어져 자동으로 퇴장됐다는 알림 메세지 띄우기
+
+      participantIdStorage.clear();
+
+      !hasOwnId && navigate(ROUTE_PATH.STUDY_ROOMS);
+    }
+  }, [participantSummaries, participantId, navigate]);
 
   if (isLoading) {
     return <Spinner />;
