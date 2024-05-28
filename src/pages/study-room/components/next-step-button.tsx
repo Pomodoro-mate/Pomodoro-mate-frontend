@@ -1,4 +1,3 @@
-import React from 'react';
 import useSockJSContext from '../hooks/useSockJSContext';
 import useAudio from '../hooks/useAudio';
 import { Button } from '@mui/material';
