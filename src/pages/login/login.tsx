@@ -44,6 +44,7 @@ const Login = () => {
               textFieldProps={{
                 label: '닉네임',
                 //  defaultValue: '',
+                placeholder: '특수문자 제외 2자 이상, 16자 이하',
               }}
               control={control}
               name="nickname"
