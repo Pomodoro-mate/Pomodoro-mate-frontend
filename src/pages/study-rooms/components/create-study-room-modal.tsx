@@ -49,6 +49,7 @@ const CreateStudyRoomModal = () => {
         name="name"
         variant="outlined"
         margin="normal"
+        placeholder="2자 이상, 30자 이하"
         onChange={handleChangeTextField}
       />
       <TextField
@@ -58,6 +59,7 @@ const CreateStudyRoomModal = () => {
         variant="outlined"
         multiline
         rows={3}
+        placeholder="(선택) 1000자 이하"
         onChange={handleChangeTextField}
       />
       <StepTimeSelectFields timeSet={timeSet} onChangeSelect={handleChangeSelect} />
