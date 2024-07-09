@@ -3,12 +3,14 @@ import { STUDY_ROOM_STEP } from '@/constant/study-room';
 import { StepInfo } from '@/types/study-room.types';
 import useAudio from './useAudio';
 
+import startSound from '@/assets/audio/study-start.mp3';
+
 const DELAY = 1000;
 
 const useStepInfo = ({ step, progressTime, updateAt }: StepInfo) => {
   const [remainingSeconds, setRemainingSeconds] = useState(0);
 
-  const { play } = useAudio();
+  const { play } = useAudio({ initialSound: startSound });
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -40,10 +42,8 @@ const useStepInfo = ({ step, progressTime, updateAt }: StepInfo) => {
 
         if (updatedRemainingTime >= 0) {
           setRemainingSeconds(updatedRemainingTime);
-
           return;
         }
-
         play();
 
         clearTimer();

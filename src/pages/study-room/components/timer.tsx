@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
-import { Button, Container } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
+import { Container } from '@mui/material';
+
 import { StepInfo } from '@/types/study-room.types';
+
 import useStepInfo from '../hooks/useStepInfo';
-import useSockJSContext from '../hooks/useSockJSContext';
+
+import endSound from '@/assets/audio/study-end.mp3';
+import NextStepButton from './next-step-button';
 
 const Timer = (stepInfo: StepInfo) => {
-  const { goToNextStep } = useSockJSContext();
-
   const { stepLabel, currentTime } = useStepInfo(stepInfo);
 
   useEffect(
@@ -21,14 +23,7 @@ const Timer = (stepInfo: StepInfo) => {
     <Container sx={{ minWidth: '50%', textAlign: 'center', paddingBlock: 4 }}>
       <h2>{stepLabel} 단계</h2>
       <h1>{currentTime}</h1>
-      <Button
-        size="large"
-        type="button"
-        variant="contained"
-        onClick={() => goToNextStep(stepInfo.step)}
-      >
-        &nbsp; NEXT STEP <KeyboardArrowRightIcon />
-      </Button>
+      <NextStepButton sound={endSound} step={stepInfo.step} />
     </Container>
   );
 };
