@@ -49,7 +49,7 @@ http.interceptors.response.use(
     } = error;
 
     if (status === HTTP_ERROR.UNAUTHORIZED) {
-      if (error.response.data === ERROR_MESSAGE.UNAUTHORIZED) {
+      if (error.response.data.message === ERROR_MESSAGE.UNAUTHORIZED) {
         const response = await getAccessToken();
 
         if (response.status === 201) {
