@@ -9,22 +9,29 @@ import useStudyRoomsQuery from '../hooks/useStudyRoomsQuery';
 import StudyRoomListItem from './study-room-list-item';
 import StudyRoomDetailDialog from './study-room-detail-dialog';
 import { useState } from 'react';
+import { StudyRoomInfo } from '@/types/study-room.types';
 
 const StudyRoomList = () => {
   const navigate = useNavigate();
 
-  const { isLoading, studyRooms, pageDto, isError, page, setPage } = useStudyRoomsQuery();
+  const {
+    isLoading,
+    studyRooms,
+    // pageDto,
+    isError,
+    //page, setPage
+  } = useStudyRoomsQuery();
 
-  const handlePageChange = (targetPage: number) => {
-    if (page === targetPage) return;
+  // const handlePageChange = (targetPage: number) => {
+  //   if (page === targetPage) return;
 
-    setPage(targetPage);
-  };
+  //   setPage(targetPage);
+  // };
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = (status: boolean) => setIsOpen(status);
 
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState({} as StudyRoomInfo);
   const openStudyRoomModal = async (studyId: number) => {
     try {
       const data = await getStudyRoomInfo({ studyId });

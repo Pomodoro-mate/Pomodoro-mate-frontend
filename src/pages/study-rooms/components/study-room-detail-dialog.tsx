@@ -21,7 +21,7 @@ import { StudyRoomInfo } from '@/types/study-room.types';
 interface StudyRoomDetailDialogType {
   isOpen: boolean;
   studyRoomInfo: StudyRoomInfo;
-  toggle: () => void;
+  toggle: (status: boolean) => void;
   joinStudyRoom: (studyRoomId: number) => void;
 }
 
@@ -31,7 +31,14 @@ const StudyRoomDetailDialog = ({
   toggle,
   joinStudyRoom,
 }: StudyRoomDetailDialogType) => {
-  const { id, intro, name, participantSummaries, timeSet, updateAt } = studyRoomInfo;
+  const {
+    id,
+    intro,
+    name,
+    participantSummaries,
+    timeSet,
+    //updateAt
+  } = studyRoomInfo;
   const { planningTime, restingTime, retrospectTime, studyingTime } = timeSet;
 
   return (
