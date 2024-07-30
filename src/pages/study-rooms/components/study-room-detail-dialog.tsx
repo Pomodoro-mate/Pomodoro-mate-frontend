@@ -81,7 +81,7 @@ const StudyRoomDetailDialog = ({
             <Label>참여별 목록</Label>
             <div className="bg-gray-200 xl:h-[200px] xl:w-[500px] rounded-lg p-3">
               {participantSummaries.map((item) => {
-                const { id, userId, nickname, imageUrl } = item;
+                const { id, nickname } = item;
                 return (
                   <div key={id} className="flex flex-row items-center gap-2">
                     <Avatar>
