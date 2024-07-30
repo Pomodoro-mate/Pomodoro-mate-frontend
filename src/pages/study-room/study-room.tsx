@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import useSockJSContext from './hooks/useSockJSContext';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
 import useExitRoomModalContext from './hooks/useExitRoomModalContext';
-  
+
 import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 
 const StudyRoom = () => {

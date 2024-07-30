@@ -1,7 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
+
 import { ROUTE_PATH } from '@/constant/routes';
-import ProtectedRoute from '../common/protected-route/protected-route';
+
+import { Container } from '../ui';
 import Header from './header/header';
+import ProtectedRoute from '../common/protected-route/protected-route';
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -14,7 +17,9 @@ const Layout = () => {
       {!isStudyRoomPage && <Header />}
       <main>
         <ProtectedRoute>
-          <Outlet />
+          <Container className="my-8 px-40">
+            <Outlet />
+          </Container>
         </ProtectedRoute>
       </main>
     </>
