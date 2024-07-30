@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { SelectChangeEvent } from '@mui/material';
 import { STUDY_ROOM_STEP_PROGRESS_TIME } from '@/constant/study-room';
 
 const useCreateStudyRoomForm = () => {
@@ -17,19 +16,21 @@ const useCreateStudyRoomForm = () => {
 
   const handleChangeTextField = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
-
+    setTextFields({ ...textFields, [name]: value });
+  };
+  const handleChangeTextFieldArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value, name } = event.target;
     setTextFields({ ...textFields, [name]: value });
   };
 
-  const handleChangeSelect = (event: SelectChangeEvent<unknown>) => {
-    const { value, name } = event.target;
-
-    setTimeSet((prev) => ({ ...prev, [name]: Number(value) }));
+  const handleChangeSelect = (name: string, selected: string) => {
+    setTimeSet((prev) => ({ ...prev, [name]: Number(selected) }));
   };
 
   return {
     textFields,
     timeSet,
+    handleChangeTextFieldArea,
     handleChangeTextField,
     handleChangeSelect,
   };

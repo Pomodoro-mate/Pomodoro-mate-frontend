@@ -14,7 +14,7 @@ import ExitRoomModalProvdier from '@/pages/study-room/provider/exit-room-modal-p
 
 import AppRoute from '@/components/common/app-route/app-route';
 import Spinner from '@/components/common/spinner/spinner';
-import Login from '@/pages/login/login';
+
 import StudyRoom from '@/pages/study-room/study-room';
 import StudyRooms from '@/pages/study-rooms/study-rooms';
 
@@ -51,13 +51,9 @@ export const router = [
   },
   {
     path: ROUTE_PATH.HOME,
-    element: <Home />,
-  },
-  {
-    path: ROUTE_PATH.LOGIN,
     element: (
       <AppRoute>
-        <Login />
+        <Home />,
       </AppRoute>
     ),
   },

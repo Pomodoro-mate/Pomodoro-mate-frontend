@@ -1,10 +1,9 @@
 import { ModalKey } from '@/types/modal.types';
-import { MODAL_KEYS } from '@/constant/modal';
 import useModalContext from '@/hooks/useModalContext';
-import CreateStudyRoomModal from '@/pages/study-rooms/components/create-study-room-modal';
+// import CreateStudyRoomModal from '@/pages/study-rooms/components/create-study-room-modal';
 
 const modals = {
-  [MODAL_KEYS.CREATE_STUDY_ROOM]: <CreateStudyRoomModal />,
+  // [MODAL_KEYS.CREATE_STUDY_ROOM]: <CreateStudyRoomModal />,
 };
 
 const Switch = ({ modals }: { modals: { [key: string]: JSX.Element } }) => {
