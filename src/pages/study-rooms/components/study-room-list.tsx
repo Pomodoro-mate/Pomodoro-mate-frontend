@@ -32,6 +32,7 @@ const StudyRoomList = () => {
   const toggle = (status: boolean) => setIsOpen(status);
 
   const [info, setInfo] = useState({} as StudyRoomInfo);
+
   const openStudyRoomModal = async (studyId: number) => {
     try {
       const data = await getStudyRoomInfo({ studyId });
@@ -46,8 +47,9 @@ const StudyRoomList = () => {
     try {
       const data = await joinStudyRoom({ studyRoomId });
       const { id: participantId } = data;
+
       participantIdStorage.setItem(participantId);
-      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${studyRoomId}`);
+      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${studyRoomId}`, { state: { title: info.name } });
     } catch (err) {
       console.error({ err });
     }

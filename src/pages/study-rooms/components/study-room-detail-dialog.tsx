@@ -1,3 +1,5 @@
+import { Book, Bulb, Crown, Headset, Receipt } from '@/components/icons';
+
 import {
   Avatar,
   AvatarImage,
@@ -10,11 +12,6 @@ import {
   DialogTitle,
   Label,
 } from '@/components/ui';
-
-import book from '../../../assets/icons/book-outline.png';
-import bulb from '../../../assets/icons/bulb-outline.png';
-import receipt from '../../../assets/icons/receipt-outline.png';
-import headset from '../../../assets/icons/headset-outline.png';
 
 import { StudyRoomInfo } from '@/types/study-room.types';
 
@@ -58,26 +55,25 @@ const StudyRoomDetailDialog = ({
             <div className="flex xl:max-w-[200px] flex-wrap items-center">
               <div>
                 <div className="flex flex-col items-center border-r py-2 px-6">
-                  <img src={receipt} />
+                  <Receipt width={32} height={32} stroke="#333333" />
                   <span>계획</span>
                   <span>{`${planningTime} 분`}</span>
                 </div>
                 <div className="flex flex-col items-center border-t border-r  py-2 px-6">
-                  <img src={bulb} />
+                  <Bulb width={32} height={32} stroke="#333333" />
                   <span>회고</span>
                   <span>{`${restingTime} 분`}</span>
                 </div>
               </div>
-
               <div>
                 <div className="flex flex-col items-center border-b  py-2 px-6">
-                  <img src={book} />
+                  <Book width={32} height={32} stroke="#333333" />
                   <span>스터디</span>
                   <span>{`${studyingTime} 분`}</span>
                 </div>
 
                 <div className="flex flex-col items-center py-2 px-6">
-                  <img src={headset} />
+                  <Headset width={32} height={32} stroke="#333333" />
                   <span>휴식</span>
                   <span>{`${retrospectTime} 분`}</span>
                 </div>
@@ -85,15 +81,16 @@ const StudyRoomDetailDialog = ({
             </div>
           </div>
           <div>
-            <Label>참여별 목록</Label>
+            <Label>참여자 목록</Label>
             <div className="bg-gray-200 xl:h-[200px] xl:w-[500px] rounded-lg p-3">
               {participantSummaries.map((item) => {
-                const { id, nickname } = item;
+                const { id, nickname, isHost } = item;
                 return (
                   <div key={id} className="flex flex-row items-center gap-2">
                     <Avatar>
                       <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
                     </Avatar>
+                    {isHost && <Crown width={16} height={16} fill="#FFD953" />}
                     <span>{nickname}</span>
                   </div>
                 );
@@ -103,12 +100,7 @@ const StudyRoomDetailDialog = ({
         </div>
 
         <DialogFooter className="sm:flex-col-reverse">
-          <Button
-            type="submit"
-            onClick={() => {
-              joinStudyRoom(id);
-            }}
-          >
+          <Button type="submit" onClick={() => joinStudyRoom(id)}>
             참가하기
           </Button>
         </DialogFooter>

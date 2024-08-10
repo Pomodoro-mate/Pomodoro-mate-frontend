@@ -20,6 +20,7 @@ export type ParticipantSummary = {
   userId: number;
   nickname: string;
   imageUrl: string;
+  isHost: boolean;
 };
 
 export type TimeSet = {
