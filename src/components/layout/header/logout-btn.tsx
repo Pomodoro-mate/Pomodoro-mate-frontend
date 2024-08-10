@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui';
 import { ROUTE_PATH } from '@/constant/routes';
 import useLogoutMutation from '@/hooks/useLogoutMutation';
 import { tokenStorage } from '@/utils/storage';
@@ -19,7 +18,7 @@ const LogoutBtn = () => {
     }
   };
 
-  return <Button onClick={logout}>로그아웃</Button>;
+  return <span onClick={logout}>로그아웃</span>;
 };
 
 export default LogoutBtn;
