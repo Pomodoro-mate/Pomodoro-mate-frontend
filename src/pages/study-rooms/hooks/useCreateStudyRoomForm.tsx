@@ -18,6 +18,7 @@ const useCreateStudyRoomForm = () => {
     const { value, name } = event.target;
     setTextFields({ ...textFields, [name]: value });
   };
+
   const handleChangeTextFieldArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value, name } = event.target;
     setTextFields({ ...textFields, [name]: value });
