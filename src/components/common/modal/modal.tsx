@@ -1,4 +1,12 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui';
 
 export interface ModalProps extends React.PropsWithChildren {
   isOpen: boolean;
@@ -7,6 +15,8 @@ export interface ModalProps extends React.PropsWithChildren {
   actionBtn?: string;
   closeBtn?: string;
   onClickActionBtn?: () => void;
+  activeClose?: boolean;
+  variant?: 'default' | 'disabled' | 'ghost' | 'link' | 'outline' | 'secondary';
 }
 
 const Modal = ({
@@ -14,22 +24,28 @@ const Modal = ({
   onClose,
   title,
   actionBtn,
+  activeClose = true,
   closeBtn = '닫기',
   onClickActionBtn,
   children,
+  variant = 'default',
 }: ModalProps) => {
   return (
-    <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>{children}</DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>{closeBtn}</Button>
-        {actionBtn && (
-          <Button variant="contained" onClick={onClickActionBtn}>
-            {actionBtn}
-          </Button>
-        )}
-      </DialogActions>
+    <Dialog open={isOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle onClick={onClose}>{title}</DialogTitle>
+        </DialogHeader>
+        <DialogDescription>{children}</DialogDescription>
+        <DialogFooter>
+          {activeClose && <Button onClick={onClose}>{closeBtn}</Button>}
+          {actionBtn && (
+            <Button variant={variant} onClick={onClickActionBtn}>
+              {actionBtn}
+            </Button>
+          )}
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 };

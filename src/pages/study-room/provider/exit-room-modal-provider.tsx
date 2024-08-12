@@ -1,12 +1,11 @@
 import Modal from '@/components/common/modal/modal';
 
-import { Typography } from '@mui/material';
-
 import { PropsWithChildren, createContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useExitStudyRoom from '../hooks/useExitStudyRoom';
 import useBooleanState from '@/hooks/useBooleanState';
+import { Warning } from '@/components/icons';
 
 const initialContext = {
   isOpen: false,
@@ -31,13 +30,18 @@ const ExitRoomModalProvdier = ({ children }: PropsWithChildren) => {
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          title="스터디룸 나가기"
+          title="알림"
           closeBtn="취소"
           actionBtn="나가기"
-          onClickActionBtn={clickExit}
           onClose={close}
+          onClickActionBtn={clickExit}
+          activeClose={false}
+          variant="secondary"
         >
-          <Typography>스터디 방을 나가시겠습니까?</Typography>
+          <div className="flex flex-col items-center gap-3">
+            <Warning width={56} height={56} fill="#D53D0E" />
+            <span>스터디룸을 나가시겠습니까?</span>
+          </div>
         </Modal>
       )}
     </ExitRoomModalContext.Provider>

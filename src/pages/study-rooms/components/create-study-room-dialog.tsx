@@ -35,7 +35,7 @@ const CreateStudyRoomDialog = () => {
     try {
       const { id, participantId } = await createStudyRoomApi({ name, intro, timeSet });
       participantIdStorage.setItem(participantId);
-      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${id}`);
+      navigate(`${ROUTE_PATH.STUDY_ROOMS}/${id}`, { state: { title: name } });
     } catch (e) {
       console.error(e);
     }

@@ -1,16 +1,14 @@
 import Spinner from '@/components/common/spinner/spinner';
-import Header from './components/header';
+
 import ParticipantPopover from './components/participant-list';
 import Timer from './components/timer';
-
-import { Box, Container, Grid } from '@mui/material';
 
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import useExitRoomModalContext from './hooks/useExitRoomModalContext';
 import useSockJSContext from './hooks/useSockJSContext';
 import useStudyRoomQuery from './hooks/useStudyRoomQuery';
-import useExitRoomModalContext from './hooks/useExitRoomModalContext';
 
 import getProgressTime from '@/pages/study-room/utils/get-progress-time';
 
@@ -22,7 +20,7 @@ const StudyRoom = () => {
   // 추후 수정 예정
   const {
     isLoading,
-    data: { name, participantSummaries, step, updateAt, timeSet },
+    data: { participantSummaries, step, updateAt, timeSet },
     isError,
   } = useStudyRoomQuery({ studyId: Number(studyId) });
 
@@ -55,17 +53,12 @@ const StudyRoom = () => {
 
   return (
     <>
-      <Header name={name} />
-      <Container maxWidth="xl">
-        <Box component="section" sx={{ position: 'relative', paddingBlock: 2 }}>
-          <ParticipantPopover participants={participants} />
-          <Grid container sx={{ justifyContent: 'center' }}>
-            <Grid item xs={6}>
-              <Timer {...stepInfo} />
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
+      <div className="flex justify-end">
+        <ParticipantPopover participants={participants} />
+      </div>
+      <div className="flex justify-center">
+        <Timer {...stepInfo} />
+      </div>
     </>
   );
 };
