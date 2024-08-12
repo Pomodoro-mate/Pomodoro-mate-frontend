@@ -3,7 +3,7 @@ import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarImage } from '@/components/ui';
 import { Crown } from '@/components/icons';
 
-const ParticipantListItem = ({ nickname, imageUrl, isHost }: ParticipantSummary) => {
+const ParticipantListItem = ({ nickname, isHost }: ParticipantSummary) => {
   return (
     <DropdownMenuItem>
       <div className="flex gap-2 items-center">
