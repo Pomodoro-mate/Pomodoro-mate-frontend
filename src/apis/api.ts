@@ -47,8 +47,9 @@ http.interceptors.response.use(
       config,
       response: { status },
     } = error;
-
+    console.log(error.response);
     if (status === HTTP_ERROR.UNAUTHORIZED) {
+      console.log(error.response);
       if (error.response.data.message === ERROR_MESSAGE.UNAUTHORIZED) {
         const response = await getAccessToken();
 
