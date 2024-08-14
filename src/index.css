@@ -92,7 +92,8 @@
     @apply text-sm font-normal;
   }
 }
-
-.hint {
-  @apply text-xs font-normal text-achromatic-80;
+@layer components {
+  .hint {
+    @apply text-xs font-normal text-achromatic-80;
+  }
 }
