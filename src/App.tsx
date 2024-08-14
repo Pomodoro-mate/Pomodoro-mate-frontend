@@ -1,4 +1,3 @@
-import CssBaseline from '@mui/material/CssBaseline';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from './components/theme-provider';
@@ -10,7 +9,6 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light">
       <QueryClientProvider client={queryClient}>
-        <CssBaseline />
         <RouterProvider router={routes} />
       </QueryClientProvider>
     </ThemeProvider>
