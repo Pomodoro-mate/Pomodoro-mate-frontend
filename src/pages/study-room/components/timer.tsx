@@ -17,7 +17,11 @@ const Timer = (stepInfo: StepInfo) => {
   useEffect(
     function setDocumentTitle() {
       document.title = `${currentTime} - ${stepLabel} 단계`;
+      return () => {
+        document.title = 'Pomodoro Mate';
+      };
     },
+
     [currentTime, stepLabel],
   );
 
