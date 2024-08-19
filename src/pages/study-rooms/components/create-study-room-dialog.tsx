@@ -6,19 +6,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Input,
   Label,
+  Textarea,
 } from '@/components/ui';
-import TextField from '@/components/common/text-field/text-field';
-import TextAreaField from '@/components/common/text-area-field/text-area-field';
-
 import StepTimeSelectField from './stpe-time-select-field';
 
 import { useNavigate } from 'react-router-dom';
 
+import { createStudyRoom as createStudyRoomApi } from '@/apis/study-room/create-study-room';
 import { ROUTE_PATH } from '@/constant/routes';
 import { participantIdStorage } from '@/utils/storage';
 import useCreateStudyRoomForm from '../hooks/useCreateStudyRoomForm';
-import { createStudyRoom as createStudyRoomApi } from '@/apis/study-room/create-study-room';
 
 const CreateStudyRoomDialog = () => {
   const navigate = useNavigate();
@@ -52,21 +51,22 @@ const CreateStudyRoomDialog = () => {
         </DialogHeader>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <TextField
-              label="제목"
-              labelId="title"
+            <Label htmlFor="title" className="text-left">
+              제목
+            </Label>
+            <Input
+              id="title"
+              className="col-span-3"
               name="name"
-              placeholder="2자 이상 30자 이하"
+              placeholder="사용할 닉네임 입력"
               onChange={handleChangeTextField}
             />
           </div>
           <div className="flex flex-col gap-2">
-            <TextAreaField
-              label="설명"
-              labelId="description"
-              name="intro"
-              onChange={handleChangeTextFieldArea}
-            />
+            <Label htmlFor="description" className="text-left">
+              설명
+            </Label>
+            <Textarea id="description" name="intro" onChange={handleChangeTextFieldArea} />
           </div>
         </div>
         <div className="mb-6">
