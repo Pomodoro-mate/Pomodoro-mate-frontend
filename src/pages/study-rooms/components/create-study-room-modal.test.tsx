@@ -1,67 +1,67 @@
-// import { fireEvent, screen } from '@testing-library/react';
-// import { render } from '@/test-helper';
-// import fixtures from '@/fixtures';
-// import CreateStudyRoomModal from './create-study-room-modal';
+import { fireEvent, screen } from '@testing-library/react';
+import { render } from '@/test-helper';
+import fixtures from '@/fixtures';
+import CreateStudyRoomDialog from './create-study-room-dialog';
 
-// const { studyRoom } = fixtures;
+const { studyRoom } = fixtures;
 
-// const context = describe;
+const context = describe;
 
-// jest.mock('react-router-dom', () => ({
-//   useNavigate: jest.fn(),
-// }));
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(),
+}));
 
-// jest.mock('@/hooks/useModal', () => () => ({
-//   isOpen: true,
-//   onClose: jest.fn(),
-// }));
+jest.mock('@/hooks/useModal', () => () => ({
+  isOpen: true,
+  onClose: jest.fn(),
+}));
 
-// const createStudyRoom = jest.fn();
+const createStudyRoom = jest.fn();
 
-// jest.mock('@/apis/study-room/create-study-room', () => ({
-//   createStudyRoom: () => createStudyRoom({}),
-// }));
+jest.mock('@/apis/study-room/create-study-room', () => ({
+  createStudyRoom: () => createStudyRoom({}),
+}));
 
-// const mockUseCreateStudyRoomForm = {
-//   textFields: { name: studyRoom.name, intro: studyRoom.intro },
-//   timeSet: studyRoom.timeSet,
-//   handleChangeTextField: jest.fn(),
-//   handleChangeSelect: jest.fn(),
-// };
+const mockUseCreateStudyRoomForm = {
+  textFields: { name: studyRoom.name, intro: studyRoom.intro },
+  timeSet: studyRoom.timeSet,
+  handleChangeTextField: jest.fn(),
+  handleChangeSelect: jest.fn(),
+};
 
-// jest.mock('../hooks/useCreateStudyRoomForm', () => () => mockUseCreateStudyRoomForm);
+jest.mock('../hooks/useCreateStudyRoomForm', () => () => mockUseCreateStudyRoomForm);
 
-// describe('CreateStudyRoomModal', () => {
-//   it('renders CreateStudyRoomModal', () => {
-//     render(<CreateStudyRoomModal />);
+describe('CreateStudyRoomDialog', () => {
+  it('renders CreateStudyRoomDialog', () => {
+    render(<CreateStudyRoomDialog />);
 
-//     screen.getByLabelText(/제목/);
-//     screen.getByLabelText(/설명/);
-//   });
+    screen.getByLabelText(/제목/);
+    screen.getByLabelText(/설명/);
+  });
 
-//   context('when text field changes', () => {
-//     it('execute handler function', () => {
-//       const { handleChangeTextField } = mockUseCreateStudyRoomForm;
+  context('when text field changes', () => {
+    it('execute handler function', () => {
+      const { handleChangeTextField } = mockUseCreateStudyRoomForm;
 
-//       render(<CreateStudyRoomModal />);
+      render(<CreateStudyRoomDialog />);
 
-//       const nameTextField = screen.getByLabelText(/제목/);
+      const nameTextField = screen.getByLabelText(/제목/);
 
-//       fireEvent.change(nameTextField, { target: { value: 'new text' } });
+      fireEvent.change(nameTextField, { target: { value: 'new text' } });
 
-//       expect(handleChangeTextField).toHaveBeenCalled();
-//     });
-//   });
+      expect(handleChangeTextField).toHaveBeenCalled();
+    });
+  });
 
-//   context('when click "방 만들기" button', () => {
-//     it('execute createStudyRoom function', () => {
-//       render(<CreateStudyRoomModal />);
+  context('when click "방 만들기" button', () => {
+    it('execute createStudyRoom function', () => {
+      render(<CreateStudyRoomDialog />);
 
-//       const button = screen.getByRole('button', { name: /방 만들기/ });
+      const button = screen.getByRole('button', { name: /방 만들기/ });
 
-//       fireEvent.click(button);
+      fireEvent.click(button);
 
-//       expect(createStudyRoom).toHaveBeenCalled();
-//     });
-//   });
-// });
+      expect(createStudyRoom).toHaveBeenCalled();
+    });
+  });
+});

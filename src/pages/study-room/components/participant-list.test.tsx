@@ -1,60 +1,47 @@
-// import { fireEvent, screen } from '@testing-library/react';
-// import { render } from '@/test-helper';
-// import fixtures from '@/fixtures';
-// import { UsePopover } from '../hooks/usePopover';
-// import ParticipantList from './participant-list';
+import fixtures from '@/fixtures';
+import { render } from '@/test-helper';
+import { fireEvent, screen } from '@testing-library/react';
+import ParticipantList from './participant-list';
 
-// const context = describe;
+const context = describe;
 
-// const { participants } = fixtures;
+const { participants } = fixtures;
 
-// const [participant1, participant2] = participants;
+const [participant1, participant2] = participants;
 
-// const mockUsePopover: UsePopover = {
-//   anchorEl: null,
-//   openPopover: jest.fn(),
-//   closePopover: jest.fn(),
-// };
+const renderParticipantList = () => render(<ParticipantList participants={participants} />);
 
-// jest.mock('../hooks/usePopover', () => () => mockUsePopover);
+describe('ParticipantList', () => {
+  describe('when anchorEl is null', () => {
+    it('renders only participant list button', () => {
+      renderParticipantList();
 
-// const renderParticipantList = () => render(<ParticipantList participants={participants} />);
+      screen.getByText(participants.length);
 
-// describe('ParticipantList', () => {
-//   describe('when anchorEl is null', () => {
-//     it('renders only participant list button', () => {
-//       renderParticipantList();
+      expect(screen.queryByText(participant1.nickname)).not.toBeInTheDocument();
+    });
 
-//       screen.getByText(participants.length);
+    context('when click participant list button', () => {
+      it('renders participant list', () => {
+        renderParticipantList();
 
-//       expect(screen.queryByText(participant1.nickname)).not.toBeInTheDocument();
-//     });
+        const buttonNameRegExp = new RegExp(String(participants.length));
 
-//     context('when click participant list button', () => {
-//       it('renders participant list', () => {
-//         renderParticipantList();
+        const button = screen.getByRole('button', { name: buttonNameRegExp });
 
-//         const buttonNameRegExp = new RegExp(String(participants.length));
+        fireEvent.click(button);
+      });
+    });
+  });
 
-//         const button = screen.getByRole('button', { name: buttonNameRegExp });
+  describe('when anchorEl is participant list button', () => {
+    beforeEach(() => {});
 
-//         fireEvent.click(button);
+    it('renders participant list', () => {
+      renderParticipantList();
 
-//         expect(mockUsePopover.openPopover).toHaveBeenCalled();
-//       });
-//     });
-//   });
-
-//   describe('when anchorEl is participant list button', () => {
-//     beforeEach(() => {
-//       mockUsePopover.anchorEl = document.createElement('button');
-//     });
-
-//     it('renders participant list', () => {
-//       renderParticipantList();
-
-//       screen.getByText(participant1.nickname);
-//       screen.getByText(participant2.nickname);
-//     });
-//   });
-// });
+      screen.getByText(participant1.nickname);
+      screen.getByText(participant2.nickname);
+    });
+  });
+});
