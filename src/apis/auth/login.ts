@@ -1,3 +1,4 @@
+import { API_PATH } from '@/constant/api-path';
 import { http } from '../api';
 
 type LoginResponse = {
@@ -10,7 +11,7 @@ type Params = {
 
 export const login = async ({ nickname }: Params): Promise<LoginResponse> => {
   const response = await http.post<LoginResponse>(
-    '/auth/guest',
+    API_PATH.GUEST_LOGIN,
     { nickname },
     { withCredentials: true },
   );

@@ -1,8 +1,8 @@
 import { API_PATH } from '@/constant/api-path';
 import { ERROR_MESSAGE } from '@/constant/error-message';
 import { HTTP_ERROR } from '@/constant/error-status-code';
-import { ROUTE_PATH } from '@/constant/routes';
 
+import { ROUTE_PATH } from '@/constant/routes';
 import { tokenStorage } from '@/utils/storage';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import getAccessToken from './auth/get-access-token';
@@ -64,7 +64,7 @@ http.interceptors.response.use(
 
         alert(ERROR_MESSAGE.COMMON);
         tokenStorage.clear();
-        window.location.replace(ROUTE_PATH.LOGIN);
+        window.location.replace(ROUTE_PATH.HOME);
       }
     }
     return Promise.reject(error);
