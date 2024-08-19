@@ -1,32 +1,27 @@
-import { joinStudyRoom } from '@/apis/study-room/join-study-room';
 import { getStudyRoomInfo } from '@/apis/study-room/get-study-room-info';
+import { joinStudyRoom } from '@/apis/study-room/join-study-room';
 
 import { ROUTE_PATH } from '@/constant/routes';
 import { participantIdStorage } from '@/utils/storage';
 import { useNavigate } from 'react-router-dom';
 import useStudyRoomsQuery from '../hooks/useStudyRoomsQuery';
 
-import StudyRoomListItem from './study-room-list-item';
-import StudyRoomDetailDialog from './study-room-detail-dialog';
-import { useState } from 'react';
 import { StudyRoomInfo } from '@/types/study-room.types';
+import { useState } from 'react';
+import StudyRoomDetailDialog from './study-room-detail-dialog';
+import StudyRoomListItem from './study-room-list-item';
+import Paginator from '@/components/common/paginator';
 
 const StudyRoomList = () => {
   const navigate = useNavigate();
 
-  const {
-    isLoading,
-    studyRooms,
-    // pageDto,
-    isError,
-    //page, setPage
-  } = useStudyRoomsQuery();
+  const { isLoading, studyRooms, pageDto, isError, page, setPage } = useStudyRoomsQuery();
 
-  // const handlePageChange = (targetPage: number) => {
-  //   if (page === targetPage) return;
+  const handlePageChange = (targetPage: number) => {
+    if (page === targetPage) return;
 
-  //   setPage(targetPage);
-  // };
+    setPage(targetPage);
+  };
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = (status: boolean) => setIsOpen(status);
@@ -86,6 +81,7 @@ const StudyRoomList = () => {
           <StudyRoomListItem key={studyRoom.id} {...studyRoom} onClick={openStudyRoomModal} />
         ))}
       </div>
+      <Paginator pageDto={pageDto} handlePageChange={handlePageChange} />
       {isOpen && (
         <StudyRoomDetailDialog
           toggle={toggle}

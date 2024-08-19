@@ -65,5 +65,35 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply text-base font-normal text-achromatic-100;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  :lang(en) {
+    font-family: 'Inter', sans-serif;
+    @apply text-base font-normal text-achromatic-100;
+  }
+
+  h1 {
+    @apply text-4xl font-semibold;
+  }
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+  h3 {
+    @apply text-2xl font-medium;
+  }
+  h4 {
+    @apply text-xl font-medium;
+  }
+  h5 {
+    @apply text-lg font-medium;
+  }
+  p {
+    @apply text-sm font-normal;
+  }
+}
+@layer components {
+  .hint {
+    @apply text-xs font-normal text-achromatic-80;
   }
 }

@@ -8,6 +8,7 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   prefix: '',
+  important: true,
   theme: {
     container: {
       center: true,
@@ -17,6 +18,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'], // 영어 폰트
+        korean: ['Noto Sans KR', 'sans-serif'], // 한글 폰트
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

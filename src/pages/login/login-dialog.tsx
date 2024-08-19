@@ -49,14 +49,14 @@ const LoginDialog = ({ btnName }: LoginDialogProps) => {
           <div className="flex flex-row justify-center">
             <img src={loginLogo} width={319} />
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
             <TextField
               labelId="title"
               name="name"
               placeholder="사용할 닉네임 입력"
               onChange={handleNickname}
             />
-            <span className="text-xs md:text-base">특수문자 제외 2자 이상 16자 이하</span>
+            <span className="mb-3 hint">특수문자 제외 2자 이상 16자 이하</span>
             <Button type="submit" onClick={onSubmit}>
               로그인
             </Button>

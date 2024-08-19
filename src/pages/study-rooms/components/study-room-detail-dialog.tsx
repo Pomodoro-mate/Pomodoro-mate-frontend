@@ -44,44 +44,44 @@ const StudyRoomDetailDialog = ({
         <DialogHeader>
           <DialogTitle>스터디룸 상세</DialogTitle>
         </DialogHeader>
-        <Label>제목</Label>
+        <Label className="text-lg">제목</Label>
         <DialogDescription>{name}</DialogDescription>
-        <Label>설명</Label>
+        <Label className="text-lg">설명</Label>
         <DialogDescription>{intro}</DialogDescription>
 
         <div className="flex gap-5">
-          <div>
-            <Label>단계별 시간</Label>
+          <div className="flex flex-col">
+            <Label className="text-lg mb-3">단계별 시간</Label>
             <div className="flex xl:max-w-[200px] flex-wrap items-center">
               <div>
                 <div className="flex flex-col items-center border-r py-2 px-6">
-                  <Receipt width={32} height={32} stroke="#333333" />
-                  <span>계획</span>
-                  <span>{`${planningTime} 분`}</span>
+                  <Receipt width={32} height={32} stroke="#4A4A4A" />
+                  <span className="font-medium text-main-80">계획</span>
+                  <span className="font-medium text-main-80">{`${planningTime}분`}</span>
                 </div>
                 <div className="flex flex-col items-center border-t border-r  py-2 px-6">
-                  <Bulb width={32} height={32} stroke="#333333" />
-                  <span>회고</span>
-                  <span>{`${restingTime} 분`}</span>
+                  <Bulb width={32} height={32} stroke="#4A4A4A" />
+                  <span className="font-medium text-main-80">회고</span>
+                  <span className="font-medium text-main-80">{`${restingTime}분`}</span>
                 </div>
               </div>
               <div>
                 <div className="flex flex-col items-center border-b  py-2 px-6">
-                  <Book width={32} height={32} stroke="#333333" />
-                  <span>스터디</span>
-                  <span>{`${studyingTime} 분`}</span>
+                  <Book width={32} height={32} stroke="#4A4A4A" />
+                  <span className="font-medium text-main-80">스터디</span>
+                  <span className="font-medium text-main-80">{`${studyingTime}분`}</span>
                 </div>
 
                 <div className="flex flex-col items-center py-2 px-6">
-                  <Headset width={32} height={32} stroke="#333333" />
-                  <span>휴식</span>
-                  <span>{`${retrospectTime} 분`}</span>
+                  <Headset width={32} height={32} stroke="#4A4A4A" />
+                  <span className="font-medium text-main-80">휴식</span>
+                  <span className="font-medium text-main-80">{`${retrospectTime}분`}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <Label>참여자 목록</Label>
+          <div className="flex flex-col">
+            <Label className="text-lg mb-3">참여자 목록</Label>
             <div className="bg-gray-200 xl:h-[200px] xl:w-[500px] rounded-lg p-3">
               {participantSummaries.map((item) => {
                 const { id, nickname, isHost } = item;

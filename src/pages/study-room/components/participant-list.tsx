@@ -15,21 +15,19 @@ interface ParticipantListProps {
 
 const ParticipantList = ({ participants }: ParticipantListProps) => {
   return (
-    <div>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Button type="button" className="rounded-full py-1 px-3 flex gap-2">
-            <PersonIcon width={20} height={20} fill="white" />
-            <span>{participants.length}</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          {participants.map((participant) => (
-            <ParticipantListItem key={participant.id} {...participant} />
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button type="button" className="rounded-full py-1 px-3 flex gap-2">
+          <PersonIcon width={20} height={20} fill="white" />
+          <span>{participants.length}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {participants.map((participant) => (
+          <ParticipantListItem key={participant.id} {...participant} />
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

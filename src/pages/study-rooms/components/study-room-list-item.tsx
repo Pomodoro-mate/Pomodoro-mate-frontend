@@ -18,7 +18,10 @@ const StudyRoomListItem = ({
   onClick,
 }: StudyRoomListItemProps) => {
   return (
-    <Card className="rounded-2xl hover:bg-achromatic-20 cursor-pointer" onClick={() => onClick(id)}>
+    <Card
+      className="rounded-2xl border-achromatic-40 hover:bg-achromatic-20 cursor-pointer"
+      onClick={() => onClick(id)}
+    >
       <CardHeader className="p-4">
         <CardTitle className="text-lg font-medium">{name}</CardTitle>
       </CardHeader>
