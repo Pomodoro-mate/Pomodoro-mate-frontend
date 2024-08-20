@@ -1,3 +1,4 @@
+import { API_PATH } from '@/constant/api-path';
 import { http } from '../api';
 
 type ExitStudyRoomParams = {
@@ -6,5 +7,5 @@ type ExitStudyRoomParams = {
 };
 
 export const exitStudyRoom = async ({ studyRoomId, participantId }: ExitStudyRoomParams) => {
-  await http.delete(`/studyrooms/${studyRoomId}/participants/${participantId}`);
+  await http.delete(`${API_PATH.STUDY_ROOMS}/${studyRoomId}/participants/${participantId}`);
 };

@@ -1,3 +1,4 @@
+import { API_PATH } from '@/constant/api-path';
 import { http } from '../api';
 import { TimeSet } from '@/types/study-room.types';
 
@@ -17,7 +18,7 @@ export const createStudyRoom = async ({
   intro,
   timeSet,
 }: CreateStudyRoomParams): Promise<CreateStudyRoomResponse> => {
-  const { data } = await http.post('/studyrooms', { name, intro, timeSet });
+  const { data } = await http.post(API_PATH.STUDY_ROOMS, { name, intro, timeSet });
 
   return data;
 };

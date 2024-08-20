@@ -12,6 +12,7 @@ const Header = () => {
   const { pathname, state } = useLocation();
 
   const { open } = useExitRoomModalContext();
+
   const IN_STUDY_ROOM_REGEX = new RegExp(`^${ROUTE_PATH.STUDY_ROOMS}/\\d+$`);
   const isStudyRoomPage = IN_STUDY_ROOM_REGEX.test(pathname);
 

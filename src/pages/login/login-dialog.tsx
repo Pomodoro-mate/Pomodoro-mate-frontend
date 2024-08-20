@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Input,
 } from '@/components/ui';
-import TextField from '@/components/common/text-field/text-field';
 
 import loginLogo from '@/assets/loginLogo.png';
 import { ROUTE_PATH } from '@/constant/routes';
@@ -50,11 +50,11 @@ const LoginDialog = ({ btnName }: LoginDialogProps) => {
             <img src={loginLogo} width={319} />
           </div>
           <div className="flex flex-col gap-1">
-            <TextField
-              labelId="title"
+            <Input
               name="name"
               placeholder="사용할 닉네임 입력"
               onChange={handleNickname}
+              className="col-span-3"
             />
             <span className="mb-3 hint">특수문자 제외 2자 이상 16자 이하</span>
             <Button type="submit" onClick={onSubmit}>
