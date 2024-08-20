@@ -13,7 +13,7 @@ export const joinStudyRoom = async ({
   studyRoomId,
 }: JoinStudyRoomParams): Promise<JoinStudyRoomResponse> => {
   // TODO : 사용자에게 isForce 값을 받도록 변경
-  const { data } = await http.post(`/${API_PATH.STUDY_ROOMS}/${studyRoomId}/participants`, {
+  const { data } = await http.post(`${API_PATH.STUDY_ROOMS}/${studyRoomId}/participants`, {
     isForce: false,
   });
 

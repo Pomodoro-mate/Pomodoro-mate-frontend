@@ -7,5 +7,5 @@ type ExitStudyRoomParams = {
 };
 
 export const exitStudyRoom = async ({ studyRoomId, participantId }: ExitStudyRoomParams) => {
-  await http.delete(`/${API_PATH.STUDY_ROOMS}/${studyRoomId}/participants/${participantId}`);
+  await http.delete(`${API_PATH.STUDY_ROOMS}/${studyRoomId}/participants/${participantId}`);
 };
