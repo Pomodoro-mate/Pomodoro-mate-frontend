@@ -18,6 +18,8 @@ import StudyRoom from '@/pages/study-room/study-room';
 import StudyRooms from '@/pages/study-rooms/study-rooms';
 import ErrorBoundary from '@/components/common/error-boundary/error-boundary';
 
+import KakaoAuth from '@/pages/login/components/kakao-auth';
+
 export const router = [
   {
     element: (
@@ -55,7 +57,15 @@ export const router = [
     path: ROUTE_PATH.HOME,
     element: (
       <AppRoute>
-        <Home />,
+        <Home />
+      </AppRoute>
+    ),
+  },
+  {
+    path: '/auth/kakao/callback',
+    element: (
+      <AppRoute>
+        <KakaoAuth />
       </AppRoute>
     ),
   },
