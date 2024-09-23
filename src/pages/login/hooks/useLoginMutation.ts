@@ -2,11 +2,11 @@ import { login } from '@/apis/auth/login';
 import { tokenStorage } from '@/utils/storage';
 import { useMutation } from '@tanstack/react-query';
 
-interface useLoginMutationProps {
+interface UseLoginMutationProps {
   handlePage: () => void;
 }
 
-const useLoginMutation = ({ handlePage }: useLoginMutationProps) => {
+const useLoginMutation = ({ handlePage }: UseLoginMutationProps) => {
   return useMutation({
     mutationFn: login,
     onSuccess: ({ accessToken }) => {
