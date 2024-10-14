@@ -33,7 +33,7 @@ const GuestLogin = () => {
       />
       {isError && <p className="text-red-600">로그인에 실패하였습니다.</p>}
       <span className="mb-3 hint">특수문자 제외 2자 이상 16자 이하</span>
-      <Button type="submit" onClick={onSubmit}>
+      <Button type="button" onClick={onSubmit}>
         로그인
       </Button>
     </div>
