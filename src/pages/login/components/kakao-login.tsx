@@ -1,3 +1,5 @@
+import kakao from '../../../assets/kakao_login_medium_narrow.png';
+
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 
 const REDIRECT_BASE_URI = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -13,7 +15,7 @@ const KakaoLogin = () => {
     window.location.href = KAKAO_URL;
   };
 
-  return <button onClick={handleLogin}>카카오톡 로그인</button>;
+  return <img src={kakao} className="cursor-pointer" onClick={handleLogin} alt="카카오 로그인" />;
 };
 
 export default KakaoLogin;
