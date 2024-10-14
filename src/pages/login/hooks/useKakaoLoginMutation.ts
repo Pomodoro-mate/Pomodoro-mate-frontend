@@ -1,14 +1,14 @@
-import { login } from '@/apis/auth/login';
+import { kakaoLogin } from '@/apis/auth/kakao-login';
 import { tokenStorage } from '@/utils/storage';
 import { useMutation } from '@tanstack/react-query';
 
-interface UseLoginMutationProps {
+interface UseKakaoLoginMutationProps {
   handlePage: () => void;
 }
 
-const useLoginMutation = ({ handlePage }: UseLoginMutationProps) => {
+const useKakaoLoginMutation = ({ handlePage }: UseKakaoLoginMutationProps) => {
   return useMutation({
-    mutationFn: login,
+    mutationFn: kakaoLogin,
     onSuccess: ({ accessToken }) => {
       tokenStorage.setItem(accessToken);
       handlePage();
@@ -16,4 +16,4 @@ const useLoginMutation = ({ handlePage }: UseLoginMutationProps) => {
   });
 };
 
-export default useLoginMutation;
+export default useKakaoLoginMutation;
