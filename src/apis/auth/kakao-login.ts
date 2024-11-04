@@ -5,11 +5,11 @@ type KakaoLoginResponse = {
   accessToken: string;
 };
 
-type KakaoLoginParamsProps = {
-  code: string | null;
+type Params = {
+  code: string;
 };
 
-export const kakaoLogin = async ({ code }: KakaoLoginParamsProps): Promise<KakaoLoginResponse> => {
+export const kakaoLogin = async ({ code }: Params): Promise<KakaoLoginResponse> => {
   const { data } = await http.get(`${API_PATH.KAKAO_LOGIN}?code=${code}`);
 
   return data;
