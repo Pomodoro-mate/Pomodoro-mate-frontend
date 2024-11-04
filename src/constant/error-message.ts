@@ -3,5 +3,6 @@
  */
 export const ERROR_MESSAGE = {
   UNAUTHORIZED: '만료된 토큰입니다.',
+  REFRESH_TOKEN_EXPIRES: '만료된 리프레시 토큰입니다.',
   COMMON: '에러가 발생하였습니다.',
 };
