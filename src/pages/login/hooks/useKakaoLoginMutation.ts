@@ -1,18 +1,14 @@
 import { kakaoLogin } from '@/apis/auth/kakao-login';
-import { tokenStorage } from '@/utils/storage';
 import { useMutation } from '@tanstack/react-query';
 
 interface UseKakaoLoginMutationProps {
-  handlePage: () => void;
+  loginAction: (accessToken: string) => void;
 }
 
-const useKakaoLoginMutation = ({ handlePage }: UseKakaoLoginMutationProps) => {
+const useKakaoLoginMutation = ({ loginAction }: UseKakaoLoginMutationProps) => {
   return useMutation({
     mutationFn: kakaoLogin,
-    onSuccess: ({ accessToken }) => {
-      tokenStorage.setItem(accessToken);
-      handlePage();
-    },
+    onSuccess: ({ accessToken }) => loginAction(accessToken),
   });
 };
 
