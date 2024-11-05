@@ -61,11 +61,10 @@ http.interceptors.response.use(
           config.headers.Authorization = `Bearer ${newAccessToken}`;
           return axios(config);
         }
-
-        alert(ERROR_MESSAGE.COMMON);
-        tokenStorage.clear();
-        window.location.replace(ROUTE_PATH.HOME);
       }
+      alert(ERROR_MESSAGE.REFRESH_TOKEN_EXPIRES);
+      tokenStorage.clear();
+      window.location.replace(ROUTE_PATH.HOME);
     }
     return Promise.reject(error);
   },
