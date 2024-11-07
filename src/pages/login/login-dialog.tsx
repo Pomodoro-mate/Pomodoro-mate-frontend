@@ -47,7 +47,7 @@ const LoginDialog = ({ btnName }: LoginDialogProps) => {
         </DialogHeader>
         <div className="flex flex-col gap-12 mx-28">
           <div className="flex flex-row justify-center">
-            <img src={loginLogo} width={319} />
+            <img src={loginLogo} width={319} draggable="false" />
           </div>
           <div className="flex flex-col gap-1">
             <Input
