@@ -1,4 +1,3 @@
-// useToast.ts
 import { useEffect, useState } from 'react';
 
 type ToastType = 'success' | 'error' | 'warning' | 'info';

@@ -15,7 +15,7 @@ const toastBgColor = {
   info: 'bg-blue-100 text-blue-800',
 };
 
-const Toast: React.FC<ToastProps> = ({ type = 'info', message, autoClose = false, duration }) => {
+const Toast = ({ type = 'info', message, autoClose = false, duration }: ToastProps) => {
   const { visible, handleClose } = useToast({ type, message, autoClose, duration });
 
   if (!visible) return null;
