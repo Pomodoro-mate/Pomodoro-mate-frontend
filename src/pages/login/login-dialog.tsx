@@ -11,10 +11,11 @@ import {
 import loginLogo from '@/assets/loginLogo.png';
 import { ROUTE_PATH } from '@/constant/routes';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import useLoginMutation from './hooks/useLoginMutation';
+import { ERROR_MESSAGE } from '@/constant/error-message';
 interface LoginDialogProps {
   btnName: string;
 }
@@ -24,12 +25,13 @@ const LoginDialog = ({ btnName }: LoginDialogProps) => {
   const handleLoginDialog = (status: boolean) => setIsOpen(status);
   const navigate = useNavigate();
   const handlePage = () => navigate(ROUTE_PATH.STUDY_ROOMS);
-  const { mutate: loginMutate, error: loginError } = useLoginMutation({
+  const { mutate: loginMutate, status } = useLoginMutation({
     handlePage,
   });
 
   const [nickname, setNickname] = useState('');
-  const [isNicknameError, setIsNicknameError] = useState(false);
+  const isError = status === 'error';
+
   const onSubmit = () => {
     loginMutate({ nickname });
   };
@@ -38,18 +40,6 @@ const LoginDialog = ({ btnName }: LoginDialogProps) => {
     const { value } = e.target;
     setNickname(value);
   };
-
-  useEffect(() => {
-    if (loginError && loginError.code !== '') {
-      setIsNicknameError(true);
-    }
-  }, [loginError]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsNicknameError(false);
-    }
-  }, [isOpen]);
 
   return (
     <Dialog modal={true} open={isOpen} onOpenChange={handleLoginDialog}>
@@ -71,8 +61,8 @@ const LoginDialog = ({ btnName }: LoginDialogProps) => {
               onChange={handleNickname}
               className="col-span-3"
             />
-            <span className="mb-3 hint" style={{ color: isNicknameError ? '#F5292C' : '' }}>
-              {isNicknameError ? '닉네임을 입력해주세요' : '특수문자 제외 2자 이상 16자 이하'}
+            <span className="mb-3 hint" style={{ color: isError ? '#F5292C' : '' }}>
+              {isError ? ERROR_MESSAGE.LOGIN_ERROR_MESSAGE : '특수문자 제외 2자 이상 16자 이하'}
             </span>
             <Button type="submit" onClick={onSubmit}>
               로그인

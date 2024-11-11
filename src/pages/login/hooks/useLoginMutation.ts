@@ -13,9 +13,6 @@ const useLoginMutation = ({ handlePage }: useLoginMutationProps) => {
       tokenStorage.setItem(accessToken);
       handlePage();
     },
-    onError: (error: { code: string }) => {
-      if (error) return error;
-    },
   });
 };
 
