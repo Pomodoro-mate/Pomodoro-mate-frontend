@@ -58,7 +58,7 @@ const CreateStudyRoomDialog = () => {
               id="title"
               className="col-span-3"
               name="name"
-              placeholder="사용할 닉네임 입력"
+              placeholder="스터디룸 제목을 입력해주세요"
               onChange={handleChangeTextField}
             />
           </div>
