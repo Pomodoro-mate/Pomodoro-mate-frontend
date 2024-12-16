@@ -22,9 +22,10 @@ const StudyRoom = () => {
     isLoading,
     data: { participantSummaries, step, updateAt, timeSet },
     isError,
+    refetch,
   } = useStudyRoomQuery({ studyId: Number(studyId) });
 
-  const { curStepInfo, curParticipants } = useSockJSContext();
+  const { curStepInfo, curParticipants, isChangeHost } = useSockJSContext();
 
   const participants = curParticipants.length > 0 ? curParticipants : participantSummaries;
 
@@ -33,6 +34,12 @@ const StudyRoom = () => {
     progressTime: getProgressTime({ step, timeSet }),
     updateAt,
   };
+
+  useEffect(() => {
+    if (!isChangeHost) return;
+
+    refetch();
+  }, [isChangeHost, refetch]);
 
   useEffect(() => {
     window.addEventListener('popstate', open);

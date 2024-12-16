@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SockJSContext } from '@/provider/sockjs-provider';
+import { SockJSContext } from '../provider/sockjs-provider';
 
 const useSockJSContext = () => {
   const context = useContext(SockJSContext);

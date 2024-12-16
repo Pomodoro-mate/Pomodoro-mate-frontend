@@ -23,7 +23,6 @@ const useExitStudyRoom = ({ studyId, close }: UseExitStudyRoom) => {
   const exitStudyRoomAction = () => {
     close();
     participantIdStorage.clear();
-
     navigate(ROUTE_PATH.STUDY_ROOMS);
   };
 
